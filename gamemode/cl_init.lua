@@ -1,9 +1,9 @@
 include("shared.lua")
 
-local CFG = FBL.Config
+local CFG = Fray.Config
 
 local tohide = CFG.HideHUD
-hook.Add("HUDShouldDraw", "FBL", function(name)
+hook.Add("HUDShouldDraw", "Fray", function(name)
 	if tohide[name] then 
 		return false 
 	end
