@@ -5,7 +5,7 @@ include("shared.lua")
 local CFG = Fray.Config
 
 function GM:Initialize()
-	local spawns = CFG.Spawns
+	local spawns = CFG.PlayerSpawns
 	if not spawns then
 		return
 	end
@@ -17,7 +17,7 @@ function GM:Initialize()
 end
 
 hook.Add("PlayerSelectSpawn", "Fray", function()
-	if not CFG.Spawns then
+	if not CFG.PlayerSpawns then
 		return
 	end
 	local spawns = ents.FindByClass("fray_spawn")
