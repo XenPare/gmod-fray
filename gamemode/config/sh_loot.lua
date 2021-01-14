@@ -1,0 +1,3 @@
+Fray.Config.Loot = {
+	
+}

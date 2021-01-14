@@ -2,6 +2,8 @@ Fray.Config.WalkSpeed = 180
 Fray.Config.RunSpeed = 260
 Fray.Config.JumpPower = 200
 
+Fray.Config.LootDelay = 300
+
 Fray.Config.Playermodels = {
 	"models/player/group03/male_01.mdl",
 	"models/player/group03/male_02.mdl",
