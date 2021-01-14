@@ -1,0 +1,6 @@
+"fray"
+{
+	"base"		"base"
+	"title"		"Fray"
+	"menusystem"	"1"
+}
