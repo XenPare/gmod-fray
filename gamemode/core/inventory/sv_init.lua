@@ -89,6 +89,11 @@ end
 net.Receive("Fray Inventory Use", function(_, pl)
 	local class = net.ReadString()
 	if list[class].UseFunc then
+		if list[class].UseCondition then
+			if not list[class].UseCondition(pl) then
+				return
+			end
+		end
 		list[class].UseFunc(pl)
 		pl:TakeInventoryItem(class)
 	end
