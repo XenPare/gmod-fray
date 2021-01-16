@@ -29,7 +29,7 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetWalkSpeed(CFG.WalkSpeed)
 	pl:SetRunSpeed(CFG.RunSpeed)
 	pl:SetJumpPower(CFG.JumpPower)
-	pl:SetModel(table.Random(CFG.Playermodel))
+	pl:SetModel(table.Random(CFG.Playermodels))
 
 	pl:SetSimpleTimer(0.1, function()
 		pl:SetTeam(TEAM_SURVIVOR)
