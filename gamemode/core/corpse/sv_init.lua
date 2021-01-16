@@ -7,7 +7,7 @@ net.Receive("Fray Corpse Take", function(_, pl)
 	local corpse = net.ReadEntity()
 	local class = net.ReadString()
 
-	if not corpse.PlayerRag or pl:DistToSqr(corpse:GetPos()) > 40000 then
+	if not corpse.PlayerRag or pl:GetPos():DistToSqr(corpse:GetPos()) > 40000 then
 		return
 	end
 
@@ -15,6 +15,11 @@ net.Receive("Fray Corpse Take", function(_, pl)
 		table.RemoveByValue(corpse.Inventory, class)
 		table.insert(pl.Inventory, class)
 		pl:EmitSound("items/ammocrate_close.wav")
+
+		local list = Fray.InventoryList
+		if list[class].onAdd then
+			list[class].onAdd(pl)
+		end
 	end
 end)
 
@@ -89,10 +94,8 @@ hook.Add("PlayerDeath", "Fray Corpse", function(pl)
 		return 
 	end
 
-	ragdoll.Inventory = pl.Inventory
-	timer.Simple(0.1, function()
-		pl:ClearInventory()
-	end)
+	ragdoll.Inventory = table.Copy(pl.Inventory)
+	pl:ClearInventory()
 
 	DeathRagdolls[pl] = DeathRagdolls[pl] or {}
 	DeathRagdolls[pl][#DeathRagdolls[pl] + 1] = ragdoll
