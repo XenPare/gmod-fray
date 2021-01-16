@@ -9,11 +9,13 @@ function GM:Initialize()
 	if not spawns then
 		return
 	end
-	for _, pos in pairs(spawns) do
-		local spawn = ents.Create("fray_spawn")
-		spawn:SetPos(pos)
-		spawn:Spawn()
-	end
+	timer.Simple(0.4, function()
+		for _, pos in pairs(spawns) do
+			local spawn = ents.Create("fray_spawn")
+			spawn:SetPos(pos)
+			spawn:Spawn()
+		end
+	end)
 end
 
 hook.Add("PlayerSelectSpawn", "Fray", function()
