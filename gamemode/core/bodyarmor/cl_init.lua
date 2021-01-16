@@ -1,7 +1,5 @@
 local armor, sides = include("parts.lua"), {"l", "r"}
 
-PrintTable(armor)
-
 net.Receive("Body Armor AddCSModel", function()
 	local pl = net.ReadEntity()
 	if not IsValid(pl) then
