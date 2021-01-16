@@ -1,19 +1,19 @@
 AddCSLuaFile("parts.lua")
 
 util.AddNetworkString("Body Armor AddCSModel")
+util.AddNetworkString("Body Armor RemoveCSModel")
 
 local pl = FindMetaTable("Player")
 function pl:SetBodyArmor(id, bool)
 	self:SetNWBool("BA #" .. id, bool)
-	timer.Simple(0.1, function()
+	timer.Simple(0.2, function()
 		if not IsValid(self) then
 			return
 		end
-		net.Start("Body Armor AddCSModel")
+		net.Start("Body Armor " .. (bool and "Add" or "Remove") .. "CSModel")
 			net.WriteEntity(self)
 			net.WriteString(id)
 		net.Broadcast()
-		self:SetBodyArmor(id, bool)
 	end)
 end
 

@@ -36,10 +36,18 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetSimpleTimer(0.1, function()
 		pl:SetTeam(TEAM_SURVIVOR)
 	end)
+
+	pl:Give("cw_extrema_ratio_official")
+	pl:Give("cw_makarov")
 end)
 
 hook.Add("PlayerSpawn", "Fray", function(pl)
 	pl:SetWalkSpeed(CFG.WalkSpeed)
 	pl:SetRunSpeed(CFG.RunSpeed)
 	pl:SetJumpPower(CFG.JumpPower)
+
+	pl:Give("cw_extrema_ratio_official")
+	pl:Give("cw_makarov")
+
+	pl:GiveAmmo(120, "9x18MM", true)
 end)
