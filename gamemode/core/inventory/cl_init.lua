@@ -1,10 +1,21 @@
 local invlist = include("list.lua")
 
+local fr
+hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
+	if string.find(bind, "impulse 100") then
+		if not IsValid(fr) then
+			RunConsoleCommand("fray_inventory")
+		end
+		return true
+	end
+end)
+
 net.Receive("Fray Inventory Menu", function()
 	local items = net.ReadTable()
 
-	local fr = vgui.Create("XPFrame")
+	fr = vgui.Create("XPFrame")
 	fr:SetTitle("Inventory")
+	fr:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", fr)
 	scroll:Dock(FILL)
