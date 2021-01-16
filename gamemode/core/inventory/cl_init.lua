@@ -1,4 +1,4 @@
-local function countItems(tbl)
+local function countItems(tbl, class)
 	local count = 0
 	for _, item in pairs(tbl) do
 		if item == class then
@@ -52,7 +52,7 @@ net.Receive("Fray Inventory Menu", function()
 		model:SetTooltipPanelOverride("XPTooltip")
 		model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description)
 
-		if invlist[item].max and countItems(items) >= invlist[item].max then
+		if invlist[item].max and countItems(items, item) >= invlist[item].max then
 			model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description .. "\n(Limit is reached)")
 		end
 

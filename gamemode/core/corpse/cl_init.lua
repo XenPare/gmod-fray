@@ -1,4 +1,4 @@
-local function countItems(tbl)
+local function countItems(tbl, class)
 	local count = 0
 	for _, item in pairs(tbl) do
 		if item == class then
@@ -47,7 +47,7 @@ net.Receive("Fray Corpse", function()
 		model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description)
 
 		local limited = false
-		if invlist[item].max and countItems(myitems) >= invlist[item].max then
+		if invlist[item].max and countItems(myitems, item) >= invlist[item].max then
 			limited = true
 			model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description .. "\n(Limit is reached)")
 		end
@@ -64,16 +64,15 @@ net.Receive("Fray Corpse", function()
 			local menu = vgui.Create("XPMenu")
 			menu:SetPos(input.GetCursorPos())
 
-			menu:AddOption("Take", function()
-				if limited then
-					return
-				end
-				net.Start("Fray Corpse Take")
-					net.WriteEntity(corpse)
-					net.WriteString(item)
-				net.SendToServer()
-				btn:Remove()
-			end)
+			if not limited then
+				menu:AddOption("Take", function()
+					net.Start("Fray Corpse Take")
+						net.WriteEntity(corpse)
+						net.WriteString(item)
+					net.SendToServer()
+					btn:Remove()
+				end)
+			end
 
 			menu:Open()
 		end

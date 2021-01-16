@@ -12,9 +12,13 @@ net.Receive("Fray Corpse Take", function(_, pl)
 	end
 
 	if table.HasValue(corpse.Inventory, class) then
+		local list = Fray.InventoryList
+		if not list[class] or ((pl:CalculateInventoryWeight() + list[class].weight) >= Fray.Config.MaxInventoryWeight) or (list[class].max and pl:CalculateInventoryItemCount(class) >= list[class].max or false) then
+			return
+		end
+
 		table.RemoveByValue(corpse.Inventory, class)
-		table.insert(pl.Inventory, class)
-		pl:EmitSound("items/ammocrate_close.wav")
+		pl:AddInventoryItem(class)
 
 		local list = Fray.InventoryList
 		if list[class].onAdd then
