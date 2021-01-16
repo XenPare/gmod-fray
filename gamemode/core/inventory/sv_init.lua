@@ -100,8 +100,8 @@ function meta:TakeInventoryItem(class)
 	
 	table.RemoveByValue(self.Inventory, class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
-	self:SetRunSpeed(self:GetRunSpeed() - self:CalculateInventoryWeight())
-	self:SetJumpPower(self:GetJumpPower() - (math.Round(self:CalculateInventoryWeight() / 2)))
+	self:SetRunSpeed(self:GetRunSpeed() + self:CalculateInventoryWeight())
+	self:SetJumpPower(self:GetJumpPower() + (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if self:Alive() then
 		self:EmitSound("items/ammocrate_open.wav")

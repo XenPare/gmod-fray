@@ -1,6 +1,6 @@
-Fray.Config.WalkSpeed = 180
-Fray.Config.RunSpeed = 260
-Fray.Config.JumpPower = 200
+Fray.Config.WalkSpeed = 150
+Fray.Config.RunSpeed = 270
+Fray.Config.JumpPower = 215
 
 Fray.Config.LootDelay = 300
 
