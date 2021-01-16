@@ -14,6 +14,10 @@ hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	end
 
 	pl.Inventory = util.JSONToTable(file.Read(path))
+	pl:SetSimpleTimer(0.2, function()
+		pl:SetRunSpeed(pl:GetRunSpeed() - pl:CalculateInventoryWeight())
+		pl:SetJumpPower(pl:GetJumpPower() - (math.Round(pl:CalculateInventoryWeight() / 2)))
+	end)
 end)
 
 function meta:CalculateInventoryWeight()
@@ -63,6 +67,8 @@ function meta:AddInventoryItem(class)
 	table.insert(self.Inventory, _class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 	self:EmitSound("items/ammocrate_close.wav")
+	self:SetRunSpeed(self:GetRunSpeed() - self:CalculateInventoryWeight())
+	self:SetJumpPower(self:GetJumpPower() - (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if IsEntity(class) and IsValid(class) then
 		class:Remove()
@@ -77,6 +83,8 @@ function meta:ClearInventory()
 		end
 	end
 	self.Inventory = {}
+	self:SetRunSpeed(Fray.Config.RunSpeed)
+	self:SetJumpPower(Fray.Config.JumpPower)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
@@ -92,6 +100,8 @@ function meta:TakeInventoryItem(class)
 	
 	table.RemoveByValue(self.Inventory, class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
+	self:SetRunSpeed(self:GetRunSpeed() - self:CalculateInventoryWeight())
+	self:SetJumpPower(self:GetJumpPower() - (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if self:Alive() then
 		self:EmitSound("items/ammocrate_open.wav")
@@ -99,6 +109,7 @@ function meta:TakeInventoryItem(class)
 end
 
 function meta:HasInventoryItem(class)
+	local list = Fray.InventoryList
 	if not list[class] then
 		return false
 	end
