@@ -1,4 +1,4 @@
-local armor, sides = include("ids.lua"), {"l", "r"}
+local armor, sides = include("parts.lua"), {"l", "r"}
 
 net.Receive("Body Armor AddCSModel", function()
 	local pl = net.ReadEntity()
