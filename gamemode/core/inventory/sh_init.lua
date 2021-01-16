@@ -3,7 +3,7 @@ Fray.InventoryList = {
 		label = "Bicep Armor",
 		model = "models/snowzgmod/payday2/armour/armourlbicep.mdl",
 		description = "Protect your biceps. Having this item in your inventory is enough to make it work.",
-		weight = 2,
+		weight = 3,
 		max = 1,
 		onAdd = function(pl)
 			if SERVER then
@@ -57,7 +57,7 @@ Fray.InventoryList = {
 		label = "Thigh Armor",
 		model = "models/snowzgmod/payday2/armour/armourlthigh.mdl",
 		description = "Protect your thighs. Having this item in your inventory is enough to make it work.",
-		weight = 2,
+		weight = 3,
 		max = 1,
 		onAdd = function(pl)
 			if SERVER then
