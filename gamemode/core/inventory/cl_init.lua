@@ -8,6 +8,19 @@ local function countItems(tbl, class)
 	return count
 end
 
+local function calculateWeight(tbl)
+	local weight = 0
+	local list = Fray.InventoryList
+	for _, item in pairs(tbl) do
+		local data = list[item]
+		if not data or not data.weight then
+			continue
+		end
+		weight = weight + data.weight
+	end
+	return weight
+end
+
 local fr
 hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
 	if string.find(bind, "impulse 100") then
@@ -27,7 +40,7 @@ net.Receive("Fray Inventory Menu", function()
 	local invlist = Fray.InventoryList
 
 	fr = vgui.Create("XPFrame")
-	fr:SetTitle("Inventory")
+	fr:SetTitle("Inventory (" .. calculateWeight(items) .. "/" .. Fray.Config.MaxInventoryWeight .. " kg)")
 	fr:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", fr)
@@ -50,10 +63,10 @@ net.Receive("Fray Inventory Menu", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description)
+		model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description)
 
 		if invlist[item].max and countItems(items, item) >= invlist[item].max then
-			model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description .. "\n(Limit is reached)")
+			model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description .. "\n(Limit is reached)")
 		end
 
 		model.OnCursorEntered = function()

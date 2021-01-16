@@ -44,12 +44,12 @@ net.Receive("Fray Corpse", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description)
+		model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description)
 
 		local limited = false
 		if invlist[item].max and countItems(myitems, item) >= invlist[item].max then
 			limited = true
-			model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description .. "\n(Limit is reached)")
+			model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description .. "\n(Limit is reached)")
 		end
 
 		model.OnCursorEntered = function()

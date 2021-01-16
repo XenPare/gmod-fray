@@ -70,9 +70,13 @@ function meta:AddInventoryItem(class)
 end
 
 function meta:ClearInventory()
+	local list = Fray.InventoryList
 	for _, item in pairs(self.Inventory) do
-		self:TakeInventoryItem(item)
+		if list[item].onTake then
+			list[item].onTake(self)
+		end
 	end
+	self.Inventory = {}
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
