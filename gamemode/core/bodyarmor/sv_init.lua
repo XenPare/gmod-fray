@@ -17,15 +17,6 @@ function pl:SetBodyArmor(id, bool)
 	end)
 end
 
-local ids = {"vest", "bicep", "forearm", "calf", "thigh"}
-hook.Add("PlayerDeath", "Fray Body Armor", function(pl)
-	for _, id in pairs(ids) do
-		if pl:GetNWBool("BA #" .. id) then
-			pl:SetBodyArmor(id, false)
-		end
-	end
-end)
-
 hook.Add("ScalePlayerDamage", "Fray Body Armor", function(pl, hit, dmg)
 	if (hit == HITGROUP_CHEST or hit == HITGROUP_STOMACH) and pl:GetNWBool("BA #chest") then
 		dmg:ScaleDamage(0.4)
