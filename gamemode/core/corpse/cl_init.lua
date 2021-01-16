@@ -9,25 +9,19 @@ local function countItems(tbl)
 end
 
 local fr
-hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
-	if string.find(bind, "impulse 100") then
-		if not IsValid(fr) then
-			RunConsoleCommand("fray_inventory")
-		end
-		return true
-	end
-end)
-
-net.Receive("Fray Inventory Menu", function()
+net.Receive("Fray Corpse", function()
 	if IsValid(fr) then
 		return
 	end
 
+	local corpse = net.ReadEntity()
+	local name = net.ReadString()
 	local items = net.ReadTable()
+	local myitems = net.ReadTable()
 	local invlist = Fray.InventoryList
 
 	fr = vgui.Create("XPFrame")
-	fr:SetTitle("Inventory")
+	fr:SetTitle(name .. "'s corpse")
 	fr:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", fr)
@@ -52,7 +46,9 @@ net.Receive("Fray Inventory Menu", function()
 		model:SetTooltipPanelOverride("XPTooltip")
 		model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description)
 
-		if invlist[item].max and countItems(items) >= invlist[item].max then
+		local limited = false
+		if invlist[item].max and countItems(myitems) >= invlist[item].max then
+			limited = true
 			model:SetTooltip(invlist[item].label .. "\n" .. invlist[item].description .. "\n(Limit is reached)")
 		end
 
@@ -68,17 +64,12 @@ net.Receive("Fray Inventory Menu", function()
 			local menu = vgui.Create("XPMenu")
 			menu:SetPos(input.GetCursorPos())
 
-			if invlist[item].UseFunc then
-				menu:AddOption("Use", function()
-					net.Start("Fray Inventory Use")
-						net.WriteString(item)
-					net.SendToServer()
-					btn:Remove()
-				end)
-			end
-
-			menu:AddOption("Drop", function()
-				net.Start("Fray Inventory Drop")
+			menu:AddOption("Take", function()
+				if limited then
+					return
+				end
+				net.Start("Fray Corpse Take")
+					net.WriteEntity(corpse)
 					net.WriteString(item)
 				net.SendToServer()
 				btn:Remove()

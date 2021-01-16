@@ -1,6 +1,3 @@
-AddCSLuaFile("list.lua")
-local list = include("list.lua")
-
 file.CreateDir("fray/inventory")
 
 util.AddNetworkString("Fray Inventory Menu")
@@ -21,6 +18,7 @@ end)
 
 function meta:CalculateInventoryWeight()
 	local weight = 0
+	local list = Fray.InventoryList
 	for _, item in pairs(self.Inventory) do
 		local data = list[item]
 		if not data or not data.weight then
@@ -42,30 +40,44 @@ function meta:CalculateInventoryItemCount(class)
 end
 
 function meta:AddInventoryItem(class)
-	local ent
-	if IsValid(class) then
-		ent = class
-		class = class:GetClass()
-	end
-
-	if not list[class] or ((self:CalculateInventoryWeight() + list[class].weight) >= Fray.Config.MaxInventoryWeight) or self:CalculateInventoryItemCount(class) >= list[class].max then
+	if not self:Alive() then
 		return
 	end
 
-	if list[class].onAdd then
-		list[class].onAdd(self)
+	local _class
+	if IsEntity(class) then
+		_class = class:GetClass()
+	else
+		_class = class
 	end
 
-	table.insert(self.Inventory, class)
+	local list = Fray.InventoryList
+	if not list[_class] or ((self:CalculateInventoryWeight() + list[_class].weight) >= Fray.Config.MaxInventoryWeight) or (list[_class].max and self:CalculateInventoryItemCount(_class) >= list[_class].max or false) then
+		return
+	end
+
+	if list[_class].onAdd then
+		list[_class].onAdd(self)
+	end
+
+	table.insert(self.Inventory, _class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 	self:EmitSound("items/ammocrate_close.wav")
 
-	if IsValid(ent) then
-		ent:Remove()
+	if IsEntity(class) and IsValid(class) then
+		class:Remove()
 	end
 end
 
+function meta:ClearInventory()
+	for _, item in pairs(self.Inventory) do
+		self:TakeInventoryItem(item)
+	end
+	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
+end
+
 function meta:TakeInventoryItem(class)
+	local list = Fray.InventoryList
 	if not list[class] or not table.HasValue(self.Inventory, class) then
 		return
 	end
@@ -76,7 +88,10 @@ function meta:TakeInventoryItem(class)
 	
 	table.RemoveByValue(self.Inventory, class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
-	self:EmitSound("items/ammocrate_open.wav")
+
+	if self:Alive() then
+		self:EmitSound("items/ammocrate_open.wav")
+	end
 end
 
 function meta:HasInventoryItem(class)
@@ -87,7 +102,12 @@ function meta:HasInventoryItem(class)
 end
 
 net.Receive("Fray Inventory Use", function(_, pl)
+	if not pl:Alive() then
+		return
+	end
+
 	local class = net.ReadString()
+	local list = Fray.InventoryList
 	if list[class].UseFunc then
 		if list[class].UseCondition then
 			if not list[class].UseCondition(pl) then
@@ -100,6 +120,10 @@ net.Receive("Fray Inventory Use", function(_, pl)
 end)
 
 net.Receive("Fray Inventory Drop", function(_, pl)
+	if not pl:Alive() then
+		return
+	end
+
 	local class = net.ReadString()
 	pl:TakeInventoryItem(class)
 
@@ -115,6 +139,10 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 end)
 
 concommand.Add("fray_inventory", function(pl)
+	if not pl:Alive() then
+		return
+	end
+
 	net.Start("Fray Inventory Menu")
 		net.WriteTable(pl.Inventory)
 	net.Send(pl)

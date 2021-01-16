@@ -1,4 +1,4 @@
-return {
+Fray.InventoryList = {
 	fray_ba_bicep = {
 		label = "Bicep Armor",
 		model = "models/snowzgmod/payday2/armour/armourlbicep.mdl",

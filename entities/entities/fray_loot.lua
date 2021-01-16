@@ -21,7 +21,6 @@ if SERVER then
 
 	function ENT:Use(pl)
 		pl:AddInventoryItem(self)
-		self:Remove()
 	end
 else
 	function ENT:Draw()

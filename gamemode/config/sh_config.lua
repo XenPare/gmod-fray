@@ -4,6 +4,8 @@ Fray.Config.JumpPower = 200
 
 Fray.Config.LootDelay = 300
 
+Fray.Config.CorpseCleanTime = 300
+
 Fray.Config.MaxInventoryWeight = 100
 
 Fray.Config.Playermodels = {
