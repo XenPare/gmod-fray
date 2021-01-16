@@ -6,6 +6,10 @@ util.AddNetworkString("Fray Inventory Drop")
 
 local meta = FindMetaTable("Player")
 
+local cfg = Fray.Config
+local def_run = cfg.RunSpeed
+local def_jump = cfg.JumpPower
+
 hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	local path = "fray/inventory/" .. pl:SteamID64() .. ".json"
 	local exists = file.Exists(path, "DATA")
@@ -15,8 +19,8 @@ hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 
 	pl.Inventory = util.JSONToTable(file.Read(path))
 	pl:SetSimpleTimer(0.2, function()
-		pl:SetRunSpeed(pl:GetRunSpeed() - pl:CalculateInventoryWeight())
-		pl:SetJumpPower(pl:GetJumpPower() - (math.Round(pl:CalculateInventoryWeight() / 2)))
+		pl:SetRunSpeed(def_run - pl:CalculateInventoryWeight())
+		pl:SetJumpPower(def_jump - (math.Round(pl:CalculateInventoryWeight() / 2)))
 	end)
 end)
 
@@ -67,8 +71,8 @@ function meta:AddInventoryItem(class)
 	table.insert(self.Inventory, _class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 	self:EmitSound("items/ammocrate_close.wav")
-	self:SetRunSpeed(self:GetRunSpeed() - self:CalculateInventoryWeight())
-	self:SetJumpPower(self:GetJumpPower() - (math.Round(self:CalculateInventoryWeight() / 2)))
+	self:SetRunSpeed(def_run - self:CalculateInventoryWeight())
+	self:SetJumpPower(def_jump - (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if IsEntity(class) and IsValid(class) then
 		class:Remove()
@@ -83,8 +87,8 @@ function meta:ClearInventory()
 		end
 	end
 	self.Inventory = {}
-	self:SetRunSpeed(Fray.Config.RunSpeed)
-	self:SetJumpPower(Fray.Config.JumpPower)
+	self:SetRunSpeed(def_run)
+	self:SetJumpPower(def_jump)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
@@ -100,8 +104,8 @@ function meta:TakeInventoryItem(class)
 	
 	table.RemoveByValue(self.Inventory, class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
-	self:SetRunSpeed(self:GetRunSpeed() + self:CalculateInventoryWeight())
-	self:SetJumpPower(self:GetJumpPower() + (math.Round(self:CalculateInventoryWeight() / 2)))
+	self:SetRunSpeed(def_run + self:CalculateInventoryWeight())
+	self:SetJumpPower(def_jump + (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if self:Alive() then
 		self:EmitSound("items/ammocrate_open.wav")
@@ -142,9 +146,19 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	local class = net.ReadString()
 	pl:TakeInventoryItem(class)
 
-	local tr = pl:GetEyeTrace()
+	local att_id = pl:LookupAttachment("eyes")
+	if not att_id then
+		return
+	end
+	
+	local att = pl:GetAttachment(att_id)
+	if not att then
+		return
+	end
+
+	local pos = att.Pos
 	local ent = ents.Create(class)
-	ent:SetPos(tr.HitPos + tr.HitNormal * 10)
+	ent:SetPos(pos)
 	ent:Spawn()
 	
 	local phys = ent:GetPhysicsObject()
