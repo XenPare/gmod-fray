@@ -22,23 +22,23 @@ hook.Add("ScalePlayerDamage", "Fray Body Armor", function(pl, hit, dmg)
 		dmg:ScaleDamage(0.4)
 	end
 	if hit == HITGROUP_LEFTARM or hit == HITGROUP_RIGHTARM then
-		local protect = 1
+		local res = 0.85
 		if pl:GetNWBool("BA #bicep") then
-			protect = protect - 0.3
+			res = res - 0.2
 		end
 		if pl:GetNWBool("BA #forearm") then
-			protect = protect - 0.3
+			res = res - 0.2
 		end
-		dmg:ScaleDamage(protect)
+		dmg:ScaleDamage(res)
 	end
 	if hit == HITGROUP_LEFTLEG or hit == HITGROUP_RIGHTLEG then
-		local protect = 1
+		local res = 0.75
 		if pl:GetNWBool("BA #calf") then
-			protect = protect - 0.3
+			res = res - 0.2
 		end
 		if pl:GetNWBool("BA #thigh") then
-			protect = protect - 0.3
+			res = res - 0.2
 		end
-		dmg:ScaleDamage(protect)
+		dmg:ScaleDamage(res)
 	end
 end)
