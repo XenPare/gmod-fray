@@ -9,6 +9,8 @@ ENT.Author = "crester"
 
 ENT.Spawnable = true
 
+ENT.InventoryPlaceholder = true
+
 if SERVER then
 	function ENT:Initialize()
 		self:SetModel("models/snowzgmod/payday2/armour/armourlthigh.mdl")
