@@ -1,4 +1,4 @@
-local armor, sides = include("parts.lua"), {"l", "r"}
+local armor, sides = include("ids.lua"), {"l", "r"}
 
 net.Receive("Body Armor AddCSModel", function()
 	local pl = net.ReadEntity()
@@ -6,31 +6,31 @@ net.Receive("Body Armor AddCSModel", function()
 		return
 	end
 
-	local part = net.ReadString()
-	if pl:GetNWBool("BA #" .. part) then
-		if istable(armor[part]) then
+	local id = net.ReadString()
+	if pl:GetNWBool("BA #" .. id) then
+		if istable(armor[id]) then
 			for _, side in pairs(sides) do
-				local mdl = ClientsideModel("models/snowzgmod/payday2/armour/armour" .. side .. part .. ".mdl", RENDERGROUP_OPAQUE)
+				local mdl = ClientsideModel("models/snowzgmod/payday2/armour/armour" .. side .. id .. ".mdl", RENDERGROUP_OPAQUE)
 				mdl:SetNoDraw(true)
-				pl.BodyArmor[side .. part] = mdl
+				pl.BodyArmor[side .. id] = mdl
 			end
 		else
-			local mdl = ClientsideModel("models/snowzgmod/payday2/armour/armour" .. part .. ".mdl", RENDERGROUP_OPAQUE)
+			local mdl = ClientsideModel("models/snowzgmod/payday2/armour/armour" .. id .. ".mdl", RENDERGROUP_OPAQUE)
 			mdl:SetNoDraw(true)
-			pl.BodyArmor[part] = mdl
+			pl.BodyArmor[id] = mdl
 		end
 	else
-		if istable(armor[part]) then
+		if istable(armor[id]) then
 			for _, side in pairs(sides) do
-				if pl.BodyArmor[side .. part] and IsValid(pl.BodyArmor[side .. part]) then
-					pl.BodyArmor[side .. part]:Remove()
-					pl.BodyArmor[side .. part] = nil
+				if pl.BodyArmor[side .. id] and IsValid(pl.BodyArmor[side .. id]) then
+					pl.BodyArmor[side .. id]:Remove()
+					pl.BodyArmor[side .. id] = nil
 				end
 			end
 		else
-			if pl.BodyArmor[part] and IsValid(pl.BodyArmor[part]) then
-				pl.BodyArmor[part]:Remove()
-				pl.BodyArmor[part] = nil
+			if pl.BodyArmor[id] and IsValid(pl.BodyArmor[id]) then
+				pl.BodyArmor[id]:Remove()
+				pl.BodyArmor[id] = nil
 			end
 		end
 	end
@@ -43,13 +43,13 @@ hook.Add("PostPlayerDraw", "Fray Body Armor", function(pl)
 	if not IsValid(pl) or not pl:Alive() then 
 		return 
 	end
-	for base, part in pairs(armor) do
-		if istable(part) then
+	for base, id in pairs(armor) do
+		if istable(id) then
 			for _, side in pairs(sides) do
 				local model = "models/snowzgmod/payday2/armour/armour" .. side .. base .. ".mdl"
 				local pos, ang = Vector(), Angle()
 
-				local bone_id = pl:LookupBone(part[side])
+				local bone_id = pl:LookupBone(id[side])
 				if not bone_id then 
 					continue 
 				end
@@ -78,7 +78,7 @@ hook.Add("PostPlayerDraw", "Fray Body Armor", function(pl)
 			local model = "models/snowzgmod/payday2/armour/armour" .. base .. ".mdl"
 			local pos, ang = Vector(), Angle()
 
-			local bone_id = pl:LookupBone(part)
+			local bone_id = pl:LookupBone(id)
 			if not bone_id then 
 				continue 
 			end
