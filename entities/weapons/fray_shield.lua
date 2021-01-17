@@ -121,7 +121,7 @@ if CLIENT then
 			mdl:SetPos(pos)
 			mdl:SetAngles(ang)
 
-            mdl:SetupBones()
+			mdl:SetupBones()
 		else
 			mdl:SetPos(self:GetPos())
 			mdl:SetAngles(self:GetAngles())
