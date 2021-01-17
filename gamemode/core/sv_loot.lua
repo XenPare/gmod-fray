@@ -35,5 +35,14 @@ local function SpawnLoot()
 	end
 end
 
+hook.Add("Initialize", "Fray Loot", function()
+	for _, class in pairs(loot) do
+		local ENT = scripted_ents.GetStored(class).t
+		function ENT:Use(pl)
+			pl:AddInventoryItem(self)
+		end
+	end
+end)
+
 hook.Add("InitPostEntity", "Fray", SpawnLoot)
 timer.Create("Fray Loot", cfg.LootDelay, 0, SpawnLoot)

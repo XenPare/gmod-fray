@@ -88,4 +88,136 @@ Fray.InventoryList = {
 			end
 		end
 	},
+
+	cw_ammo_9x19 = {
+		label = "9x19MM Ammo",
+		model = "models/items/boxsrounds.mdl",
+		description = "Contains 30 resupply ammo",
+		weight = 4,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(30, "9x19MM", true)
+			end
+		end
+	},
+
+	cw_ammo_50ae = {
+		label = ".50 AE Ammo",
+		model = "models/items/boxsrounds.mdl",
+		description = "Contains 7 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(7, ".50 AE", true)
+			end
+		end
+	},
+
+	cw_ammo_44magnum = {
+		label = ".44 Magnum Ammo",
+		model = "models/items/boxsrounds.mdl",
+		description = "Contains 6 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(6, ".44 Magnum", true)
+			end
+		end
+	},
+
+	cw_ammo_338lapua = {
+		label = ".338 Lapua Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 5 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(5, ".338 Lapua", true)
+			end
+		end
+	},
+
+	cw_ammo_545x39 = {
+		label = "5.45x39MM Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 30 resupply ammo",
+		weight = 4,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(30, "5.45x39MM", true)
+			end
+		end
+	},
+
+	cw_ammo_556x45 = {
+		label = "5.56x45MM Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 30 resupply ammo",
+		weight = 4,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(30, "5.56x45MM", true)
+			end
+		end
+	},
+
+	cw_ammo_762x51 = {
+		label = "7.62x51MM Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 20 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(20, "7.62x51MM", true)
+			end
+		end
+	},
+
+	cw_ammo_9x17 = {
+		label = "9x17MM Ammo",
+		model = "models/items/boxsrounds.mdl",
+		description = "Contains 25 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(25, "9x17MM", true)
+			end
+		end
+	},
+
+	cw_ammo_9x39 = {
+		label = "9x39MM Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 20 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(20, "9x39MM", true)
+			end
+		end
+	},
+
+	cw_ammo_12gauge = {
+		label = "12 Gauge Ammo",
+		model = "models/items/boxmrounds.mdl",
+		description = "Contains 8 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(8, "12 Gauge", true)
+			end
+		end
+	},
+
+	cw_ammo_45acp = {
+		label = ".45 ACP Ammo",
+		model = "models/items/boxsrounds.mdl",
+		description = "Contains 25 resupply ammo",
+		weight = 3,
+		onUse = function(pl)
+			if SERVER then
+				pl:GiveAmmo(25, ".45 ACP", true)
+			end
+		end
+	}
 }
