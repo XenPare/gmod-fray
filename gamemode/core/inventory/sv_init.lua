@@ -92,14 +92,16 @@ function meta:ClearInventory()
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
-function meta:TakeInventoryItem(class)
+function meta:TakeInventoryItem(class, silent)
 	local list = Fray.InventoryList
 	if not list[class] or not table.HasValue(self.Inventory, class) then
 		return
 	end
 
-	if list[class].onTake then
-		list[class].onTake(self)
+	if silent then
+		if list[class].onTake then
+			list[class].onTake(self)
+		end
 	end
 	
 	table.RemoveByValue(self.Inventory, class)
@@ -107,8 +109,10 @@ function meta:TakeInventoryItem(class)
 	self:SetRunSpeed(def_run + self:CalculateInventoryWeight())
 	self:SetJumpPower(def_jump + (math.Round(self:CalculateInventoryWeight() / 2)))
 
-	if self:Alive() then
-		self:EmitSound("items/ammocrate_open.wav")
+	if silent then
+		if self:Alive() then
+			self:EmitSound("items/ammocrate_open.wav")
+		end
 	end
 end
 
@@ -117,7 +121,13 @@ function meta:HasInventoryItem(class)
 	if not list[class] then
 		return false
 	end
-	return table.HasValue(self.Inventory, class)
+	local count = 0
+	for _, item in pairs(self.Inventory) do
+		if item == class then
+			count = count + 1 
+		end
+	end
+	return count > 0, count
 end
 
 net.Receive("Fray Inventory Use", function(_, pl)
