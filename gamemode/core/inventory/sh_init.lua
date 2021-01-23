@@ -1,8 +1,8 @@
 Fray.InventoryList = {
 	fray_ba_bicep = {
-		label = "Bicep Armor",
+		label = "bicep_armor",
+		description = "bicep_armor_description",
 		model = "models/snowzgmod/payday2/armour/armourlbicep.mdl",
-		description = "Protect your biceps. Having this item in your inventory is enough to make it work.",
 		weight = 3,
 		max = 1,
 		onAdd = function(pl)
@@ -18,9 +18,9 @@ Fray.InventoryList = {
 	},
 
 	fray_ba_calf = {
-		label = "Calf Armor",
+		label = "calf_armor",
+		description = "calf_armor_description",
 		model = "models/snowzgmod/payday2/armour/armourlcalf.mdl",
-		description = "Protect your calfs. Having this item in your inventory is enough to make it work.",
 		weight = 2,
 		max = 1,
 		onAdd = function(pl)
@@ -36,9 +36,9 @@ Fray.InventoryList = {
 	},
 
 	fray_ba_forearm = {
-		label = "Forearm Armor",
+		label = "forearm_armor",
+		description = "forearm_armor_description",
 		model = "models/snowzgmod/payday2/armour/armourlforearm.mdl",
-		description = "Protect your forearms. Having this item in your inventory is enough to make it work.",
 		weight = 2,
 		max = 1,
 		onAdd = function(pl)
@@ -54,9 +54,9 @@ Fray.InventoryList = {
 	},
 
 	fray_ba_thigh = {
-		label = "Thigh Armor",
+		label = "thigh_armor",
+		description = "thigh_armor_description",
 		model = "models/snowzgmod/payday2/armour/armourlthigh.mdl",
-		description = "Protect your thighs. Having this item in your inventory is enough to make it work.",
 		weight = 3,
 		max = 1,
 		onAdd = function(pl)
@@ -72,9 +72,9 @@ Fray.InventoryList = {
 	},
 
 	fray_ba_vest = {
-		label = "Vest",
+		label = "vest_armor",
+		description = "vest_armor_description",
 		model = "models/snowzgmod/payday2/armour/armourvest.mdl",
-		description = "Protect your chest. Having this item in your inventory is enough to make it work.",
 		weight = 5,
 		max = 1,
 		onAdd = function(pl)
@@ -90,9 +90,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_9x19 = {
-		label = "9x19MM Ammo",
+		label = "ammo_9x19",
+		description = "ammo_9x19_description",
 		model = "models/items/boxsrounds.mdl",
-		description = "Contains 30 resupply ammo",
 		weight = 4,
 		onUse = function(pl)
 			if SERVER then
@@ -102,9 +102,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_50ae = {
-		label = ".50 AE Ammo",
+		label = "ammo_50ae",
+		description = "ammo_50ae_description",
 		model = "models/items/boxsrounds.mdl",
-		description = "Contains 7 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -114,9 +114,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_44magnum = {
-		label = ".44 Magnum Ammo",
+		label = "ammo_44magnum",
+		description = "ammo_44magnum_description",
 		model = "models/items/boxsrounds.mdl",
-		description = "Contains 6 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -126,9 +126,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_338lapua = {
-		label = ".338 Lapua Ammo",
+		label = "ammo_338lapua",
+		description = "ammo_338lapua_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 5 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -138,9 +138,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_545x39 = {
-		label = "5.45x39MM Ammo",
+		label = "ammo_545x39",
+		description = "ammo_545x39_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 30 resupply ammo",
 		weight = 4,
 		onUse = function(pl)
 			if SERVER then
@@ -150,9 +150,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_556x45 = {
-		label = "5.56x45MM Ammo",
+		label = "ammo_556x45",
+		description = "ammo_556x45_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 30 resupply ammo",
 		weight = 4,
 		onUse = function(pl)
 			if SERVER then
@@ -162,9 +162,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_762x51 = {
-		label = "7.62x51MM Ammo",
+		label = "ammo_762x51",
+		description = "ammo_762x51_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 20 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -174,9 +174,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_9x17 = {
-		label = "9x17MM Ammo",
+		label = "ammo_9x17",
+		description = "ammo_9x17_description",
 		model = "models/items/boxsrounds.mdl",
-		description = "Contains 25 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -186,9 +186,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_9x39 = {
-		label = "9x39MM Ammo",
+		label = "ammo_9x39",
+		description = "ammo_9x39_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 20 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -198,9 +198,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_12gauge = {
-		label = "12 Gauge Ammo",
+		label = "ammo_12gauge",
+		description = "ammo_12gauge_description",
 		model = "models/items/boxmrounds.mdl",
-		description = "Contains 8 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then
@@ -210,9 +210,9 @@ Fray.InventoryList = {
 	},
 
 	cw_ammo_45acp = {
-		label = ".45 ACP Ammo",
+		label = "ammo_45acp",
+		description = "ammo_45acp_description",
 		model = "models/items/boxsrounds.mdl",
-		description = "Contains 25 resupply ammo",
 		weight = 3,
 		onUse = function(pl)
 			if SERVER then

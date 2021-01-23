@@ -21,10 +21,10 @@ local function calculateWeight(tbl)
 	return weight
 end
 
-local fr
+inventoryPanel = nil
 hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
 	if string.find(bind, "impulse 100") then
-		if not IsValid(fr) then
+		if not IsValid(inventoryPanel) then
 			RunConsoleCommand("fray_inventory")
 		end
 		return true
@@ -32,18 +32,18 @@ hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
 end)
 
 net.Receive("Fray Inventory Menu", function()
-	if IsValid(fr) then
+	if IsValid(inventoryPanel) or IsValid(corpsePanel) then
 		return
 	end
 
 	local items = net.ReadTable()
 	local invlist = Fray.InventoryList
 
-	fr = vgui.Create("XPFrame")
-	fr:SetTitle("Inventory (" .. calculateWeight(items) .. "/" .. Fray.Config.MaxInventoryWeight .. " kg)")
-	fr:SetKeyboardInputEnabled(false)
+	inventoryPanel = vgui.Create("XPFrame")
+	inventoryPanel:SetTitle(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. Fray.Config.MaxInventoryWeight .. " kg)")
+	inventoryPanel:SetKeyboardInputEnabled(false)
 
-	local scroll = vgui.Create("XPScrollPanel", fr)
+	local scroll = vgui.Create("XPScrollPanel", inventoryPanel)
 	scroll:Dock(FILL)
 	scroll:DockMargin(3, 3, 3, 3)
 
@@ -63,10 +63,10 @@ net.Receive("Fray Inventory Menu", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description)
+		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description))
 
 		if invlist[item].max and countItems(items, item) >= invlist[item].max then
-			model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description .. "\n(Limit is reached)")
+			model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
 		end
 
 		model.OnCursorEntered = function()
@@ -82,7 +82,7 @@ net.Receive("Fray Inventory Menu", function()
 			menu:SetPos(input.GetCursorPos())
 
 			if invlist[item].UseFunc then
-				menu:AddOption("Use", function()
+				menu:AddOption(Fray.GetPhrase("use"), function()
 					net.Start("Fray Inventory Use")
 						net.WriteString(item)
 					net.SendToServer()
@@ -90,7 +90,7 @@ net.Receive("Fray Inventory Menu", function()
 				end)
 			end
 
-			menu:AddOption("Drop", function()
+			menu:AddOption(Fray.GetPhrase("drop"), function()
 				net.Start("Fray Inventory Drop")
 					net.WriteString(item)
 				net.SendToServer()

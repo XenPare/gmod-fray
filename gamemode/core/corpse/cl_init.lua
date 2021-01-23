@@ -8,9 +8,9 @@ local function countItems(tbl, class)
 	return count
 end
 
-local fr
+corpsePanel = nil
 net.Receive("Fray Corpse", function()
-	if IsValid(fr) then
+	if IsValid(corpsePanel) or IsValid(inventoryPanel) then
 		return
 	end
 
@@ -20,11 +20,11 @@ net.Receive("Fray Corpse", function()
 	local myitems = net.ReadTable()
 	local invlist = Fray.InventoryList
 
-	fr = vgui.Create("XPFrame")
-	fr:SetTitle(name .. "'s corpse")
-	fr:SetKeyboardInputEnabled(false)
+	corpsePanel = vgui.Create("XPFrame")
+	corpsePanel:SetTitle(name .. Fray.GetPhrase("corpse"))
+	corpsePanel:SetKeyboardInputEnabled(false)
 
-	local scroll = vgui.Create("XPScrollPanel", fr)
+	local scroll = vgui.Create("XPScrollPanel", corpsePanel)
 	scroll:Dock(FILL)
 	scroll:DockMargin(3, 3, 3, 3)
 
@@ -44,12 +44,12 @@ net.Receive("Fray Corpse", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description)
+		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description))
 
 		local limited = false
 		if invlist[item].max and countItems(myitems, item) >= invlist[item].max then
 			limited = true
-			model:SetTooltip(invlist[item].label .. " (" .. invlist[item].weight .. " kg)\n" .. invlist[item].description .. "\n(Limit is reached)")
+			model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description) .. "\n(Limit is reached)")
 		end
 
 		model.OnCursorEntered = function()
@@ -65,7 +65,7 @@ net.Receive("Fray Corpse", function()
 			menu:SetPos(input.GetCursorPos())
 
 			if not limited then
-				menu:AddOption("Take", function()
+				menu:AddOption(Fray.GetPhrase("take"), function()
 					net.Start("Fray Corpse Take")
 						net.WriteEntity(corpse)
 						net.WriteString(item)
