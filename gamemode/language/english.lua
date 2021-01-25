@@ -9,7 +9,19 @@ LANG.Zones = {
 	["United States"] = true
 }
 
+local money_amount = Fray.Config.MoneyPerEntity
+
 LANG.Phrases = {
+	--[[
+		Shop
+	]]
+
+	["shop"] = "Shop",
+	["buy"] = "Buy",
+	["available"] = "available",
+	["cant_deliver"] = "Can't be delivered here",
+	["cant_afford"] = "You can't afford it",
+
 	--[[
 		Inventory
 	]]
@@ -18,13 +30,20 @@ LANG.Phrases = {
 	["limit"] = "Limit is reached",
 	["use"] = "Use",
 	["drop"] = "Drop",
+
+	--[[
+		Corpse
+	]]
+
+	["corpse"] = "'s corpse",
 	["take"] = "Take",
 
 	--[[
 		Inventory Items
 	]]
 
-	["corpse"] = "'s corpse",
+	["money"] = "$" .. money_amount,
+	["money_description"] = "A $" .. money_amount .. " banknote.",
 
 	["bicep_armor"] = "Bicep Armor",
 	["bicep_armor_description"] = "Protect your biceps. Having this item in your inventory is enough to make it work.",

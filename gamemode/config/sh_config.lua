@@ -2,6 +2,8 @@ Fray.Config.WalkSpeed = 150
 Fray.Config.RunSpeed = 270
 Fray.Config.JumpPower = 215
 
+Fray.Config.MoneyPerEntity = 500
+
 Fray.Config.LootDelay = 300
 
 Fray.Config.CorpseCleanTime = 300

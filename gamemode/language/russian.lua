@@ -10,23 +10,42 @@ LANG.Zones = {
     ["Belarus"] = true
 }
 
+local money_amount = Fray.Config.MoneyPerEntity
+
 LANG.Phrases = {
+	--[[
+		Магазин
+	]]
+
+	["shop"] = "Магазин",
+	["buy"] = "Купить",
+	["available"] = "доступно",
+	["cant_deliver"] = "Не может быть доставлено сюда",
+	["cant_afford"] = "Недостаточно средств",
+
     --[[
-		Inventory
+		Инвентарь
     ]]
     
     ["inventory"] = "Инвентарь",
     ["limit"] = "Лимит достигнут",
     ["use"] = "Использовать",
     ["drop"] = "Выбросить",
-    ["take"] = "Взять",
-    
-    --[[
-		Inventory Items
-    ]]
+	
+	--[[
+		Труп
+	]]
 
-    ["corpse"] = " испустил дух в этом теле",
-    
+	["corpse"] = " испустил дух в этом теле",
+	["take"] = "Взять",
+
+    --[[
+		Вещи инвентаря
+    ]]
+	
+	["money"] = "$" .. money_amount,
+	["money_description"] = "Купюра в $" .. money_amount .. ".",
+
 	["bicep_armor"] = "Наплечники",
 	["bicep_armor_description"] = "Защитите ваши плечи. Владение этим предметом в инвентаре достаточно для работы эффекта.",
 

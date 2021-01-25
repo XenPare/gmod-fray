@@ -10,7 +10,7 @@ end
 
 corpsePanel = nil
 net.Receive("Fray Corpse", function()
-	if IsValid(corpsePanel) or IsValid(inventoryPanel) then
+	if IsValid(corpsePanel) or IsValid(inventoryPanel) or IsValid(shopPanel) then
 		return
 	end
 

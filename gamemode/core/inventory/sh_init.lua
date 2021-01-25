@@ -1,4 +1,11 @@
 Fray.InventoryList = {
+	fray_money = {
+		label = "money",
+		description = "money_description",
+		model = "models/props/cs_assault/money.mdl",
+		weight = 0.1
+	},
+
 	fray_ba_bicep = {
 		label = "bicep_armor",
 		description = "bicep_armor_description",

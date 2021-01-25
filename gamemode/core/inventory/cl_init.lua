@@ -32,7 +32,7 @@ hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
 end)
 
 net.Receive("Fray Inventory Menu", function()
-	if IsValid(inventoryPanel) or IsValid(corpsePanel) then
+	if IsValid(inventoryPanel) or IsValid(corpsePanel) or IsValid(shopPanel) then
 		return
 	end
 

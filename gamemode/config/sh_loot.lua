@@ -9,5 +9,6 @@ Fray.Config.Loot = {
 	"cw_ammo_9x17",
 	"cw_ammo_9x39",
 	"cw_ammo_12gauge",
-	"cw_ammo_45acp"
+	"cw_ammo_45acp",
+	"fray_money"
 }
