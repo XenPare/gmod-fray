@@ -44,7 +44,7 @@ LANG.Phrases = {
     ]]
 	
 	["money"] = "$" .. money_amount,
-	["money_description"] = "Купюра в $" .. money_amount .. ".",
+	["money_description"] = "Обычная купюра.",
 
 	["bicep_armor"] = "Наплечники",
 	["bicep_armor_description"] = "Защитите ваши плечи. Владение этим предметом в инвентаре достаточно для работы эффекта.",

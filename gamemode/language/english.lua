@@ -43,7 +43,7 @@ LANG.Phrases = {
 	]]
 
 	["money"] = "$" .. money_amount,
-	["money_description"] = "A $" .. money_amount .. " banknote.",
+	["money_description"] = "A simple banknote.",
 
 	["bicep_armor"] = "Bicep Armor",
 	["bicep_armor_description"] = "Protect your biceps. Having this item in your inventory is enough to make it work.",
