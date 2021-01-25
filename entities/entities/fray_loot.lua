@@ -4,7 +4,7 @@ ENT.Type = "anim"
 ENT.Base = "base_gmodentity"
 
 ENT.PrintName = "Loot Base"
-ENT.Category = "Fray"
+ENT.Category = "Fray Loot"
 ENT.Author = "crester"
 
 ENT.Spawnable = false
@@ -20,7 +20,11 @@ if SERVER then
 	end
 
 	function ENT:Use(pl)
-		pl:AddInventoryItem(self)
+		if not self.Weapon then
+			pl:AddInventoryItem(self)
+		else
+			pl:Give(self.Weapon)
+		end
 	end
 else
 	function ENT:Draw()
