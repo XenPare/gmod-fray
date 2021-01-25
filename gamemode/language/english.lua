@@ -45,6 +45,9 @@ LANG.Phrases = {
 	["money"] = "$" .. money_amount,
 	["money_description"] = "A simple banknote.",
 
+	["shield"] = "Ballistic Shield",
+	["shield_description"] = "Use it to protect yourself.",
+
 	["bicep_armor"] = "Bicep Armor",
 	["bicep_armor_description"] = "Protect your biceps. Having this item in your inventory is enough to make it work.",
 

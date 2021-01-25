@@ -6,6 +6,18 @@ Fray.InventoryList = {
 		weight = 0.1
 	},
 
+	fray_ent_shield = {
+		label = "shield",
+		description = "shield_description",
+		model = "models/weapons/arccw_go/v_shield.mdl",
+		weight = 5,
+		onUse = function(pl)
+			if SERVER then
+				pl:Give("fray_shield")
+			end
+		end,
+	},
+
 	fray_ba_bicep = {
 		label = "bicep_armor",
 		description = "bicep_armor_description",

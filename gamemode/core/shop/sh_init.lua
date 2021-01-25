@@ -18,5 +18,9 @@ Fray.ShopList = {
 	fray_ba_vest = {
 		price = 1500,
 		max = 1
+	},
+	fray_ent_shield = {
+		price = 1500,
+		max = 1
 	}
 }
