@@ -14,6 +14,17 @@ local money_amount = Fray.Config.MoneyPerEntity
 
 LANG.Phrases = {
 	--[[
+		Ранги
+	]]
+
+	["sinner"] = "Грешник",
+	["tempter"] = "Искуситель",
+	["fallen"] = "Падший",
+	["demon"] = "Демон",
+	["archdemon"] = "Архидемон",
+	["devil"] = "Дьявол",
+
+	--[[
 		Магазин
 	]]
 
