@@ -11,6 +11,18 @@ Fray.InventoryList = {
 		end
 	},
 
+	fray_medicine = {
+		label = "medicine",
+		description = "medicine_description",
+		model = "models/weapons/w_medkit.mdl",
+		weight = 0.4,
+		UseFunc = function(pl)
+			if SERVER then
+				pl:SetHealth(100)
+			end
+		end
+	},
+
 	fray_drink = {
 		label = "drink",
 		description = "drink_description",

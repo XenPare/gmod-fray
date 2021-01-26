@@ -58,6 +58,9 @@ LANG.Phrases = {
 	
 	["weapon_description"] = "Использовать по назначению.",
 
+	["medicine"] = "Аптечка",
+	["medicine_description"] = "Используйте чтобы вылечиться.",
+
 	["food"] = "Еда",
 	["food_description"] = "Используйте чтобы утолить голод.",
 

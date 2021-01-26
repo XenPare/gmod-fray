@@ -57,6 +57,9 @@ LANG.Phrases = {
 
 	["weapon_description"] = "Use it properly.",
 
+	["medicine"] = "Medicine",
+	["medicine_description"] = "Use to heal yourself.",
+
 	["food"] = "Food",
 	["food_description"] = "Use to satisfy your hunger.",
 
