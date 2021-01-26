@@ -27,7 +27,8 @@ Fray.Config.Playermodels = {
 Fray.Config.Workshop = {
 	"1998638783", -- Xanthys
 	"284860008", -- Body Armor
-	"2329408464" -- Ballistic Shield
+	"2329408464", -- Ballistic Shield
+	"283399070" -- Masks
 }
 
 Fray.Config.HideHUD = {}
