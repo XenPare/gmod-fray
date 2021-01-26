@@ -1,6 +1,8 @@
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua")
+AddCSLuaFile("lang.lua")
 include("shared.lua")
+include("lang.lua")
 
 local CFG = Fray.Config
 
@@ -35,6 +37,11 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 
 	pl:SetSimpleTimer(0.1, function()
 		pl:SetTeam(TEAM_SURVIVOR)
+	end)
+
+	Fray.SetCountry(pl)
+	pl:SetSimpleTimer(30, function()
+		Fray.LanguagePropose(pl)
 	end)
 
 	pl:Give("cw_extrema_ratio_official")

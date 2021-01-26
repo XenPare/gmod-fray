@@ -1,4 +1,5 @@
 include("shared.lua")
+include("lang.lua")
 
 local CFG = Fray.Config
 

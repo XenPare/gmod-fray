@@ -6,16 +6,16 @@ Fray.Languages = Fray.Languages or {}
 
 if CLIENT then
 	function Fray.GetPhrase(str)
-		return Fray.Languages[LocalPlayer():GetInfo("fray_lang") or lng_base]["Phrases"][str]
+		return Fray.Languages[LocalPlayer():GetInfo("fray_lang") or lng_base]["Phrases"][str] or str
 	end
 end
 
 if SERVER then
 	function Fray.GetPhrase(str, pl)
 		if not IsValid(pl) then
-			return Fray.Languages[lng_base]["Phrases"][str]
+			return Fray.Languages[lng_base]["Phrases"][str] or str
 		end
-		return Fray.Languages[pl:GetInfo("fray_lang")]["Phrases"][str]
+		return Fray.Languages[pl:GetInfo("fray_lang")]["Phrases"][str] or str
 	end
 end
 

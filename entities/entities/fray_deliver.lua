@@ -40,6 +40,9 @@ if SERVER then
 
 		if self.Deliver then
 			local deliver = ents.Create(self.Deliver)
+			if self.ContainedWeapon then
+				deliver.Weapon = self.ContainedWeapon
+			end
 			deliver:SetPos(self:GetPos() + Vector(0, 0, 15))
 			deliver:Spawn()
 
