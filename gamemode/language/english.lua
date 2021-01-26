@@ -46,6 +46,12 @@ LANG.Phrases = {
 
 	["weapon_description"] = "Use it properly.",
 
+	["food"] = "Food",
+	["food_description"] = "Use to satisfy your hunger.",
+
+	["drink"] = "Drink",
+	["drink_description"] = "Use to satisfy your thirst.",
+
 	["money"] = "$" .. money_amount,
 	["money_description"] = "A simple banknote.",
 

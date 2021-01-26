@@ -47,6 +47,12 @@ LANG.Phrases = {
 	
 	["weapon_description"] = "Использовать по назначению.",
 
+	["food"] = "Еда",
+	["food_description"] = "Используйте чтобы утолить голод.",
+
+	["drink"] = "Напиток",
+	["drink_description"] = "Используйте чтобы утолить жажду.",
+
 	["money"] = "$" .. money_amount,
 	["money_description"] = "Обычная купюра.",
 

@@ -1,4 +1,28 @@
 Fray.InventoryList = {
+	fray_food = {
+		label = "food",
+		description = "food_description",
+		model = "models/props_junk/garbage_takeoutcarton001a.mdl",
+		weight = 0.2,
+		UseFunc = function(pl)
+			if SERVER then
+				pl:AddHunger(20)
+			end
+		end
+	},
+
+	fray_drink = {
+		label = "drink",
+		description = "drink_description",
+		model = "models/props_junk/popcan01a.mdl",
+		weight = 0.2,
+		UseFunc = function(pl)
+			if SERVER then
+				pl:AddThirst(20)
+			end
+		end
+	},
+
 	fray_money = {
 		label = "money",
 		description = "money_description",

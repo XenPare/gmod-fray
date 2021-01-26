@@ -11,7 +11,9 @@ Fray.Config.Loot = {
 	"cw_ammo_12gauge",
 	"cw_ammo_45acp",
 	"fray_money",
-	"fray_weapon"
+	"fray_weapon",
+	"fray_food",
+	"fray_drink"
 }
 
 Fray.Config.RandomWeaponLoot = {
