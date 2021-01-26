@@ -29,6 +29,8 @@ LANG.Phrases = {
 	["inventory"] = "Inventory",
 	["limit"] = "Limit is reached",
 	["use"] = "Use",
+	["equip"] = "Equip",
+	["unequip"] = "Unequip",
 	["drop"] = "Drop",
 
 	--[[
@@ -41,6 +43,8 @@ LANG.Phrases = {
 	--[[
 		Inventory Items
 	]]
+
+	["weapon_description"] = "Use it properly.",
 
 	["money"] = "$" .. money_amount,
 	["money_description"] = "A simple banknote.",

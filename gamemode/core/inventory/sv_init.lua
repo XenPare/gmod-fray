@@ -2,6 +2,8 @@ file.CreateDir("fray/inventory")
 
 util.AddNetworkString("Fray Inventory Menu")
 util.AddNetworkString("Fray Inventory Use")
+util.AddNetworkString("Fray Inventory Equip")
+util.AddNetworkString("Fray Inventory Unequip")
 util.AddNetworkString("Fray Inventory Drop")
 
 local meta = FindMetaTable("Player")
@@ -98,10 +100,8 @@ function meta:TakeInventoryItem(class, silent)
 		return
 	end
 
-	if silent then
-		if list[class].onTake then
-			list[class].onTake(self)
-		end
+	if list[class].onTake then
+		list[class].onTake(self)
 	end
 	
 	table.RemoveByValue(self.Inventory, class)
@@ -138,13 +138,32 @@ net.Receive("Fray Inventory Use", function(_, pl)
 	local class = net.ReadString()
 	local list = Fray.InventoryList
 	if list[class].UseFunc then
-		if list[class].UseCondition then
-			if not list[class].UseCondition(pl) then
-				return
-			end
-		end
 		list[class].UseFunc(pl)
 		pl:TakeInventoryItem(class)
+	end
+end)
+
+net.Receive("Fray Inventory Equip", function(_, pl)
+	if not pl:Alive() then
+		return
+	end
+
+	local class = net.ReadString()
+	local list = Fray.InventoryList
+	if list[class].EquipFunc then
+		list[class].EquipFunc(pl)
+	end
+end)
+
+net.Receive("Fray Inventory Unequip", function(_, pl)
+	if not pl:Alive() then
+		return
+	end
+
+	local class = net.ReadString()
+	local list = Fray.InventoryList
+	if list[class].UnequipFunc then
+		list[class].UnequipFunc(pl)
 	end
 end)
 
@@ -167,7 +186,11 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	end
 
 	local pos = att.Pos
-	local ent = ents.Create(class)
+	local iscw20wep = weapons.Get(class).CW20Weapon
+	local ent = ents.Create(iscw20wep and "fray_weapon" or class)
+	if iscw20wep then
+		ent.Weapon = class
+	end
 	ent:SetPos(pos)
 	ent:Spawn()
 	

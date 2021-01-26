@@ -4,11 +4,17 @@ function Fray.ShopDeliver(pl, class)
 		return
 	end
 
-	local endPos = hitPos - Vector(0, 0, 60) + VectorRand(-200, 200)
+	local endPos = hitPos - Vector(0, 0, 200) + VectorRand(-200, 200)
 	
+	local iscw20wep = weapons.Get(class).CW20Weapon
 	local ent = ents.Create("fray_deliver")
 	ent:SetPos(endPos)
-	ent.Deliver = class
+	if iscw20wep then
+		ent.Deliver = "fray_weapon"
+		ent.ContainedWeapon = class
+	else
+		ent.Deliver = class
+	end
 	ent:Spawn()
 
 	local phys = ent:GetPhysicsObject()

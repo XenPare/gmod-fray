@@ -11,11 +11,21 @@ Fray.InventoryList = {
 		description = "shield_description",
 		model = "models/weapons/arccw_go/v_shield.mdl",
 		weight = 5,
-		onUse = function(pl)
-			if SERVER then
+		EquipFunc = function(pl)
+			if SERVER and not pl:HasWeapon("fray_shield") then
 				pl:Give("fray_shield")
 			end
 		end,
+		UnequipFunc = function(pl)
+			if SERVER and pl:HasWeapon("fray_shield") then
+				pl:StripWeapon("fray_shield")
+			end
+		end,
+		onTake = function(pl)
+			if SERVER and pl:HasWeapon("fray_shield") then
+				pl:StripWeapon("fray_shield")
+			end
+		end
 	},
 
 	fray_ba_bicep = {
@@ -113,7 +123,7 @@ Fray.InventoryList = {
 		description = "ammo_9x19_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 4,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "9x19MM", true)
 			end
@@ -125,7 +135,7 @@ Fray.InventoryList = {
 		description = "ammo_50ae_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(7, ".50 AE", true)
 			end
@@ -137,7 +147,7 @@ Fray.InventoryList = {
 		description = "ammo_44magnum_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(6, ".44 Magnum", true)
 			end
@@ -149,7 +159,7 @@ Fray.InventoryList = {
 		description = "ammo_338lapua_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(5, ".338 Lapua", true)
 			end
@@ -161,7 +171,7 @@ Fray.InventoryList = {
 		description = "ammo_545x39_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 4,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "5.45x39MM", true)
 			end
@@ -173,7 +183,7 @@ Fray.InventoryList = {
 		description = "ammo_556x45_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 4,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "5.56x45MM", true)
 			end
@@ -185,7 +195,7 @@ Fray.InventoryList = {
 		description = "ammo_762x51_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(20, "7.62x51MM", true)
 			end
@@ -197,7 +207,7 @@ Fray.InventoryList = {
 		description = "ammo_9x17_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(25, "9x17MM", true)
 			end
@@ -209,7 +219,7 @@ Fray.InventoryList = {
 		description = "ammo_9x39_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(20, "9x39MM", true)
 			end
@@ -221,7 +231,7 @@ Fray.InventoryList = {
 		description = "ammo_12gauge_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(8, "12 Gauge", true)
 			end
@@ -233,10 +243,36 @@ Fray.InventoryList = {
 		description = "ammo_45acp_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
-		onUse = function(pl)
+		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(25, ".45 ACP", true)
 			end
 		end
 	}
 }
+
+hook.Add("Initialize", "Fray Loot", function()
+	for _, class in pairs(Fray.Config.RandomWeaponLoot) do
+		Fray.InventoryList[class] = {
+			label = weapons.GetStored(class).PrintName,
+			description = "weapon_description",
+			model = weapons.GetStored(class).WorldModel,
+			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
+			EquipFunc = function(pl)
+				if SERVER and not pl:HasWeapon(class) then
+					pl:Give(class)
+				end
+			end,
+			UnequipFunc = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end,
+			onTake = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end
+		}
+	end
+end)

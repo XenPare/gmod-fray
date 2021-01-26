@@ -90,6 +90,22 @@ net.Receive("Fray Inventory Menu", function()
 				end)
 			end
 
+			if invlist[item].EquipFunc then
+				if not LocalPlayer():HasWeapon(item) then
+					menu:AddOption(Fray.GetPhrase("equip"), function()
+						net.Start("Fray Inventory Equip")
+							net.WriteString(item)
+						net.SendToServer()
+					end)
+				else
+					menu:AddOption(Fray.GetPhrase("unequip"), function()
+						net.Start("Fray Inventory Unequip")
+							net.WriteString(item)
+						net.SendToServer()
+					end)
+				end
+			end
+
 			menu:AddOption(Fray.GetPhrase("drop"), function()
 				net.Start("Fray Inventory Drop")
 					net.WriteString(item)

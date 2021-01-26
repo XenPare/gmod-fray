@@ -10,5 +10,14 @@ Fray.Config.Loot = {
 	"cw_ammo_9x39",
 	"cw_ammo_12gauge",
 	"cw_ammo_45acp",
-	"fray_money"
+	"fray_money",
+	"fray_weapon"
+}
+
+Fray.Config.RandomWeaponLoot = {
+	"cw_mp5",
+	"cw_deagle",
+	"cw_fiveseven",
+	"cw_mac11",
+	"cw_m1911"
 }
