@@ -1,12 +1,18 @@
 local usable = {
-	"fray_deliver"
+	"fray_deliver",
+	"fray_weapon"
 }
 
-local inv = Fray.Config.Loot
+local inv = nil
 local color_green = Color(23, 117, 6)
 hook.Add("PreDrawHalos", "Fray Halos", function()
-	for _, class in pairs(inv) do
-		halo.Add(ents.FindByClass(class), color_white, 1, 1, 2)
+	if inv == nil and Fray.InventoryList then		
+		inv = Fray.InventoryList
+	end
+	if inv ~= nil then
+		for class in pairs(inv) do
+			halo.Add(ents.FindByClass(class), color_green, 1, 1, 2)
+		end
 	end
 	for _, class in pairs(usable) do
 		halo.Add(ents.FindByClass(class), color_green, 1, 1, 2)
