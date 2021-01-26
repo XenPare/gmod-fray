@@ -15,7 +15,7 @@ local function SpawnLoot()
 		table.Empty(active)
 	end
 
-	local mod = #player.GetAll() > (math.Round(game.MaxPlayers()) / 2) and 2 or 1
+	local mod = #player.GetAll() > (math.Round(game.MaxPlayers()) / 2) and 1 or 2
 	local required = #spawns / mod
 
 	local used, i = {}, 1
