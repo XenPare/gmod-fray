@@ -1,11 +1,11 @@
 local meta = FindMetaTable("Player")
 
 function meta:SetHunger(n)
-	self:SetNWInt("Hunger", n)
+	self:SetPData("Hunger", n)
 end
 
 function meta:GetHunger()
-	return self:GetNWInt("Hunger")
+	return tonumber(self:GetPData("Hunger", 100))
 end
 
 function meta:AddHunger(n)
@@ -23,20 +23,11 @@ function meta:TakeHunger(n)
 	self:SetHunger(self:GetHunger() - n)
 end
 
-local function saveHunger(pl)
-	file.Write("fray/stats/hunger/" .. pl:SteamID64() .. ".txt", tostring(pl:GetHunger()))
-end
-
 local function setHunger(pl, init)
 	if init then
-		local path = "fray/stats/hunger/" .. pl:SteamID64() .. ".txt"
-		local exists = file.Exists(path, "DATA")
-		if not exists then
-			file.Write(path, "100")
-		end
-		pl:SetNWInt("Hunger", tonumber(file.Read(path)))
+		pl:SetHunger(pl:GetHunger())
 	else
-		pl:SetNWInt("Hunger", 100)
+		pl:SetHunger(100)
 	end
 
 	if pl:TimerExists("Hunger") then
@@ -55,14 +46,9 @@ local function setHunger(pl, init)
 			pl:TakeHunger(1)
 		end
 	end)
-
-	pl:SetTimer("Hunger Save", 120, 0, function()
-		saveHunger(pl)
-	end)
 end
 
-hook.Add("PlayerDisconnected", "Fray Hunger", saveHunger)
-hook.Add("PlayerSpawn", "Fray Hunger", setHunger)
+hook.Add("PlayerDeath", "Fray Hunger", setHunger)
 hook.Add("PlayerInitialSpawn", "Fray Hunger", function(pl)
 	setHunger(pl, true)
 end)

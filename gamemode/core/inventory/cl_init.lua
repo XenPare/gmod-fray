@@ -31,6 +31,7 @@ hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
 	end
 end)
 
+local maxWeight = Fray.Config.MaxInventoryWeight
 net.Receive("Fray Inventory Menu", function()
 	if IsValid(inventoryPanel) or IsValid(corpsePanel) or IsValid(shopPanel) then
 		return
@@ -40,7 +41,7 @@ net.Receive("Fray Inventory Menu", function()
 	local invlist = Fray.InventoryList
 
 	inventoryPanel = vgui.Create("XPFrame")
-	inventoryPanel:SetTitle(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. Fray.Config.MaxInventoryWeight .. " kg)")
+	inventoryPanel:SetTitle(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")
 	inventoryPanel:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", inventoryPanel)
@@ -111,6 +112,8 @@ net.Receive("Fray Inventory Menu", function()
 					net.WriteString(item)
 				net.SendToServer()
 				btn:Remove()
+				table.RemoveByValue(items, item)
+				inventoryPanel.Title:SetText(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")
 			end)
 
 			menu:Open()

@@ -57,7 +57,6 @@ hook.Add("PostPlayerDraw", "Fray Body Armor", function(pl)
 	for base, id in pairs(armor) do
 		if istable(id) then
 			for _, side in pairs(sides) do
-				local model = "models/snowzgmod/payday2/armour/armour" .. side .. base .. ".mdl"
 				local pos, ang = Vector(), Angle()
 
 				local bone_id = pl:LookupBone(id[side])
@@ -86,7 +85,6 @@ hook.Add("PostPlayerDraw", "Fray Body Armor", function(pl)
 				mdl:SetRenderAngles()
 			end
 		else
-			local model = "models/snowzgmod/payday2/armour/armour" .. base .. ".mdl"
 			local pos, ang = Vector(), Angle()
 
 			local bone_id = pl:LookupBone(id)

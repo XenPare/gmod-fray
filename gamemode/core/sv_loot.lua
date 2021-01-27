@@ -1,48 +1,46 @@
 local cfg = Fray.Config
-local spawns, loot, active = cfg.LootSpawns, cfg.Loot, {}
+local spawns, loot = cfg.LootSpawns, cfg.Loot
+
+Fray.ActiveLoot = {}
 
 local function SpawnLoot()
-	if not loot or #loot == 0 then
+	if #spawns == 0 or #loot == 0 then
 		return
 	end
 
-	if #active ~= 0 then
-		for _, ent in pairs(active) do
+	if #Fray.ActiveLoot ~= 0 then
+		for _, ent in pairs(Fray.ActiveLoot) do
 			if IsValid(ent) then
 				ent:Remove()
 			end
 		end
-		table.Empty(active)
+		table.Empty(Fray.ActiveLoot)
 	end
 
 	local mod = #player.GetAll() > (math.Round(game.MaxPlayers()) / 2) and 1 or 2
 	local required = #spawns / mod
 
-	local used, i = {}, 1
-	while #used ~= required do
-		i = i + 1
-		local pos = spawns[i]
-		if not table.HasValue(used, pos) then
-			table.insert(used, pos)
-		end
-	end
-
 	for i = 1, required do
 		local ent = ents.Create(table.Random(loot))
-		ent:SetPos(used[i])
+		ent:SetPos(spawns[i])
 		ent:Spawn()
-		table.insert(active, ent)
+
+		local phys = ent:GetPhysicsObject()
+		if IsValid(phys) then
+			phys:Wake()
+		end
+		
+		table.insert(Fray.ActiveLoot, ent)
 	end
 end
 
-hook.Add("Initialize", "Fray Loot", function()
+timer.Simple(5, function()
 	for _, class in pairs(loot) do
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
 			pl:AddInventoryItem(self)
 		end
 	end
+	SpawnLoot()
 end)
-
-hook.Add("InitPostEntity", "Fray", SpawnLoot)
 timer.Create("Fray Loot", cfg.LootDelay, 0, SpawnLoot)

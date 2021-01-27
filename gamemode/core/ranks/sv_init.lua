@@ -3,9 +3,9 @@ util.AddNetworkString("Fray Ranks Broadcast")
 local meta = FindMetaTable("Player")
 
 function meta:GetRank()
-	local _rank
-	for rank, data in pairs(Fray.Ranks) do
-		if self:GetPData("Kills", 0) > data.kills then
+	local _rank = "mortal"
+	for rank, data in SortedPairsByMemberValue(Fray.Ranks, "kills") do
+		if tonumber(self:GetPData("Kills", 0)) >= data.kills then
 			_rank = rank
 		end
 	end
@@ -16,7 +16,7 @@ local function broadcastRank(pl)
 	net.Start("Fray Ranks Broadcast")
 		net.WriteEntity(pl)
 		net.WriteString(pl:GetRank())
-		net.WriteInt(self:GetPData("Kills", 0), 16)
+		net.WriteInt(pl:GetPData("Kills", 0), 16)
 	net.Broadcast()
 end
 

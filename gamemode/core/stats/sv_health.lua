@@ -1,16 +1,16 @@
-local function saveHealth(pl)
-	file.Write("fray/stats/health/" .. pl:SteamID64() .. ".txt", tostring(pl:Health()))
-end
+hook.Add("EntityTakeDamage", "Fray Health", function(ent, dmg)
+	if not ent:IsPlayer() then
+		return
+	end
+	ent:SetPData("Health", ent:Health() - dmg:GetDamage())
+end)
+
+hook.Add("PlayerDeath", "Fray Health", function(pl)
+	pl:SetPData("Health", 100)
+end)
 
 hook.Add("PlayerInitialSpawn", "Fray Health", function(pl)
-	local path = "fray/stats/health/" .. pl:SteamID64() .. ".txt"
-	local exists = file.Exists(path, "DATA")
-	if not exists then
-		file.Write(path, "100")
-	end
-	pl:SetHealth(tonumber(file.Read(path)))
-	pl:SetTimer("Health Save", 120, 0, function()
-		saveHealth(pl)
+	pl:SetSimpleTimer(1, function()
+		pl:SetHealth(tonumber(pl:GetPData("Health", 100)))
 	end)
 end)
-hook.Add("PlayerDisconnected", "Fray Health", saveHealth)

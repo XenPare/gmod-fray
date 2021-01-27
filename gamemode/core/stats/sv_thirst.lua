@@ -1,11 +1,11 @@
 local meta = FindMetaTable("Player")
 
 function meta:SetThirst(n)
-	self:SetNWInt("Thirst", n)
+	self:SetPData("Thirst", n)
 end
 
 function meta:GetThirst()
-	return self:GetNWInt("Thirst")
+	return tonumber(self:GetPData("Thirst", 100))
 end
 
 function meta:AddThirst(n)
@@ -23,20 +23,11 @@ function meta:TakeThirst(n)
 	self:SetThirst(self:GetThirst() - n)
 end
 
-local function saveThirst(pl)
-	file.Write("fray/stats/thirst/" .. pl:SteamID64() .. ".txt", tostring(pl:GetThirst()))
-end
-
 local function setThirst(pl, init)
 	if init then
-		local path = "fray/stats/thirst/" .. pl:SteamID64() .. ".txt"
-		local exists = file.Exists(path, "DATA")
-		if not exists then
-			file.Write(path, "100")
-		end
-		pl:SetNWInt("Thirst", tonumber(file.Read(path)))
+		pl:SetThirst(pl:GetThirst())
 	else
-		pl:SetNWInt("Thirst", 100)
+		pl:SetThirst(100)
 	end
 
 	if pl:TimerExists("Thirst") then
@@ -55,14 +46,9 @@ local function setThirst(pl, init)
 			pl:TakeThirst(1)
 		end
 	end)
-
-	pl:SetTimer("Thirst Save", 120, 0, function()
-		saveThirst(pl)
-	end)
 end
 
-hook.Add("PlayerDisconnected", "Fray Thirst", saveThirst)
-hook.Add("PlayerSpawn", "Fray Thirst", setThirst)
+hook.Add("PlayerDeath", "Fray Thirst", setThirst)
 hook.Add("PlayerInitialSpawn", "Fray Thirst", function(pl)
 	setThirst(pl, true)
 end)

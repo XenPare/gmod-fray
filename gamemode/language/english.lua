@@ -16,6 +16,7 @@ LANG.Phrases = {
 		Ranks
 	]]
 
+	["mortal"] = "Mortal",
 	["sinner"] = "Sinner",
 	["tempter"] = "Tempter",
 	["fallen"] = "Fallen",

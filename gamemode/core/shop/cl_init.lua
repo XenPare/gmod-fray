@@ -84,7 +84,7 @@ net.Receive("Fray Shop Menu", function()
 						net.SendToServer()
 
 						money = money - item.price
-						shopPanel:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
+						shopPanel.Title:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
 					end)
 				else
 					menu:AddOption(Fray.GetPhrase("cant_afford"))
