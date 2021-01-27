@@ -36,6 +36,9 @@ end
 
 timer.Simple(5, function()
 	for _, class in pairs(loot) do
+		if not string.find(class, "cw_") then
+			continue
+		end
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
 			pl:AddInventoryItem(self)

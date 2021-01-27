@@ -12,6 +12,11 @@ Fray.Config.MaxInventoryWeight = 100
 
 Fray.Config.BaseLanguage = "english"
 
+Fray.Config.BaseEquipment = {
+	"cw_m1911",
+	"cw_ammo_45acp"
+}
+
 Fray.Config.Playermodels = {
 	"models/player/group03/male_01.mdl",
 	"models/player/group03/male_02.mdl",

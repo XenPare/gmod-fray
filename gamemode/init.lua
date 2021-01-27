@@ -45,7 +45,6 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	end)
 
 	pl:Give("cw_extrema_ratio_official")
-	pl:Give("cw_makarov")
 end)
 
 hook.Add("PlayerSpawn", "Fray", function(pl)
@@ -54,7 +53,4 @@ hook.Add("PlayerSpawn", "Fray", function(pl)
 	pl:SetJumpPower(CFG.JumpPower)
 
 	pl:Give("cw_extrema_ratio_official")
-	pl:Give("cw_makarov")
-
-	pl:GiveAmmo(120, "9x18MM", true)
 end)

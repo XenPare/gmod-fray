@@ -11,6 +11,7 @@ local meta = FindMetaTable("Player")
 local cfg = Fray.Config
 local def_run = cfg.RunSpeed
 local def_jump = cfg.JumpPower
+local def_equip = cfg.BaseEquipment
 
 hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	local path = "fray/inventory/" .. pl:SteamID64() .. ".json"
@@ -21,6 +22,11 @@ hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 
 	pl.Inventory = util.JSONToTable(file.Read(path))
 	pl:SetSimpleTimer(0.2, function()
+		if not exists then
+			for _, class in pairs(def_equip) do
+				self:AddInventoryItem(class)
+			end
+		end
 		pl:SetRunSpeed(def_run - pl:CalculateInventoryWeight())
 		pl:SetJumpPower(def_jump - (math.Round(pl:CalculateInventoryWeight() / 2)))
 	end)
@@ -91,6 +97,9 @@ function meta:ClearInventory()
 	self.Inventory = {}
 	self:SetRunSpeed(def_run)
 	self:SetJumpPower(def_jump)
+	for _, class in pairs(def_equip) do
+		self:AddInventoryItem(class)
+	end
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
