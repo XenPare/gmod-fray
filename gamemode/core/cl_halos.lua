@@ -10,6 +10,9 @@ hook.Add("PreDrawHalos", "Fray Halos", function()
 	end
 	if inv ~= nil then
 		for class in pairs(inv) do
+			if weapons.Get(class) then
+				continue
+			end
 			halo.Add(ents.FindByClass(class), color_white, 1, 1, 2)
 		end
 	end
