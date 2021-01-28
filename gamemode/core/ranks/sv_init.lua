@@ -17,12 +17,15 @@ local function broadcastRank(pl, killed)
 	if killed then
 		pl:SetPData("Kills", kills + 1)
 	end
+
 	pl:SetNWInt("Kills", kills)
 	pl:SetNWString("Rank", pl:GetRank())
 
-	net.Start("Fray Ranks Broadcast")
-		net.WriteEntity(pl)
-	net.Broadcast()
+	pl:SetSimpleTimer(1, function()
+		net.Start("Fray Ranks Broadcast")
+			net.WriteEntity(pl)
+		net.Broadcast()
+	end)
 end
 
 hook.Add("PlayerInitialSpawn", "Fray Ranks", broadcastRank)
