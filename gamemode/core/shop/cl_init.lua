@@ -47,7 +47,7 @@ net.Receive("Fray Shop Menu", function()
 		return invlist[class].max and countItems(inv, class) >= invlist[class].max or false
 	end
 
-	for class, item in pairs(items) do
+	for class, item in SortedPairsByMemberValue(items, "price", true) do
 		local colormod = false
 
 		local btn = list:Add("XPButton")
