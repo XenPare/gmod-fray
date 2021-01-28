@@ -22,13 +22,12 @@ end
 local function _draw(x, y, color, num, max, anim)
 	local _x = x + (tall / 3)
 
-	local _txt = num .. "%"
+	local _txt = math.Round(Lerp(30 * FrameTime(), num, max)) .. "%"
 	surface.SetFont(f_h)
 	local w = surface.GetTextSize(_txt)
 	_x = _x + w
 
-	local l_txt = math.Round(Lerp(30 * FrameTime(), num, max))
-	txt(l_txt, f_h, x, y - 3, color_white)
+	txt(_txt, f_h, x, y - 3, color_white)
 
 	draw.RoundedBox(4, _x, y, 190 + 6, 14, ColorAlpha(color_black, 180))
 	draw.RoundedBox(3, _x + 3, y + 3, max * 1.9, 8, color)
