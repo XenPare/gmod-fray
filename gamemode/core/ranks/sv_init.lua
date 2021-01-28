@@ -18,7 +18,7 @@ local function broadcastRank(pl, killed)
 		pl:SetPData("Kills", kills + 1)
 	end
 
-	pl:SetNWInt("Kills", kills)
+	pl:SetNWInt("Kills", killed and kills + 1 or kills)
 	pl:SetNWString("Rank", pl:GetRank())
 
 	pl:SetSimpleTimer(1, function()
@@ -30,7 +30,7 @@ end
 
 hook.Add("PlayerInitialSpawn", "Fray Ranks", broadcastRank)
 hook.Add("PlayerDeath", "Fray Ranks", function(victim, _, killer)
-	if victim:IsPlayer() and killer:IsPlayer() and not victim == killer then
+	if victim:IsPlayer() and killer:IsPlayer() and victim ~= killer then
 		broadcastRank(killer, true)
 	end
 end)
