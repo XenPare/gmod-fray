@@ -7,5 +7,9 @@ function meta:CanDeliver()
 		filter = self,
 		mask = MASK_SOLID_BRUSHONLY
 	})
-    return tr.HitSky, tr.HitPos
+	if tr.HitSky then
+		local additional = tr.HitPos - Vector(0, 0, 200) + VectorRand(-200, 200)
+		return util.IsInWorld(additonal), additional
+	end
+	return false
 end
