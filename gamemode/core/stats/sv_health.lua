@@ -2,7 +2,7 @@ hook.Add("EntityTakeDamage", "Fray Health", function(ent, dmg)
 	if not ent:IsPlayer() then
 		return
 	end
-	ent:SetPData("Health", ent:Health() - dmg:GetDamage())
+	ent:SetPData("Health", math.Round(ent:Health() - dmg:GetDamage()))
 end)
 
 hook.Add("PlayerDeath", "Fray Health", function(pl)
