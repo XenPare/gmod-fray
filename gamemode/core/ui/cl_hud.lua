@@ -1,7 +1,7 @@
 local pl
 local hp, ar, hg, th
 local _hp, _ar, _hg, _th
-local kills, rank
+local kills, rank, money
 local x, y, br, placed = 0, 0, 0
 local tall = 40
 
@@ -13,6 +13,7 @@ local m_ar = Color(66, 82, 153)
 local m_hg = Color(189, 153, 111)
 local m_th = Color(53, 114, 143)
 local m_rnk = Color(227, 148, 141)
+local m_mn = Color(106, 171, 121)
 
 local function txt(str, font, x, y, color, align_x, align_y)
 	draw.SimpleText(str, font, x, y + 1, ColorAlpha(color_black, 240), align_x or TEXT_ALIGN_LEFT, align_y or TEXT_ALIGN_TOP)
@@ -114,6 +115,9 @@ hook.Add("HUDPaint", "Fray HUD", function()
 
 	kills, rank = pl:GetNWString("Kills"), pl:GetNWString("Rank")
 
-	txt(Fray.GetPhrase(rank), f_a, ScrW() - 32, ScrH() - 64, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+	txt(Fray.GetPhrase(rank), f_a, ScrW() - 32, ScrH() - 96, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 	txt(kills .. "/" .. getNextRank(kills), f_h, ScrW() - 32, ScrH() - 32, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
+
+	money = "$" .. string.Comma(pl:GetNWInt("Money"))
+	txt(money, f_h, ScrW() - 32, ScrH() - 64, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 end)

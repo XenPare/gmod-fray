@@ -52,7 +52,9 @@ local function setThirst(pl, init)
 	end)
 end
 
-hook.Add("PlayerDeath", "Fray Thirst", setThirst)
+hook.Add("PlayerDeath", "Fray Thirst", function(pl)
+	setThirst(pl)
+end)
 hook.Add("PlayerInitialSpawn", "Fray Thirst", function(pl)
 	setThirst(pl, true)
 end)

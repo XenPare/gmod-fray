@@ -1,3 +1,5 @@
+local m_amount = Fray.Config.MoneyPerEntity
+
 Fray.InventoryList = {
 	fray_food = {
 		label = "food",
@@ -33,6 +35,7 @@ Fray.InventoryList = {
 		UseFunc = function(pl)
 			if SERVER then
 				pl:SetHealth(100)
+				pl:SetPData("Health", 100)
 				pl:EmitSound("items/medshot4.wav")
 			end
 		end
@@ -42,7 +45,17 @@ Fray.InventoryList = {
 		label = "money",
 		description = "money_description",
 		model = "models/props/cs_assault/money.mdl",
-		weight = 0.1
+		weight = 0.1,
+		onAdd = function(pl)
+			if SERVER then
+				pl:SetNWInt("Money", pl:GetNWInt("Money") + m_amount)
+			end
+		end,
+		onTake = function(pl)
+			if SERVER then
+				pl:SetNWInt("Money", pl:GetNWInt("Money") - m_amount)
+			end
+		end,
 	},
 
 	fray_ent_shield = {

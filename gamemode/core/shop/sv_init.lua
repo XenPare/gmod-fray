@@ -28,7 +28,6 @@ end)
 
 concommand.Add("fray_shop", function(pl)
 	net.Start("Fray Shop Menu")
-		net.WriteInt(pl:GetMoney(), 16)
 		net.WriteTable(pl.Inventory)
 	net.Send(pl)
 end)

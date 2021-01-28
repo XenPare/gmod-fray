@@ -26,12 +26,11 @@ net.Receive("Fray Shop Menu", function()
 		return
 	end
 
-	local money = net.ReadInt(16)
 	local inv = net.ReadTable()
 	local invlist = Fray.InventoryList
 
 	shopPanel = vgui.Create("XPFrame")
-	shopPanel:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
+	shopPanel:SetTitle(Fray.GetPhrase("shop"))
 	shopPanel:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", shopPanel)
@@ -76,14 +75,11 @@ net.Receive("Fray Shop Menu", function()
 			local menu = vgui.Create("XPMenu")
 			menu:SetPos(input.GetCursorPos())
 
-			if money >= item.price then
+			if LocalPlayer():GetNWInt("Money") >= item.price then
 				menu:AddOption(Fray.GetPhrase("buy"), function()
 					net.Start("Fray Shop Buy")
 						net.WriteString(class)
 					net.SendToServer()
-
-					money = money - item.price
-					shopPanel.Title:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
 				end)
 			else
 				menu:AddOption(Fray.GetPhrase("cant_afford"))
@@ -104,8 +100,8 @@ net.Receive("Fray Shop Menu", function()
 		local price = vgui.Create("DLabel", model)
 		price:Dock(BOTTOM)
 		price:SetTall(24)
-		price:SetText("$" .. item.price)
-		price:SetColor((isLimited(class) or money < item.price) and color_red or color_white)
+		price:SetText("$" .. string.Comma(item.price))
+		price:SetColor((isLimited(class) or LocalPlayer():GetNWInt("Money") < item.price) and color_red or color_white)
 		price:SetFont("xpgui_medium")
 		price:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
 		price:SetContentAlignment(5)

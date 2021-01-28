@@ -52,7 +52,9 @@ local function setHunger(pl, init)
 	end)
 end
 
-hook.Add("PlayerDeath", "Fray Hunger", setHunger)
+hook.Add("PlayerDeath", "Fray Hunger", function(pl)
+	setHunger(pl)
+end)
 hook.Add("PlayerInitialSpawn", "Fray Hunger", function(pl)
 	setHunger(pl, true)
 end)

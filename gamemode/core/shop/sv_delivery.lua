@@ -8,8 +8,8 @@ function meta:CanDeliver()
 		mask = MASK_SOLID_BRUSHONLY
 	})
 	if tr.HitSky then
-		local additional = tr.HitPos - Vector(0, 0, 200) + VectorRand(-200, 200)
-		return util.IsInWorld(additonal), additional
+		local additional = tr.HitPos - Vector(0, 0, 400) + VectorRand(-200, 200)
+		return self:GetPos().z > -2300, additional
 	end
 	return false
 end
@@ -20,11 +20,9 @@ function Fray.ShopDeliver(pl, class)
 		return
 	end
 
-	local endPos = hitPos - Vector(0, 0, 200) + VectorRand(-200, 200)
-	
 	local iscw20wep = weapons.Get(class) and weapons.Get(class).CW20Weapon or false
 	local ent = ents.Create("fray_deliver")
-	ent:SetPos(endPos)
+	ent:SetPos(hitPos)
 	if iscw20wep then
 		ent.Deliver = "fray_weapon"
 		ent.ContainedWeapon = class
@@ -37,7 +35,7 @@ function Fray.ShopDeliver(pl, class)
 	if IsValid(phys) then
 		phys:Wake()
 
-		local tr = util.QuickTrace(endPos, pl:GetPos(), self)
+		local tr = util.QuickTrace(hitPos, pl:GetPos(), self)
 		phys:SetVelocity(tr.Normal * -10000)
 	end
 end
