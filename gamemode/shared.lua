@@ -12,7 +12,7 @@ XPA.IncludeCompounded("fray/gamemode/core/*")
 
 TEAM_SURVIVOR = 1
 function GM:PreGamemodeLoaded()
-    team.SetUp(TEAM_SURVIVOR, "Survivor", Color(46, 46, 46), false)
+    team.SetUp(TEAM_SURVIVOR, "Survivor", Color(106, 171, 121), false)
 end
 
 function GM:Move(pl)
