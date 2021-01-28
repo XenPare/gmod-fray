@@ -24,7 +24,7 @@ hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	pl:SetSimpleTimer(0.2, function()
 		if not exists then
 			for _, class in pairs(def_equip) do
-				self:AddInventoryItem(class)
+				pl:AddInventoryItem(class)
 			end
 		end
 		pl:SetRunSpeed(def_run - pl:CalculateInventoryWeight())
