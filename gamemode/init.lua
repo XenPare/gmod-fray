@@ -54,3 +54,7 @@ hook.Add("PlayerSpawn", "Fray", function(pl)
 
 	pl:Give("cw_extrema_ratio_official")
 end)
+
+hook.Add("GetFallDamage", "Fray", function(_, speed)
+    return speed / 8
+end)
