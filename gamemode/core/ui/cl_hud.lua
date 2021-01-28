@@ -66,7 +66,7 @@ place(
 local function nearest(tbl, num)
     local min, min_i
 	for i, y in ipairs(tbl) do
-		if num > y then
+		if tonumber(num) > y then
 			continue
 		end
         if not min or (math.abs(num - y) < min) then
