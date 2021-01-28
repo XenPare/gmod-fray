@@ -11,6 +11,11 @@ net.Receive("Fray Shop Buy", function(_, pl)
 		return
 	end
 
+	if not pl:CanDeliver() then
+		pl:ChatPrint(Fray.GetPhrase("cant_deliver", pl))
+		return
+	end
+
 	local max = inv_tbl[item].max
 	if max and pl:CalculateInventoryItemCount(item) >= max then
 		return

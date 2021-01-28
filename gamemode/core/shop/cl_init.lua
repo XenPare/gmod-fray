@@ -76,21 +76,17 @@ net.Receive("Fray Shop Menu", function()
 			local menu = vgui.Create("XPMenu")
 			menu:SetPos(input.GetCursorPos())
 
-			if LocalPlayer():CanDeliver() then
-				if money >= item.price then
-					menu:AddOption(Fray.GetPhrase("buy"), function()
-						net.Start("Fray Shop Buy")
-							net.WriteString(class)
-						net.SendToServer()
+			if money >= item.price then
+				menu:AddOption(Fray.GetPhrase("buy"), function()
+					net.Start("Fray Shop Buy")
+						net.WriteString(class)
+					net.SendToServer()
 
-						money = money - item.price
-						shopPanel.Title:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
-					end)
-				else
-					menu:AddOption(Fray.GetPhrase("cant_afford"))
-				end
+					money = money - item.price
+					shopPanel.Title:SetTitle(Fray.GetPhrase("shop") .. " ($" .. money .. " " .. Fray.GetPhrase("available") .. ")")
+				end)
 			else
-				menu:AddOption(Fray.GetPhrase("cant_deliver"))
+				menu:AddOption(Fray.GetPhrase("cant_afford"))
 			end
 
 			menu:Open()
