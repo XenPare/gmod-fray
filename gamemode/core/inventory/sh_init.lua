@@ -291,7 +291,36 @@ Fray.InventoryList = {
 }
 
 hook.Add("Initialize", "Fray Loot", function()
+	-- from loot
 	for _, class in pairs(Fray.Config.RandomWeaponLoot) do
+		Fray.InventoryList[class] = {
+			label = weapons.GetStored(class).PrintName,
+			description = "weapon_description",
+			model = weapons.GetStored(class).WorldModel,
+			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
+			EquipFunc = function(pl)
+				if SERVER and not pl:HasWeapon(class) then
+					pl:Give(class)
+				end
+			end,
+			UnequipFunc = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end,
+			onTake = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end
+		}
+	end
+
+	-- from shop
+	for class in pairs(Fray.ShopList) do
+		if Fray.InventoryList[class] then
+			continue
+		end
 		Fray.InventoryList[class] = {
 			label = weapons.GetStored(class).PrintName,
 			description = "weapon_description",
