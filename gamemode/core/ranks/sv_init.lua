@@ -18,6 +18,7 @@ local function broadcastRank(pl, killed)
 		pl:SetPData("Kills", kills + 1)
 	end
 
+	pl:SetFrags(killed and kills + 1 or kills)
 	pl:SetNWInt("Kills", killed and kills + 1 or kills)
 	pl:SetNWString("Rank", pl:GetRank())
 

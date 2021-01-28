@@ -99,11 +99,13 @@ net.Receive("Fray Inventory Menu", function()
 						net.SendToServer()
 					end)
 				else
-					menu:AddOption(Fray.GetPhrase("unequip"), function()
-						net.Start("Fray Inventory Unequip")
-							net.WriteString(item)
-						net.SendToServer()
-					end)
+					if invlist[item].UnequipFunc then 
+						menu:AddOption(Fray.GetPhrase("unequip"), function()
+							net.Start("Fray Inventory Unequip")
+								net.WriteString(item)
+							net.SendToServer()
+						end)
+					end
 				end
 			end
 
