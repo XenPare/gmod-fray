@@ -6,7 +6,20 @@ Fray.InventoryList = {
 		weight = 0.2,
 		UseFunc = function(pl)
 			if SERVER then
-				pl:AddHunger(20)
+				pl:AddHunger(40)
+				pl:EmitSound("npc/barnacle/barnacle_gulp" .. math.random(1, 2) .. ".wav")
+			end
+		end
+	},
+
+	fray_drink = {
+		label = "drink",
+		description = "drink_description",
+		model = "models/props_junk/popcan01a.mdl",
+		weight = 0.2,
+		UseFunc = function(pl)
+			if SERVER then
+				pl:AddThirst(30)
 				pl:EmitSound("npc/barnacle/barnacle_gulp" .. math.random(1, 2) .. ".wav")
 			end
 		end
@@ -21,19 +34,6 @@ Fray.InventoryList = {
 			if SERVER then
 				pl:SetHealth(100)
 				pl:EmitSound("items/medshot4.wav")
-			end
-		end
-	},
-
-	fray_drink = {
-		label = "drink",
-		description = "drink_description",
-		model = "models/props_junk/popcan01a.mdl",
-		weight = 0.2,
-		UseFunc = function(pl)
-			if SERVER then
-				pl:AddThirst(20)
-				pl:EmitSound("npc/barnacle/barnacle_gulp" .. math.random(1, 2) .. ".wav")
 			end
 		end
 	},

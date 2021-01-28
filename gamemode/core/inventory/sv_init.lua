@@ -72,6 +72,13 @@ function meta:AddInventoryItem(class)
 		return
 	end
 
+	if list[_class].max then
+		if self:CalculateInventoryItemCount(_class) >= list[_class].max then
+			self:ChatPrint(Fray.GetPhrase("limit", self))
+			return
+		end
+	end
+
 	if list[_class].onAdd then
 		list[_class].onAdd(self)
 	end

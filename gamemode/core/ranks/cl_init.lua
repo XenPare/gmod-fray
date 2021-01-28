@@ -1,11 +1,5 @@
 net.Receive("Fray Ranks Broadcast", function()
 	local pl = net.ReadEntity()
-	local rank = net.ReadString()
-	local kills = net.ReadInt(16)
-
-	pl.Rank = rank
-	pl.Kills = kills
-
 	if rank ~= "mortal" then
 		local mdl = Fray.Ranks[rank].mask
 		if pl.Mask and IsValid(pl.Mask) and pl.Mask:GetModel() ~= mdl then

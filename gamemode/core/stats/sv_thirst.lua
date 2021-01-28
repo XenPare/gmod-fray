@@ -2,6 +2,10 @@ local meta = FindMetaTable("Player")
 
 function meta:SetThirst(n)
 	self:SetPData("Thirst", n)
+	self:SetNWInt("Thirst", n)
+	if n > 5 and self:TimerExists("Thirst") then
+		self:RemoveTimer("Thirst")
+	end
 end
 
 function meta:GetThirst()
@@ -12,7 +16,7 @@ function meta:AddThirst(n)
 	if (self:GetThirst() + n) > 100 then
 		self:SetThirst(100)
 	else
-		self:SetThirst(n)
+		self:SetThirst(self:GetThirst() + n)
 	end
 end
 

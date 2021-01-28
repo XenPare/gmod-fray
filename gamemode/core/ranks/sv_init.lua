@@ -12,19 +12,22 @@ function meta:GetRank()
 	return _rank
 end
 
-local function broadcastRank(pl)
+local function broadcastRank(pl, killed)
+	local kills = pl:GetPData("Kills", 0)
+	if killed then
+		pl:SetPData("Kills", kills + 1)
+	end
+	pl:SetNWInt("Kills", kills)
+	pl:SetNWString("Rank", pl:GetRank())
+
 	net.Start("Fray Ranks Broadcast")
 		net.WriteEntity(pl)
-		net.WriteString(pl:GetRank())
-		net.WriteInt(pl:GetPData("Kills", 0), 16)
 	net.Broadcast()
 end
 
 hook.Add("PlayerInitialSpawn", "Fray Ranks", broadcastRank)
 hook.Add("PlayerDeath", "Fray Ranks", function(victim, _, killer)
-	if not (victim:IsPlayer() and killer:IsPlayer()) then
-		return
+	if victim:IsPlayer() and killer:IsPlayer() and not victim == killer then
+		broadcastRank(killer, true)
 	end
-	killer:SetPData("Kills", killer:GetPData("Kills", 0) + 1)
-	broadcastRank(killer)
 end)

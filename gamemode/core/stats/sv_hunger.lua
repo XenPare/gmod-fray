@@ -2,6 +2,10 @@ local meta = FindMetaTable("Player")
 
 function meta:SetHunger(n)
 	self:SetPData("Hunger", n)
+	self:SetNWInt("Hunger", n)
+	if n > 5 and self:TimerExists("Hunger") then
+		self:RemoveTimer("Hunger")
+	end
 end
 
 function meta:GetHunger()
@@ -12,7 +16,7 @@ function meta:AddHunger(n)
 	if (self:GetHunger() + n) > 100 then
 		self:SetHunger(100)
 	else
-		self:SetHunger(n)
+		self:SetHunger(self:GetHunger() + n)
 	end
 end
 

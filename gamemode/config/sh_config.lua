@@ -36,14 +36,11 @@ Fray.Config.Workshop = {
 	"283399070" -- Masks
 }
 
-Fray.Config.HideHUD = {}
---[[
 Fray.Config.HideHUD = {
 	["CHudBattery"] = true,
 	["CHudHealth"] = true,	
 	["CHudAmmo"] = true,
 	["CHudSecondaryAmmo"] = true,
 	["CHudSuitPower"] = true,
-	["CHudWeaponSelection"] = true
+	--["CHudWeaponSelection"] = true
 }
-]]
