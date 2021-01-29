@@ -45,11 +45,8 @@ local function SpawnLoot()
 	BroadcastLoot()
 end
 
-hook.Add("Initialize", "Fray Loot", function()
+hook.Add("PostGamemodeLoaded", "Fray Loot", function()
 	for _, class in pairs(loot) do
-		if not string.find(class, "cw_") or not string.find(class, "_wep_") then
-			continue
-		end
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
 			if table.HasValue(Fray.ActiveLoot, self) then

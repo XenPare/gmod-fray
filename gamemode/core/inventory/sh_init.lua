@@ -355,7 +355,7 @@ hook.Add("Initialize", "Fray Loot", function()
 		end
 		local desc, count, needed = "", 1, #atts
 		for k, att in pairs(atts) do
-			desc = desc .. att_names[att] .. (count < needed and "\n" or "")
+			desc = desc .. count .. ") " ..  att_names[att] .. (count < needed and "\n" or "")
 			count = count + 1
 		end
 		Fray.InventoryList[class] = {
