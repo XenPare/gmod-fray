@@ -26,8 +26,9 @@ net.Receive("Fray Shop Buy", function(_, pl)
 	Fray.ShopDeliver(pl, item)
 end)
 
-concommand.Add("fray_shop", function(pl)
+hook.Add("PlayerSwitchFlashlight", "Fray Shop", function(pl)
 	net.Start("Fray Shop Menu")
 		net.WriteTable(pl.Inventory)
 	net.Send(pl)
+	return false
 end)

@@ -22,19 +22,26 @@ local function calculateWeight(tbl)
 end
 
 inventoryPanel = nil
-hook.Add("PlayerBindPress", "Fray Inventory", function(pl, bind, pressed)
-	if string.find(bind, "impulse 100") then
-		if not IsValid(inventoryPanel) then
-			RunConsoleCommand("fray_inventory")
-		end
-		return true
+hook.Add("ScoreboardShow", "Fray Inventory", function()
+	if not IsValid(inventoryPanel) then
+		RunConsoleCommand("fray_inventory")
+	else
+		inventoryPanel:Close()
 	end
+	return true
 end)
 
 local maxWeight = Fray.Config.MaxInventoryWeight
 net.Receive("Fray Inventory Menu", function()
-	if IsValid(inventoryPanel) or IsValid(corpsePanel) or IsValid(shopPanel) then
+	if IsValid(inventoryPanel) then
 		return
+	end
+
+	local toclear = {shopPanel, corpsePanel}
+	for _, pnl in pairs(toclear) do
+		if IsValid(pnl) then
+			pnl:Close()
+		end
 	end
 
 	local items = net.ReadTable()

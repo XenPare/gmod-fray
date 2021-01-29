@@ -10,8 +10,15 @@ end
 
 corpsePanel = nil
 net.Receive("Fray Corpse", function()
-	if IsValid(corpsePanel) or IsValid(inventoryPanel) or IsValid(shopPanel) then
+	if IsValid(corpsePanel) then
 		return
+	end
+
+	local toclear = {inventoryPanel, shopPanel}
+	for _, pnl in pairs(toclear) do
+		if IsValid(pnl) then
+			pnl:Close()
+		end
 	end
 
 	local corpse = net.ReadEntity()

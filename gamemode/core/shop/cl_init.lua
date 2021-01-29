@@ -10,21 +10,20 @@ local function countItems(tbl, class)
 	return count
 end
 
-shopPanel = nil
-hook.Add("PlayerBindPress", "Fray Shop", function(pl, bind, pressed)
-	if string.find(bind, "+menu_context") then
-		if not IsValid(shopPanel) then
-			RunConsoleCommand("fray_shop")
-		end
-		return true
-	end
-end)
-
 local color_red = Color(194, 79, 79)
 local color_green = Color(129, 235, 166)
+shopPanel = nil
 net.Receive("Fray Shop Menu", function()
-	if IsValid(inventoryPanel) or IsValid(corpsePanel) or IsValid(shopPanel) then
+	if IsValid(shopPanel) then
+		shopPanel:Close()
 		return
+	end
+
+	local toclear = {inventoryPanel, corpsePanel}
+	for _, pnl in pairs(toclear) do
+		if IsValid(pnl) then
+			pnl:Close()
+		end
 	end
 
 	local inv = net.ReadTable()
