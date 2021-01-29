@@ -20,10 +20,10 @@ function Fray.ShopDeliver(pl, class)
 		return
 	end
 
-	local iscw20wep = weapons.Get(class) and weapons.Get(class).CW20Weapon or false
+	local iswep = tobool(weapons.Get(class))
 	local ent = ents.Create("fray_deliver")
 	ent:SetPos(hitPos)
-	if iscw20wep then
+	if iswep then
 		ent.Deliver = "fray_weapon"
 		ent.ContainedWeapon = class
 	else
@@ -34,7 +34,6 @@ function Fray.ShopDeliver(pl, class)
 	local phys = ent:GetPhysicsObject()
 	if IsValid(phys) then
 		phys:Wake()
-
 		local tr = util.QuickTrace(hitPos, pl:GetPos(), self)
 		phys:SetVelocity(tr.Normal * -10000)
 	end

@@ -58,7 +58,7 @@ Fray.InventoryList = {
 		end,
 	},
 
-	fray_ent_shield = {
+	fray_shield = {
 		label = "shield",
 		description = "shield_description",
 		model = "models/weapons/arccw_go/v_shield.mdl",
