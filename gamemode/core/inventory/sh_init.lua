@@ -402,6 +402,15 @@ hook.Add("Initialize", "Fray Loot", function()
 					end
 				end
 			end,
+			onTake = function(pl)
+				if SERVER then
+					if CustomizableWeaponry:hasSpecifiedAttachments(pl, atts) then
+						for _, att in pairs(atts) do
+							CustomizableWeaponry:removeAttachment(pl, att)
+						end
+					end
+				end
+			end
 		}
 	end
 
