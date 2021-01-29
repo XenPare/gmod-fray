@@ -1,7 +1,16 @@
 local cfg = Fray.Config
 local spawns, loot = cfg.LootSpawns, cfg.Loot
 
+util.AddNetworkString("Fray Broadcast Loot")
+util.AddNetworkString("Fray Get Loot Table")
+
 Fray.ActiveLoot = {}
+
+local function BroadcastLoot()
+	net.Start("Fray Broadcast Loot")
+		net.WriteTable(Fray.ActiveLoot)
+	net.Broadcast()
+end
 
 local function SpawnLoot()
 	if #spawns == 0 or #loot == 0 then
@@ -32,6 +41,8 @@ local function SpawnLoot()
 		
 		table.insert(Fray.ActiveLoot, ent)
 	end
+
+	BroadcastLoot()
 end
 
 hook.Add("Initialize", "Fray Attachments", function()
@@ -41,11 +52,16 @@ hook.Add("Initialize", "Fray Attachments", function()
 		end
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
+			if table.HasValue(Fray.ActiveLoot, self) then
+				table.RemoveByValue(Fray.ActiveLoot, self)
+			end
 			pl:AddInventoryItem(self)
+			BroadcastLoot()
 		end
 	end
 	timer.Simple(1, function()
 		SpawnLoot()
 	end)
 end)
+timer.Create("Fray Loot Broadcast", 15, 0, BroadcastLoot)
 timer.Create("Fray Loot", cfg.LootDelay, 0, SpawnLoot)
