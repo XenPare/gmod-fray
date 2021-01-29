@@ -42,5 +42,5 @@ Fray.Config.HideHUD = {
 	["CHudAmmo"] = true,
 	["CHudSecondaryAmmo"] = true,
 	["CHudSuitPower"] = true,
-	--["CHudWeaponSelection"] = true
+	["CHudWeaponSelection"] = true
 }
