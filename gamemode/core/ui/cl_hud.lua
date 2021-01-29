@@ -2,6 +2,7 @@ local pl
 local hp, ar, hg, th
 local _hp, _ar, _hg, _th
 local kills, rank, money
+local babygod
 local x, y, br, placed = 0, 0, 0
 local tall = 40
 
@@ -14,6 +15,7 @@ local m_hg = Color(189, 153, 111)
 local m_th = Color(53, 114, 143)
 local m_rnk = Color(227, 148, 141)
 local m_mn = Color(106, 171, 121)
+local m_pr = Color(194, 167, 79)
 
 local function txt(str, font, x, y, color, align_x, align_y)
 	draw.SimpleText(str, font, x, y + 1, ColorAlpha(color_black, 240), align_x or TEXT_ALIGN_LEFT, align_y or TEXT_ALIGN_TOP)
@@ -87,6 +89,9 @@ place(
 	end,
 	function()
 		x, y = ScrW() - 32, ScrH() - 32
+		if babygod then
+			set(txt(Fray.GetPhrase("babygod"), f_a, x, y, m_pr, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+		end
 		set(txt(Fray.GetPhrase(rank), f_a, x, y, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(kills .. "/" .. getNextRank(kills), f_h, x, y, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(money, f_h, x, y, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
@@ -107,6 +112,7 @@ hook.Add("HUDPaint", "Fray HUD", function()
 
 	kills, rank = pl:GetNWString("Kills"), pl:GetNWString("Rank")
 	money = "$" .. string.Comma(pl:GetNWInt("Money"))
+	babygod = pl:GetNWBool("Babygod")
 
 	local offy, offx = ScrH() - 48, 32
 	x, y = offx, offy

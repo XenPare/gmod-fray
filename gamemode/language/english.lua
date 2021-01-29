@@ -12,6 +12,8 @@ LANG.Zones = {
 local money_amount = Fray.Config.MoneyPerEntity
 
 LANG.Phrases = {
+	["babygod"] = "Protected +",
+
 	--[[
 		Ranks
 	]]

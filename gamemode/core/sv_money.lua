@@ -25,5 +25,7 @@ function meta:TakeMoney(num)
 end
 
 hook.Add("PlayerInitialSpawn", "Fray Money", function(pl)
-	pl:SetNWInt("Money", pl:GetMoney())
+	pl:SetSimpleTimer(1, function()
+		pl:SetNWInt("Money", pl:GetMoney())
+	end)
 end)
