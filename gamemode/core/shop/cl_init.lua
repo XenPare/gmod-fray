@@ -50,17 +50,20 @@ net.Receive("Fray Shop Menu", function()
 		local colormod = false
 
 		local btn = list:Add("XPButton")
-		btn:SetSize(84, 84)
+		btn:SetSize(130, 130)
 
 		local model = vgui.Create("ModelImage", btn)
-		model:SetSize(84, 84)
-		model:SetPos(0, 0)
+		model:SetSize(96, 96)
+		model:SetPos(12, 0)
 		model:SetModel(invlist[class].model)
+		model:SetCursor("hand")
 		model:SetTooltipPanelOverride("XPTooltip")
 		model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price))
+		btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price))
 
 		if isLimited(class) then
 			model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price) .. " (" .. Fray.GetPhrase("limit") .. ")")
+			btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price) .. " (" .. Fray.GetPhrase("limit") .. ")")
 		end
 
 		model.OnCursorEntered = function()
@@ -86,8 +89,11 @@ net.Receive("Fray Shop Menu", function()
 			end
 
 			menu:Open()
+
+			XPGUI.PlaySound("xpgui/sidemenu/sidemenu_click_01.wav")
 		end
-		
+
+		btn.DoClick = model.OnMousePressed
 		btn.Paint = function(self, w, h)
 			if colormod then
 				self.Color.a = Lerp(0.075, self.Color.a , 35)
@@ -97,16 +103,17 @@ net.Receive("Fray Shop Menu", function()
 			draw.RoundedBox(6, 0, 0, w, h, self.Color)
 		end
 
-		local price = vgui.Create("DLabel", model)
+		local price = vgui.Create("DLabel", btn)
 		price:Dock(BOTTOM)
-		price:SetTall(18)
+		price:SetTall(22)
 		price:SetText("$" .. string.Comma(item.price))
 		price:SetColor((isLimited(class) or LocalPlayer():GetNWInt("Money") < item.price) and color_red or color_green)
-		price:SetFont("xpgui_tiny")
+		price:SetFont("xpgui_medium")
 		price:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
 		price:SetContentAlignment(5)
+		price:SetMouseInputEnabled(false)
 
-		local name = vgui.Create("DLabel", model)
+		local name = vgui.Create("DLabel", btn)
 		name:Dock(BOTTOM)
 		name:SetTall(18)
 		name:SetText(Fray.GetPhrase(invlist[class].label))
@@ -114,5 +121,6 @@ net.Receive("Fray Shop Menu", function()
 		name:SetFont("xpgui_tiny")
 		name:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
 		name:SetContentAlignment(5)
+		name:SetMouseInputEnabled(false)
 	end
 end)

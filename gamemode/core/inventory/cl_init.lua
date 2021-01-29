@@ -64,12 +64,13 @@ net.Receive("Fray Inventory Menu", function()
 		local colormod = false
 
 		local btn = list:Add("XPButton")
-		btn:SetSize(84, 84)
+		btn:SetSize(96, 96)
 
 		local model = vgui.Create("ModelImage", btn)
-		model:SetSize(84, 84)
+		model:SetSize(96, 96)
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
+		model:SetCursor("hand")
 		model:SetTooltipPanelOverride("XPTooltip")
 		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg):\n" .. Fray.GetPhrase(invlist[item].description))
 
@@ -135,6 +136,8 @@ net.Receive("Fray Inventory Menu", function()
 			end)
 
 			menu:Open()
+
+			XPGUI.PlaySound("xpgui/sidemenu/sidemenu_click_01.wav")
 		end
 		
 		btn.Paint = function(self, w, h)
