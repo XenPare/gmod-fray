@@ -45,18 +45,18 @@ local function SpawnLoot()
 	BroadcastLoot()
 end
 
-hook.Add("Initialize", "Fray Attachments", function()
+hook.Add("Initialize", "Fray Loot", function()
 	for _, class in pairs(loot) do
-		if not string.find(class, "cw_") then
+		if not string.find(class, "cw_") or not string.find(class, "_wep_") then
 			continue
 		end
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
 			if table.HasValue(Fray.ActiveLoot, self) then
 				table.RemoveByValue(Fray.ActiveLoot, self)
+				BroadcastLoot()
 			end
 			pl:AddInventoryItem(self)
-			BroadcastLoot()
 		end
 	end
 	timer.Simple(1, function()
