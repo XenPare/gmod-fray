@@ -52,6 +52,15 @@ net.Receive("Fray Corpse", function()
 			model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description) .. "\n(Limit is reached)")
 		end
 
+		local name = vgui.Create("DLabel", model)
+		name:Dock(BOTTOM)
+		name:SetTall(18)
+		name:SetText(Fray.GetPhrase(invlist[item].label))
+		name:SetColor(color_white)
+		name:SetFont("xpgui_tiny")
+		name:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
+		name:SetContentAlignment(5)
+
 		model.OnCursorEntered = function()
 			colormod = true
 		end

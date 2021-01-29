@@ -20,7 +20,8 @@ hook.Add("PlayerBindPress", "Fray Shop", function(pl, bind, pressed)
 	end
 end)
 
-local color_red = Color(255, 0, 0)
+local color_red = Color(194, 79, 79)
+local color_green = Color(129, 235, 166)
 net.Receive("Fray Shop Menu", function()
 	if IsValid(inventoryPanel) or IsValid(corpsePanel) or IsValid(shopPanel) then
 		return
@@ -57,10 +58,10 @@ net.Receive("Fray Shop Menu", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[class].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg)\n" .. Fray.GetPhrase(invlist[class].description))
+		model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg)\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price))
 
 		if isLimited(class) then
-			model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg)\n" .. Fray.GetPhrase(invlist[class].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
+			model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg)\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price) .. " (" .. Fray.GetPhrase("limit") .. ")")
 		end
 
 		model.OnCursorEntered = function()
@@ -99,11 +100,20 @@ net.Receive("Fray Shop Menu", function()
 
 		local price = vgui.Create("DLabel", model)
 		price:Dock(BOTTOM)
-		price:SetTall(24)
+		price:SetTall(18)
 		price:SetText("$" .. string.Comma(item.price))
-		price:SetColor((isLimited(class) or LocalPlayer():GetNWInt("Money") < item.price) and color_red or color_white)
-		price:SetFont("xpgui_medium")
+		price:SetColor((isLimited(class) or LocalPlayer():GetNWInt("Money") < item.price) and color_red or color_green)
+		price:SetFont("xpgui_tiny")
 		price:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
 		price:SetContentAlignment(5)
+
+		local name = vgui.Create("DLabel", model)
+		name:Dock(BOTTOM)
+		name:SetTall(18)
+		name:SetText(Fray.GetPhrase(invlist[class].label))
+		name:SetColor(color_white)
+		name:SetFont("xpgui_tiny")
+		name:SetExpensiveShadow(1, ColorAlpha(color_black, 200))
+		name:SetContentAlignment(5)
 	end
 end)
