@@ -7,7 +7,7 @@ net.Receive("Fray Corpse Take", function(_, pl)
 	local corpse = net.ReadEntity()
 	local class = net.ReadString()
 
-	if not corpse.PlayerRag or pl:GetPos():DistToSqr(corpse:GetPos()) > 40000 then
+	if not IsValid(corpse) or not corpse.PlayerRag or pl:GetPos():DistToSqr(corpse:GetPos()) > 40000 then
 		return
 	end
 
