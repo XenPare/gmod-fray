@@ -65,6 +65,10 @@ hook.Add("HUDPaint", "Fray Weapon Selector", function()
 			end
 
 			surface.SetFont("fray_wepsel")
+			if not IsValid(wepsel.weapons[i]) then
+				continue
+			end
+			
 			local weaponName = wepsel.weapons[i]:GetPrintName():upper()
 			local _, ty = surface.GetTextSize(weaponName)
 

@@ -314,22 +314,30 @@ hook.Add("Initialize", "Fray Loot", function()
 			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
 			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
-			EquipFunc = function(pl)
-				if SERVER and not pl:HasWeapon(class) then
-					pl:Give(class)
-				end
-			end,
-			UnequipFunc = function(pl)
-				if SERVER and pl:HasWeapon(class) then
-					pl:StripWeapon(class)
-				end
-			end,
 			onTake = function(pl)
 				if SERVER and pl:HasWeapon(class) then
 					pl:StripWeapon(class)
 				end
 			end
 		}
+		if string.find(class, "grenade") then
+			Fray.InventoryList[class].UseFunc = function(pl)
+				if SERVER and not pl:HasWeapon(class) then
+					pl:Give(class)
+				end
+			end
+		else
+			Fray.InventoryList[class].EquipFunc = function(pl)
+				if SERVER and not pl:HasWeapon(class) then
+					pl:Give(class)
+				end
+			end
+			Fray.InventoryList[class].UnequipFunc = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end
+		end
 	end
 
 	--[[
@@ -376,22 +384,30 @@ hook.Add("Initialize", "Fray Loot", function()
 			label = weapons.GetStored(class).PrintName,
 			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
-			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
-			EquipFunc = function(pl)
+			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2
+		}
+		if string.find(class, "grenade") then
+			Fray.InventoryList[class].UseFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
 				end
-			end,
-			UnequipFunc = function(pl)
-				if SERVER and pl:HasWeapon(class) then
-					pl:StripWeapon(class)
+			end
+		else
+			Fray.InventoryList[class].EquipFunc = function(pl)
+				if SERVER and not pl:HasWeapon(class) then
+					pl:Give(class)
 				end
-			end,
-			onTake = function(pl)
+			end
+			Fray.InventoryList[class].UnequipFunc = function(pl)
 				if SERVER and pl:HasWeapon(class) then
 					pl:StripWeapon(class)
 				end
 			end
-		}
+			Fray.InventoryList[class].onTake = function(pl)
+				if SERVER and pl:HasWeapon(class) then
+					pl:StripWeapon(class)
+				end
+			end
+		end
 	end
 end)
