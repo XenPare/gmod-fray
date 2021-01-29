@@ -5,7 +5,7 @@ end)
 
 local dropped = {}
 hook.Add("OnEntityCreated", "Fray Halos", function(ent)
-	if not Fray.InventoryList[ent:GetClass()] then
+	if not Fray.InventoryList[ent:GetClass()] or ent:IsWeapon() then
 		return
 	end
 	table.insert(dropped, ent)
