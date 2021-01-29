@@ -13,7 +13,7 @@ hook.Add("OnEntityCreated", "Fray Halos", function(ent)
 	if ent:IsWeapon() or table.HasValue(active, ent) then
 		return
 	end
-	if white[ent:GetClass()] or Fray.InventoryList[ent:GetClass()] or Fray.ShopList[ent:GetClass()] then
+	if white[ent:GetClass()] or table.HasValue(Fray.Config.Loot, ent:GetClass()) or Fray.InventoryList[ent:GetClass()] or Fray.ShopList[ent:GetClass()] then
 		table.insert(post, ent)
 	end
 	if red[ent:GetClass()] then

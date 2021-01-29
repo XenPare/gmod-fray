@@ -53,7 +53,10 @@ hook.Add("PostGamemodeLoaded", "Fray Loot", function()
 				table.RemoveByValue(Fray.ActiveLoot, self)
 				BroadcastLoot()
 			end
-			pl:AddInventoryItem(self)
+			pl:AddInventoryItem(self.Weapon and self.Weapon or self)
+			if self.Weapon then
+				self:Remove()
+			end
 		end
 	end
 	timer.Simple(1, function()
