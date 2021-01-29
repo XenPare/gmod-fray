@@ -1,6 +1,6 @@
 Fray.Config.WalkSpeed = 150
-Fray.Config.RunSpeed = 270
-Fray.Config.JumpPower = 215
+Fray.Config.RunSpeed = 290
+Fray.Config.JumpPower = 225
 
 Fray.Config.MoneyPerEntity = 500
 

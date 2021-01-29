@@ -122,8 +122,8 @@ function meta:TakeInventoryItem(class, silent)
 	
 	table.RemoveByValue(self.Inventory, class)
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
-	self:SetRunSpeed(def_run + self:CalculateInventoryWeight())
-	self:SetJumpPower(def_jump + (math.Round(self:CalculateInventoryWeight() / 2)))
+	self:SetRunSpeed(def_run - self:CalculateInventoryWeight())
+	self:SetJumpPower(def_jump - (math.Round(self:CalculateInventoryWeight() / 2)))
 
 	if silent then
 		if self:Alive() then
