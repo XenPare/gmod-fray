@@ -1,4 +1,7 @@
 local cl_cvars = {
+	["gmod_mcore_test"] = 1,
+	["mat_queue_mode"] = -1,
+	["cl_threaded_bone_setup"] = 1,
 	["cw_crosshair"] = 0
 }
 
