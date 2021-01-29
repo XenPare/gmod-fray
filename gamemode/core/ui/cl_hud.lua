@@ -18,6 +18,7 @@ local m_mn = Color(106, 171, 121)
 local function txt(str, font, x, y, color, align_x, align_y)
 	draw.SimpleText(str, font, x, y + 1, ColorAlpha(color_black, 240), align_x or TEXT_ALIGN_LEFT, align_y or TEXT_ALIGN_TOP)
 	draw.SimpleText(str, font, x, y, color, align_x or TEXT_ALIGN_LEFT, align_y or TEXT_ALIGN_TOP)
+	return tall
 end
 
 local function _draw(x, y, color, num, max, anim)
@@ -47,23 +48,6 @@ local function place(...)
 	table.insert(hud, {...})
 end
 
-place(
-	function()
-		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp))
-	end, 
-	function()
-		if pl:Armor() > 0 then
-			set(_draw(x, y, m_ar, ar, math.Clamp(_ar, 0, pl:GetMaxArmor()), _ar))
-		end
-	end,
-	function()
-		set(_draw(x, y, m_hg, hg, math.Clamp(_hg, 0, 100), _hg))
-	end,
-	function()
-		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th))
-	end
-)
-
 local function nearest(tbl, num)
     local min, min_i
 	for i, y in ipairs(tbl) do
@@ -86,6 +70,29 @@ local function getNextRank(num)
 	return nearest(nums, num)
 end
 
+place(
+	function()
+		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp))
+	end, 
+	function()
+		if math.Round(_ar) > 0 then
+			set(_draw(x, y, m_ar, ar, math.Clamp(_ar, 0, pl:GetMaxArmor()), _ar))
+		end
+	end,
+	function()
+		set(_draw(x, y, m_hg, hg, math.Clamp(_hg, 0, 100), _hg))
+	end,
+	function()
+		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th))
+	end,
+	function()
+		x, y = ScrW() - 32, ScrH() - 32
+		set(txt(Fray.GetPhrase(rank), f_a, x, y, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+		set(txt(kills .. "/" .. getNextRank(kills), f_h, x, y, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+		set(txt(money, f_h, x, y, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+	end
+)
+
 hook.Add("HUDPaint", "Fray HUD", function()
 	pl = LocalPlayer()
 	if not pl:Alive() then
@@ -97,6 +104,9 @@ hook.Add("HUDPaint", "Fray HUD", function()
 	_ar = Lerp(5 * FrameTime(), _ar or 0, ar or 0)
 	_hg = Lerp(5 * FrameTime(), _hg or 0, hg or 0)
 	_th = Lerp(5 * FrameTime(), _th or 0, th or 0)
+
+	kills, rank = pl:GetNWString("Kills"), pl:GetNWString("Rank")
+	money = "$" .. string.Comma(pl:GetNWInt("Money"))
 
 	local offy, offx = ScrH() - 48, 32
 	x, y = offx, offy
@@ -112,12 +122,4 @@ hook.Add("HUDPaint", "Fray HUD", function()
 		y = offy
 		x = offx
 	end
-
-	kills, rank = pl:GetNWString("Kills"), pl:GetNWString("Rank")
-
-	txt(Fray.GetPhrase(rank), f_a, ScrW() - 32, ScrH() - 96, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-	txt(kills .. "/" .. getNextRank(kills), f_h, ScrW() - 32, ScrH() - 32, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
-
-	money = "$" .. string.Comma(pl:GetNWInt("Money"))
-	txt(money, f_h, ScrW() - 32, ScrH() - 64, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER)
 end)
