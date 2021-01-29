@@ -71,10 +71,10 @@ net.Receive("Fray Inventory Menu", function()
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description))
+		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg):\n" .. Fray.GetPhrase(invlist[item].description))
 
 		if invlist[item].max and countItems(items, item) >= invlist[item].max then
-			model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg)\n" .. Fray.GetPhrase(invlist[item].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
+			model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg):\n" .. Fray.GetPhrase(invlist[item].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
 		end
 
 		local name = vgui.Create("DLabel", model)

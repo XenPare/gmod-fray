@@ -221,6 +221,15 @@ concommand.Add("fray_inventory", function(pl)
 		return
 	end
 
+	if not pl.att_inited then
+		for pack, atts in pairs(Fray.Config.Attachments) do
+			if pl:HasInventoryItem(pack) and not CustomizableWeaponry:hasSpecifiedAttachments(pl, atts) then 
+				CustomizableWeaponry.giveAttachments(pl, atts)
+			end
+		end
+		pl.att_inited = true
+	end
+
 	net.Start("Fray Inventory Menu")
 		net.WriteTable(pl.Inventory)
 	net.Send(pl)

@@ -108,3 +108,11 @@ Fray.ShopList = {
 		price = 500
 	}
 }
+
+hook.Add("Initialize", "Fray Shop", function()
+	for att in pairs(Fray.Config.Attachments) do
+		Fray.ShopList[att] = {
+			price = 500
+		}
+	end
+end)

@@ -34,7 +34,7 @@ local function SpawnLoot()
 	end
 end
 
-timer.Simple(5, function()
+hook.Add("Initialize", "Fray Attachments", function()
 	for _, class in pairs(loot) do
 		if not string.find(class, "cw_") then
 			continue
@@ -44,6 +44,8 @@ timer.Simple(5, function()
 			pl:AddInventoryItem(self)
 		end
 	end
-	SpawnLoot()
+	timer.Simple(1, function()
+		SpawnLoot()
+	end)
 end)
 timer.Create("Fray Loot", cfg.LootDelay, 0, SpawnLoot)

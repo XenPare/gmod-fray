@@ -304,7 +304,10 @@ Fray.InventoryList = {
 }
 
 hook.Add("Initialize", "Fray Loot", function()
-	-- from loot
+	--[[
+		Loot
+	]]
+
 	for _, class in pairs(Fray.Config.RandomWeaponLoot) do
 		Fray.InventoryList[class] = {
 			label = weapons.GetStored(class).PrintName,
@@ -329,7 +332,42 @@ hook.Add("Initialize", "Fray Loot", function()
 		}
 	end
 
-	-- from shop
+	--[[
+		Attachments
+	]]
+
+	local att_names = {}
+	for _, data in pairs(CustomizableWeaponry.registeredAttachments) do
+		att_names[data.name] = data.displayName
+	end
+
+	for class, atts in pairs(Fray.Config.Attachments) do
+		if Fray.InventoryList[class] then
+			continue
+		end
+		local desc = ""
+		for k, att in pairs(atts) do
+			desc = desc .. att_names[att] .. "\n"
+		end
+		Fray.InventoryList[class] = {
+			label = scripted_ents.Get(class).PrintName,
+			description = desc,
+			model = "models/items/item_item_crate.mdl",
+			weight = 0.5,
+			onAdd = function(pl)
+				if SERVER then
+					if not CustomizableWeaponry:hasSpecifiedAttachments(pl, atts) then
+						CustomizableWeaponry.giveAttachments(pl, atts)
+					end
+				end
+			end,
+		}
+	end
+
+	--[[
+		Shop
+	]]
+
 	for class in pairs(Fray.ShopList) do
 		if Fray.InventoryList[class] then
 			continue

@@ -1,0 +1,1 @@
+Fray.Config.Attachments = {}
