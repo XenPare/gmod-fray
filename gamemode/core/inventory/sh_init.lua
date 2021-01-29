@@ -338,7 +338,6 @@ hook.Add("Initialize", "Fray Loot", function()
 	for _, class in pairs(Fray.Config.RandomWeaponLoot) do
 		Fray.InventoryList[class] = {
 			label = weapons.GetStored(class).PrintName,
-			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
 			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
 			category = FRAY_CATEGORY_WEAPONS,
@@ -349,12 +348,16 @@ hook.Add("Initialize", "Fray Loot", function()
 			end
 		}
 		if string.find(class, "grenade") then
+			Fray.InventoryList[class].description = "weapon_description"
 			Fray.InventoryList[class].UseFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
 				end
 			end
 		else
+			if weapons.GetStored(class).Primary.Ammo then
+				Fray.InventoryList[class].description = weapons.GetStored(class).Primary.Ammo
+			end
 			Fray.InventoryList[class].EquipFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
@@ -412,18 +415,21 @@ hook.Add("Initialize", "Fray Loot", function()
 		end
 		Fray.InventoryList[class] = {
 			label = weapons.GetStored(class).PrintName,
-			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
 			category = FRAY_CATEGORY_WEAPONS,
 			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2
 		}
 		if string.find(class, "grenade") then
+			Fray.InventoryList[class].description = "weapon_description"
 			Fray.InventoryList[class].UseFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
 				end
 			end
 		else
+			if weapons.GetStored(class).Primary.Ammo then
+				Fray.InventoryList[class].description = weapons.GetStored(class).Primary.Ammo
+			end
 			Fray.InventoryList[class].EquipFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)

@@ -58,12 +58,12 @@ net.Receive("Fray Shop Menu", function()
 		model:SetModel(invlist[class].model)
 		model:SetCursor("hand")
 		model:SetTooltipPanelOverride("XPTooltip")
-		model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price))
-		btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price))
+		model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description))
+		btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description))
 
 		if isLimited(class) then
-			model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price) .. " (" .. Fray.GetPhrase("limit") .. ")")
-			btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n\n$" .. string.Comma(item.price) .. " (" .. Fray.GetPhrase("limit") .. ")")
+			model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. " (" .. Fray.GetPhrase("limit") .. ")")
+			btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. " (" .. Fray.GetPhrase("limit") .. ")")
 		end
 
 		model.OnCursorEntered = function()
