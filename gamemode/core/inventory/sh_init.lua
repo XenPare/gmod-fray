@@ -1,11 +1,18 @@
 local m_amount = Fray.Config.MoneyPerEntity
 
+FRAY_CATEGORY_WEAPONS = 1
+FRAY_CATEGORY_ARMOR = 2
+FRAY_CATEGORY_AMMO = 3
+FRAY_CATEGORY_CONSUMED = 4
+FRAY_CATEGORY_ATTACHMENTS = 5
+
 Fray.InventoryList = {
 	fray_food = {
 		label = "food",
 		description = "food_description",
 		model = "models/props_junk/garbage_takeoutcarton001a.mdl",
 		weight = 0.2,
+		category = FRAY_CATEGORY_CONSUMED,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:AddHunger(40)
@@ -19,6 +26,7 @@ Fray.InventoryList = {
 		description = "drink_description",
 		model = "models/props_junk/popcan01a.mdl",
 		weight = 0.2,
+		category = FRAY_CATEGORY_CONSUMED,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:AddThirst(30)
@@ -32,6 +40,7 @@ Fray.InventoryList = {
 		description = "medicine_description",
 		model = "models/weapons/w_medkit.mdl",
 		weight = 0.4,
+		category = FRAY_CATEGORY_CONSUMED,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:SetHealth(100)
@@ -46,6 +55,7 @@ Fray.InventoryList = {
 		description = "money_description",
 		model = "models/props/cs_assault/money.mdl",
 		weight = 0.1,
+		category = FRAY_CATEGORY_CONSUMED,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetNWInt("Money", pl:GetNWInt("Money") + m_amount)
@@ -63,6 +73,7 @@ Fray.InventoryList = {
 		description = "shield_description",
 		model = "models/weapons/arccw_go/v_shield.mdl",
 		weight = 5,
+		category = FRAY_CATEGORY_ARMOR,
 		EquipFunc = function(pl)
 			if SERVER and not pl:HasWeapon("fray_shield") then
 				pl:Give("fray_shield")
@@ -86,6 +97,7 @@ Fray.InventoryList = {
 		model = "models/snowzgmod/payday2/armour/armourlbicep.mdl",
 		weight = 3,
 		max = 1,
+		category = FRAY_CATEGORY_ARMOR,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetBodyArmor("bicep", true)
@@ -104,6 +116,7 @@ Fray.InventoryList = {
 		model = "models/snowzgmod/payday2/armour/armourlcalf.mdl",
 		weight = 2,
 		max = 1,
+		category = FRAY_CATEGORY_ARMOR,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetBodyArmor("calf", true)
@@ -122,6 +135,7 @@ Fray.InventoryList = {
 		model = "models/snowzgmod/payday2/armour/armourlforearm.mdl",
 		weight = 2,
 		max = 1,
+		category = FRAY_CATEGORY_ARMOR,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetBodyArmor("forearm", true)
@@ -140,6 +154,7 @@ Fray.InventoryList = {
 		model = "models/snowzgmod/payday2/armour/armourlthigh.mdl",
 		weight = 3,
 		max = 1,
+		category = FRAY_CATEGORY_ARMOR,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetBodyArmor("thigh", true)
@@ -158,6 +173,7 @@ Fray.InventoryList = {
 		model = "models/snowzgmod/payday2/armour/armourvest.mdl",
 		weight = 5,
 		max = 1,
+		category = FRAY_CATEGORY_ARMOR,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetBodyArmor("vest", true)
@@ -175,6 +191,7 @@ Fray.InventoryList = {
 		description = "ammo_9x19_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 4,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "9x19MM", true)
@@ -187,6 +204,7 @@ Fray.InventoryList = {
 		description = "ammo_50ae_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(7, ".50 AE", true)
@@ -199,6 +217,7 @@ Fray.InventoryList = {
 		description = "ammo_44magnum_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(6, ".44 Magnum", true)
@@ -211,6 +230,7 @@ Fray.InventoryList = {
 		description = "ammo_338lapua_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(5, ".338 Lapua", true)
@@ -223,6 +243,7 @@ Fray.InventoryList = {
 		description = "ammo_545x39_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 4,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "5.45x39MM", true)
@@ -235,6 +256,7 @@ Fray.InventoryList = {
 		description = "ammo_556x45_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 4,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(30, "5.56x45MM", true)
@@ -247,6 +269,7 @@ Fray.InventoryList = {
 		description = "ammo_762x51_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(20, "7.62x51MM", true)
@@ -259,6 +282,7 @@ Fray.InventoryList = {
 		description = "ammo_9x17_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(25, "9x17MM", true)
@@ -271,6 +295,7 @@ Fray.InventoryList = {
 		description = "ammo_9x39_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(20, "9x39MM", true)
@@ -283,6 +308,7 @@ Fray.InventoryList = {
 		description = "ammo_12gauge_description",
 		model = "models/items/boxmrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(8, "12 Gauge", true)
@@ -295,6 +321,7 @@ Fray.InventoryList = {
 		description = "ammo_45acp_description",
 		model = "models/items/boxsrounds.mdl",
 		weight = 3,
+		category = FRAY_CATEGORY_AMMO,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:GiveAmmo(25, ".45 ACP", true)
@@ -314,6 +341,7 @@ hook.Add("Initialize", "Fray Loot", function()
 			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
 			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
+			category = FRAY_CATEGORY_WEAPONS,
 			onTake = function(pl)
 				if SERVER and pl:HasWeapon(class) then
 					pl:StripWeapon(class)
@@ -361,8 +389,9 @@ hook.Add("Initialize", "Fray Loot", function()
 		Fray.InventoryList[class] = {
 			label = scripted_ents.Get(class).PrintName,
 			description = desc,
-			model = "models/items/item_item_crate.mdl",
+			model = "models/items/boxsrounds.mdl",
 			weight = 0.5,
+			category = FRAY_CATEGORY_ATTACHMENTS,
 			onAdd = function(pl)
 				if SERVER then
 					if not CustomizableWeaponry:hasSpecifiedAttachments(pl, atts) then
@@ -385,6 +414,7 @@ hook.Add("Initialize", "Fray Loot", function()
 			label = weapons.GetStored(class).PrintName,
 			description = "weapon_description",
 			model = weapons.GetStored(class).WorldModel,
+			category = FRAY_CATEGORY_WEAPONS,
 			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2
 		}
 		if string.find(class, "grenade") then
