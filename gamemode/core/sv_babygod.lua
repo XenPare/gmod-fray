@@ -1,5 +1,8 @@
 local time = Fray.Config.BabygodTime
 hook.Add("PlayerInitialSpawn", "Fray Babygod", function(pl)
+	if pl:IsBot() then
+		return
+	end
 	pl:SetNWBool("Babygod", true)
 	pl:SetSimpleTimer(time, function()
 		pl:SetNWBool("Babygod", false)

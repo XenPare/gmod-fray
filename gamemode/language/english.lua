@@ -18,6 +18,8 @@ LANG.Phrases = {
 	["respawn"] = "Please, wait ",
 	["seconds"] = " seconds",
 
+	["killed"] = " killed ",
+
 	--[[
 		Ranks
 	]]
