@@ -32,6 +32,10 @@ net.Receive("Fray Shop Menu", function()
 	shopPanel = vgui.Create("XPFrame")
 	shopPanel:SetTitle(Fray.GetPhrase("shop"))
 	shopPanel:SetKeyboardInputEnabled(false)
+	shopPanel:SetWide(ScreenScale(285), ScreenScale(135))
+	shopPanel:Center()
+
+	local icon_w = shopPanel:GetWide() / 6 - 26
 
 	local scroll = vgui.Create("XPScrollPanel", shopPanel)
 	scroll:Dock(FILL)
@@ -50,10 +54,10 @@ net.Receive("Fray Shop Menu", function()
 		local colormod = false
 
 		local btn = list:Add("XPButton")
-		btn:SetSize(130, 130)
+		btn:SetSize(icon_w, icon_w)
 
 		local model = vgui.Create("ModelImage", btn)
-		model:SetSize(96, 96)
+		model:SetSize(icon_w - 34, icon_w - 34)
 		model:SetPos(12, 0)
 		model:SetModel(invlist[class].model)
 		model:SetCursor("hand")
