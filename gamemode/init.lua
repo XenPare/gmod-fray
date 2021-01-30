@@ -4,6 +4,8 @@ AddCSLuaFile("lang.lua")
 include("shared.lua")
 include("lang.lua")
 
+CustomizableWeaponry.canDropWeapon = false
+
 local CFG = Fray.Config
 
 function GM:Initialize()
