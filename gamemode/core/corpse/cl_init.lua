@@ -14,10 +14,10 @@ net.Receive("Fray Corpse", function()
 		return
 	end
 
-	local toclear = {inventoryPanel, shopPanel}
+	local toclear = XPGUI.Opened
 	for _, pnl in pairs(toclear) do
-		if IsValid(pnl) then
-			pnl:Close()
+		if IsValid(pnl) and pnl ~= corpsePanel then
+			pnl:Remove()
 		end
 	end
 

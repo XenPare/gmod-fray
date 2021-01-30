@@ -19,11 +19,22 @@ if SERVER then
 		self:SetSolid(SOLID_VPHYSICS)
 	end
 
-	function ENT:PhysicsCollide(col)
+	function ENT:Think(col)
 		if not self.Colided then
-			self:EmitSound("npc/env_headcrabcanister/explosion.wav", 120, 100)
-			self:Unpack()
-			self.Colided = true
+			local trace = {
+				start = self:GetPos(),
+				endpos = Vector(0, 0, -100000),
+				filter = ent,
+				mask = MASK_SOLID_BRUSHONLY
+			}
+
+			local tr = util.TraceLine(trace)
+			local hitPos = tr.HitPos 
+			if self:GetPos():DistToSqr(hitPos) < 5000 then
+				self:EmitSound("npc/env_headcrabcanister/explosion.wav", 120, 100)
+				self:Unpack()
+				self.Colided = true
+			end
 		end
 	end
 

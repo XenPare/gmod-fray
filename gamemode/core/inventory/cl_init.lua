@@ -37,10 +37,10 @@ net.Receive("Fray Inventory Menu", function()
 		return
 	end
 
-	local toclear = {shopPanel, corpsePanel}
+	local toclear = XPGUI.Opened --{shopPanel, corpsePanel}
 	for _, pnl in pairs(toclear) do
-		if IsValid(pnl) then
-			pnl:Close()
+		if IsValid(pnl) and pnl ~= inventoryPanel then
+			pnl:Remove()
 		end
 	end
 

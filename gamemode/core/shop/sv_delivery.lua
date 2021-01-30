@@ -8,7 +8,7 @@ function meta:CanDeliver()
 		mask = MASK_SOLID_BRUSHONLY
 	})
 	if tr.HitSky then
-		local additional = tr.HitPos - Vector(0, 0, 400) + VectorRand(-200, 200)
+		local additional = tr.HitPos - (Vector(0, 0, 120) + VectorRand(200, 200))
 		return self:GetPos().z > -2300, additional
 	end
 	return false
@@ -41,6 +41,6 @@ function Fray.ShopDeliver(pl, class)
 	if IsValid(phys) then
 		phys:Wake()
 		local tr = util.QuickTrace(hitPos, pl:GetPos(), self)
-		phys:SetVelocity(tr.Normal * -10000)
+		phys:AddVelocity(tr.Normal * Vector(1, 1, -100000))
 	end
 end

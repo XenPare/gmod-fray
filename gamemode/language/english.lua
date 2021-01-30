@@ -20,6 +20,18 @@ LANG.Phrases = {
 
 	["killed"] = " killed ",
 
+	["yes"] = "Yes",
+	["no"] = "No",
+
+	--[[
+		Teams
+	]]
+
+	["teams"] = "Teams",
+	["add_team"] = "Add",
+	["remove_team"] = "Remove",
+	["invitation"] = " has invited you to join his team, would you like to join ?",
+
 	--[[
 		Ranks
 	]]
