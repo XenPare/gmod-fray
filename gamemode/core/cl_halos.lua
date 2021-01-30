@@ -21,6 +21,18 @@ hook.Add("OnEntityCreated", "Fray Halos", function(ent)
 	end
 end)
 
+hook.Add("EntityRemoved", "Fray Halos", function(ent)
+	if not (white[ent:GetClass()] or red[ent:GetClass()]) then
+		return
+	end
+	if table.HasValue(post, ent) then
+		table.RemoveByValue(post, ent)
+	end
+	if table.HasValue(_post, ent) then
+		table.RemoveByValue(_post, ent)
+	end
+end)
+
 timer.Create("Fray Delete NULL Halos", 15, 0, function()
 	for i = 1, #post do
 		if not IsValid(post[i]) then
