@@ -50,6 +50,7 @@ net.Receive("Fray Corpse", function()
 		model:SetSize(84, 84)
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
+		model:SetCursor("hand")
 		model:SetTooltipPanelOverride("XPTooltip")
 		model:SetTooltip(Fray.GetPhrase(invlist[item].label) .. " (" .. invlist[item].weight .. " kg):\n" .. Fray.GetPhrase(invlist[item].description))
 
