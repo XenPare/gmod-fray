@@ -23,6 +23,7 @@ local function txt(str, font, x, y, color, align_x, align_y)
 	return tall
 end
 
+local scaled = ScreenScale(76)
 local function _draw(x, y, color, num, max, anim)
 	local _x = x + (tall / 3)
 
@@ -33,8 +34,8 @@ local function _draw(x, y, color, num, max, anim)
 
 	txt(_txt, f_h, x, y - 3, color_white)
 
-	draw.RoundedBox(4, _x, y, 190 + 6, 14, ColorAlpha(color_black, 180))
-	draw.RoundedBox(3, _x + 3, y + 3, max * 1.9, 8, color)
+	draw.RoundedBox(4, _x, y, scaled + 6, 14, ColorAlpha(color_black, 180))
+	draw.RoundedBox(3, _x + 3, y + 3, max * (scaled / 100), 8, color)
 
 	return tall
 end

@@ -20,7 +20,11 @@ function Fray.ShopDeliver(pl, class)
 		return
 	end
 
-	local iswep = tobool(weapons.Get(class))
+	local iswep = weapons.Get(class)
+	if not iswep and not scripted_ents.Get(class) then
+		return
+	end
+
 	local ent = ents.Create("fray_deliver")
 	ent:SetPos(hitPos)
 	ent:SetAngles(Angle(AngleRand()))

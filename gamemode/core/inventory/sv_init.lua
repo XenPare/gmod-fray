@@ -202,7 +202,7 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	end
 
 	local pos = att.Pos
-	local iswep = tobool(weapons.Get(class))
+	local iswep = weapons.Get(class)
 	local ent = ents.Create(iswep and "fray_weapon" or class)
 	if iswep then
 		ent.Weapon = class

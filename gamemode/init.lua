@@ -13,7 +13,7 @@ function GM:Initialize()
 	if not spawns then
 		return
 	end
-	timer.Simple(0.4, function()
+	timer.Simple(0, function()
 		for _, pos in pairs(spawns) do
 			local spawn = ents.Create("fray_spawn")
 			spawn:SetPos(pos)
@@ -46,15 +46,15 @@ local function hasPeopleAround(ent)
 	return #players_nearby ~= 0
 end
 
-hook.Add("PlayerSelectSpawn", "Fray", function(pl)
+function GM:PlayerSelectSpawn(pl)
 	if not CFG.PlayerSpawns then
 		return
 	end
 	
 	local randomed
+	local spawner = nil
 	local spawns = ents.FindByClass("fray_spawn")
 	local function getSpawner()
-		local spawner = nil
 		randomed = table.Random(spawns)
 		if hasDeathPointAround(pl, randomed:GetPos()) or hasPeopleAround(randomed) then
 			getSpawner()
@@ -68,7 +68,7 @@ hook.Add("PlayerSelectSpawn", "Fray", function(pl)
 		return table.Random(spawns)
 	end
 	return spawner
-end)
+end
 
 hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetWalkSpeed(CFG.WalkSpeed)
@@ -83,6 +83,10 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	Fray.SetCountry(pl)
 	pl:SetSimpleTimer(30, function()
 		Fray.LanguagePropose(pl)
+	end)
+
+	pl:SetSimpleTimer(0, function()
+		hook.Call("PostPlayerSpawn", GAMEMODE, pl)
 	end)
 end)
 

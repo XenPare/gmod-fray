@@ -332,9 +332,9 @@ hook.Add("Initialize", "Fray Loot", function()
 
 	for _, class in pairs(Fray.Config.RandomWeaponLoot) do
 		Fray.InventoryList[class] = {
-			label = weapons.GetStored(class).PrintName,
-			model = weapons.GetStored(class).WorldModel,
-			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2,
+			label = weapons.Get(class).PrintName,
+			model = weapons.Get(class).WorldModel,
+			weight = weapons.Get(class).SpeedDec and math.floor(weapons.Get(class).SpeedDec / 2.5) or 2,
 			category = FRAY_CATEGORY_WEAPONS,
 			onTake = function(pl)
 				if SERVER and pl:HasWeapon(class) then
@@ -350,8 +350,8 @@ hook.Add("Initialize", "Fray Loot", function()
 				end
 			end
 		else
-			if weapons.GetStored(class).Primary.Ammo then
-				Fray.InventoryList[class].description = weapons.GetStored(class).Primary.Ammo
+			if weapons.Get(class).Primary.Ammo then
+				Fray.InventoryList[class].description = weapons.Get(class).Primary.Ammo
 			end
 			Fray.InventoryList[class].EquipFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
@@ -418,10 +418,10 @@ hook.Add("Initialize", "Fray Loot", function()
 			continue
 		end
 		Fray.InventoryList[class] = {
-			label = weapons.GetStored(class).PrintName,
-			model = weapons.GetStored(class).WorldModel,
+			label = weapons.Get(class).PrintName,
+			model = weapons.Get(class).WorldModel,
 			category = FRAY_CATEGORY_WEAPONS,
-			weight = weapons.GetStored(class).SpeedDec and math.floor(weapons.GetStored(class).SpeedDec / 2.5) or 2
+			weight = weapons.Get(class).SpeedDec and math.floor(weapons.Get(class).SpeedDec / 2.5) or 2
 		}
 		if string.find(class, "grenade") then
 			Fray.InventoryList[class].description = "weapon_description"
@@ -431,8 +431,8 @@ hook.Add("Initialize", "Fray Loot", function()
 				end
 			end
 		else
-			if weapons.GetStored(class).Primary.Ammo then
-				Fray.InventoryList[class].description = weapons.GetStored(class).Primary.Ammo
+			if weapons.Get(class).Primary.Ammo then
+				Fray.InventoryList[class].description = weapons.Get(class).Primary.Ammo
 			end
 			Fray.InventoryList[class].EquipFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
