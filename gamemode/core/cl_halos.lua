@@ -33,19 +33,6 @@ hook.Add("EntityRemoved", "Fray Halos", function(ent)
 	end
 end)
 
-timer.Create("Fray Delete NULL Halos", 15, 0, function()
-	for i = 1, #post do
-		if not IsValid(post[i]) then
-			post[i] = nil
-		end
-	end
-	for i = 1, #_post do
-		if not IsValid(_post[i]) then
-			_post[i] = nil
-		end
-	end
-end)
-
 local color_red = Color(153, 66, 69)
 hook.Add("PreDrawHalos", "Fray Halos", function()
 	halo.Add(active, color_white, 1, 1, 2)
