@@ -15,6 +15,10 @@ local money_amount = Fray.Config.MoneyPerEntity
 LANG.Phrases = {
 	["babygod"] = "Защищён + ",
 
+	["can_respawn"] = "Кликните чтобы возродиться",
+	["respawn"] = "Пожалуйста, подождите ",
+	["seconds"] = " секунд",
+
 	--[[
 		Ранги
 	]]

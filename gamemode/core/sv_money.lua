@@ -29,3 +29,7 @@ hook.Add("PlayerInitialSpawn", "Fray Money", function(pl)
 		pl:SetNWInt("Money", pl:GetMoney())
 	end)
 end)
+
+hook.Add("PlayerDeath", "Fray Money", function(pl)
+	pl:SetNWInt("Money", 0)
+end)

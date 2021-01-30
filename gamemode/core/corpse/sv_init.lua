@@ -19,11 +19,6 @@ net.Receive("Fray Corpse Take", function(_, pl)
 
 		table.RemoveByValue(corpse.Inventory, class)
 		pl:AddInventoryItem(class)
-
-		local list = Fray.InventoryList
-		if list[class].onAdd then
-			list[class].onAdd(pl)
-		end
 	end
 end)
 
@@ -62,6 +57,8 @@ local function createRagdoll(pl)
 	ragdoll.RagColor = pl:GetPlayerColor()
 	ragdoll:SetCreator(nil)
 	ragdoll.PlayerRag = true
+
+	pl:SetNWEntity("Ragdoll", ragdoll)
 
 	for i = 0, ragdoll:GetPhysicsObjectCount() - 1 do
 		local phys = ragdoll:GetPhysicsObjectNum(i)

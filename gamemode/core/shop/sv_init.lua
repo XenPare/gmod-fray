@@ -27,6 +27,9 @@ net.Receive("Fray Shop Buy", function(_, pl)
 end)
 
 hook.Add("PlayerSwitchFlashlight", "Fray Shop", function(pl)
+	if pl:Health() <= 0 then
+		return
+	end
 	net.Start("Fray Shop Menu")
 		net.WriteTable(pl.Inventory)
 	net.Send(pl)

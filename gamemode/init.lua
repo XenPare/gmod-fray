@@ -26,13 +26,47 @@ function GM:PlayerLoadout(pl)
 	pl:Give("cw_extrema_ratio_official")
 end
 
-hook.Add("PlayerSelectSpawn", "Fray", function()
+local function hasDeathPointAround(pl, pos)
+	local death = pl.DeathPos
+	if death then
+		if death:DistToSqr(pos) < 200000 then
+			return true
+		end
+	end
+	return false
+end
+
+local function hasPeopleAround(ent)
+	local players_nearby = {}
+	for _, _ent in pairs(ents.FindInSphere(ent:GetPos(), 500)) do
+		if _ent:IsPlayer() then
+			table.insert(players_nearby, _ent)
+		end
+	end
+	return #players_nearby ~= 0
+end
+
+hook.Add("PlayerSelectSpawn", "Fray", function(pl)
 	if not CFG.PlayerSpawns then
 		return
 	end
-	local spawns = ents.FindByClass("fray_spawn")
-	local random = math.random(#spawns)
-	return spawns[random]
+
+	local randomed
+	local function getSpawner()
+		local spawner = nil
+		randomed = table.Random(ents.FindByClass("fray_spawn"))
+		if hasDeathPointAround(pl, randomed:GetPos()) or hasPeopleAround(randomed) then
+			getSpawner()
+		else
+			spawner = randomed
+		end
+	end
+
+	getSpawner()
+	if spawner == nil then
+		return table.Random(ents.FindByClass("fray_spawn"))
+	end
+	return spawner
 end)
 
 hook.Add("PlayerInitialSpawn", "Fray", function(pl)

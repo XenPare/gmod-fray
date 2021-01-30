@@ -3,6 +3,7 @@ Fray.Config.RunSpeed = 290
 Fray.Config.JumpPower = 225
 
 Fray.Config.BabygodTime = 60
+Fray.Config.RespawnTime = 20
 
 Fray.Config.MoneyPerEntity = 500
 Fray.Config.LootDelay = 300

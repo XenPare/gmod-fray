@@ -13,11 +13,15 @@ function Fray.LanguagePropose(pl)
 	local current = pl:GetInfo("fray_lang")
 	local country = pl:GetNWString("Country")
 
-	local supposed
+	local supposed = nil
 	for code, lang in pairs(Fray.Languages) do
 		if lang.Zones[country] then
 			supposed = code
 		end
+	end
+
+	if supposed == nil then
+		supposed = Fray.Config.BaseLanguage
 	end
 
 	if current ~= supposed then
