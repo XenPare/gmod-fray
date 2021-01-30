@@ -22,6 +22,10 @@ function GM:Initialize()
 	end)
 end
 
+function GM:PlayerLoadout(pl)
+	pl:Give("cw_extrema_ratio_official")
+end
+
 hook.Add("PlayerSelectSpawn", "Fray", function()
 	if not CFG.PlayerSpawns then
 		return
@@ -45,16 +49,12 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetSimpleTimer(30, function()
 		Fray.LanguagePropose(pl)
 	end)
-
-	pl:Give("cw_extrema_ratio_official")
 end)
 
 hook.Add("PlayerSpawn", "Fray", function(pl)
 	pl:SetWalkSpeed(CFG.WalkSpeed)
 	pl:SetRunSpeed(CFG.RunSpeed)
 	pl:SetJumpPower(CFG.JumpPower)
-
-	pl:Give("cw_extrema_ratio_official")
 end)
 
 hook.Add("GetFallDamage", "Fray", function(_, speed)
