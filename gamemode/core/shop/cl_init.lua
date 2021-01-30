@@ -35,7 +35,7 @@ net.Receive("Fray Shop Menu", function()
 	shopPanel:SetWide(ScreenScale(285), ScreenScale(135))
 	shopPanel:Center()
 
-	local icon_w = shopPanel:GetWide() / 6 - 26
+	local icon_w = shopPanel:GetWide() / 5 - 36
 
 	local scroll = vgui.Create("XPScrollPanel", shopPanel)
 	scroll:Dock(FILL)

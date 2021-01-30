@@ -50,6 +50,10 @@ net.Receive("Fray Inventory Menu", function()
 	inventoryPanel = vgui.Create("XPFrame")
 	inventoryPanel:SetTitle(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")
 	inventoryPanel:SetKeyboardInputEnabled(false)
+	inventoryPanel:SetWide(ScreenScale(285), ScreenScale(135))
+	inventoryPanel:Center()
+
+	local icon_w = inventoryPanel:GetWide() / 6 - 26
 
 	local scroll = vgui.Create("XPScrollPanel", inventoryPanel)
 	scroll:Dock(FILL)
@@ -64,10 +68,10 @@ net.Receive("Fray Inventory Menu", function()
 		local colormod = false
 
 		local btn = list:Add("XPButton")
-		btn:SetSize(96, 96)
+		btn:SetSize(icon_w, icon_w)
 
 		local model = vgui.Create("ModelImage", btn)
-		model:SetSize(96, 96)
+		model:SetSize(icon_w, icon_w)
 		model:SetPos(0, 0)
 		model:SetModel(invlist[item].model)
 		model:SetCursor("hand")
