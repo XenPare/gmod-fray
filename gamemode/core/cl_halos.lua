@@ -3,9 +3,7 @@ net.Receive("Fray Broadcast Loot", function()
 	active = net.ReadTable()
 end)
 
-local white, red = {
-	["fray_deliver"] = true
-}, {
+local white, red = {}, {
 	["prop_ragdoll"] = true
 }
 local post, _post = {}, {}

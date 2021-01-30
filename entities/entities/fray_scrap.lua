@@ -34,4 +34,8 @@ if SERVER then
 			self:Remove()
 		end)
 	end
+
+	function ENT:OnTakeDamage()
+		self:Remove()
+	end
 end

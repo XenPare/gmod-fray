@@ -23,6 +23,7 @@ function Fray.ShopDeliver(pl, class)
 	local iswep = tobool(weapons.Get(class))
 	local ent = ents.Create("fray_deliver")
 	ent:SetPos(hitPos)
+	ent:SetAngles(Angle(AngleRand()))
 	if iswep then
 		ent.Deliver = "fray_weapon"
 		ent.ContainedWeapon = class
@@ -30,6 +31,7 @@ function Fray.ShopDeliver(pl, class)
 		ent.Deliver = class
 	end
 	ent:Spawn()
+	ent:EmitSound("npc/env_headcrabcanister/launch.wav", 80, 100)
 
 	local phys = ent:GetPhysicsObject()
 	if IsValid(phys) then

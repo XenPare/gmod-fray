@@ -50,11 +50,12 @@ hook.Add("PlayerSelectSpawn", "Fray", function(pl)
 	if not CFG.PlayerSpawns then
 		return
 	end
-
+	
 	local randomed
+	local spawns = ents.FindByClass("fray_spawn")
 	local function getSpawner()
 		local spawner = nil
-		randomed = table.Random(ents.FindByClass("fray_spawn"))
+		randomed = table.Random(spawns)
 		if hasDeathPointAround(pl, randomed:GetPos()) or hasPeopleAround(randomed) then
 			getSpawner()
 		else
@@ -64,7 +65,7 @@ hook.Add("PlayerSelectSpawn", "Fray", function(pl)
 
 	getSpawner()
 	if spawner == nil then
-		return table.Random(ents.FindByClass("fray_spawn"))
+		return table.Random(spawns)
 	end
 	return spawner
 end)

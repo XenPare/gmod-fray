@@ -24,5 +24,6 @@ Fray.Config.RandomWeaponLoot = {
 	"cw_deagle",
 	"cw_fiveseven",
 	"cw_mac11",
-	"cw_m1911"
+	"cw_m1911",
+	"cw_mr96"
 }
