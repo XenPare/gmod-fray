@@ -17,9 +17,9 @@ net.Receive("Fray Teammates Invitation", function()
 	local title_w = surface.GetTextSize(title)
 
 	local fr = vgui.Create("XPFrame")
-    fr:SetTitle(title)
-    fr:SetSize(title_w + 15, 115)
-    fr:Center()
+	fr:SetTitle(title)
+	fr:SetSize(title_w + 15, 115)
+	fr:Center()
 
 	local yes = vgui.Create("XPButton", fr)
 	yes:Dock(TOP)
