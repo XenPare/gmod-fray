@@ -15,7 +15,7 @@ local max = Fray.Config.MaxTeams
 	Check
 ]]
 
-function teamExists(pls)
+local function teamExists(pls)
 	return table.HasValue(Fray.Teammates, pls)
 end
 
