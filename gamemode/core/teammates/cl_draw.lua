@@ -58,7 +58,7 @@ hook.Add("HUDPaint", "Fray Teammates", function()
 		draw.RoundedBox(6, 32, _offset, wide, tall, XPGUI.BGColor)
 
 		local name = pl:Name()
-		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2 + 2, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2 + 1, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 		_draw(_offset + 32, m_hp, pl:Health())
