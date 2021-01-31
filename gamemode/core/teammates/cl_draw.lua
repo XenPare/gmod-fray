@@ -1,7 +1,16 @@
-teams = teams or nil
+local teams = teams or nil
 net.Receive("Fray Teammates Broadcast", function()
 	teams = net.ReadTable()
 end)
+
+local optf = ScreenScale(10)
+surface.CreateFont("fray_tm", {
+	font = "Roboto Condensed",
+	size = optf,
+	weight = 400,
+	extended = true,
+	antialias = true
+})
 
 local _pl
 local function getTeammates(teams)
@@ -31,7 +40,9 @@ hook.Add("PreDrawHalos", "Fray Teammates", function()
 	end
 end)
 
-local wide, tall = ScreenScale(80), ScreenScale(40)
+local wide, tall = ScreenScale(80), ScreenScale(20)
+local b_tall = ScreenScale(4)
+local b_offset = b_tall + ScreenScale(7)
 
 local offset = tall + 12
 
@@ -40,8 +51,8 @@ local m_hg = Color(189, 153, 111)
 local m_th = Color(53, 114, 143)
 
 local function _draw(y, color, stat)
-	draw.RoundedBox(4, 36, y, wide - 8, 14, ColorAlpha(color_black, 180))
-	draw.RoundedBox(3, 36 + 3, y + 3, stat * (wide / 100) - 14, 8, color)
+	draw.RoundedBox(4, 36, y, wide - 8, b_tall + 6, ColorAlpha(color_black, 180))
+	draw.RoundedBox(3, 36 + 3, y + 3, stat * (wide / 100) - 14, b_tall, color)
 end
 
 hook.Add("HUDPaint", "Fray Teammates", function()
@@ -49,7 +60,6 @@ hook.Add("HUDPaint", "Fray Teammates", function()
 		return
 	end
 
-	surface.SetFont("fray_kf")
 	local count = 0
 	for _, pl in SortedPairs(getTeammates(teams), true) do
 		count = count + 1
@@ -57,12 +67,11 @@ hook.Add("HUDPaint", "Fray Teammates", function()
 
 		draw.RoundedBox(6, 32, _offset, wide, tall, XPGUI.BGColor)
 
-		local name = pl:Name()
-		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2 + 1, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
-		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		local name = IsValid(pl) and pl:Name() or "Unknown"
+		draw.SimpleText(name, "fray_tm", 32 + (wide / 2), _offset + 2 + 1, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		draw.SimpleText(name, "fray_tm", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
-		_draw(_offset + 32, m_hp, pl:Health())
-		_draw(_offset + 52, m_hg, pl:GetNWInt("Hunger"))
-		_draw(_offset + 72, m_th, pl:GetNWInt("Thirst"))
+		local hp = IsValid(pl) and pl:Health() or 100
+ 		_draw(_offset + b_offset, m_hp, hp)
 	end
 end)
