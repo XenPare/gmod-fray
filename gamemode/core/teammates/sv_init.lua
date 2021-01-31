@@ -16,14 +16,32 @@ local max = Fray.Config.MaxTeams
 ]]
 
 local function teamExists(pls)
-	return table.HasValue(Fray.Teammates, pls)
+	local found = nil
+	for _, team in pairs(Fray.Teammates) do
+		local pl, mate = pls[1], pls[2]
+		if table.HasValue(team, pl) and table.HasValue(team, mate) then
+			found = team
+			break
+		end
+	end
+	return found ~= nil, found
 end
 
 local function getPlayerTeams(pl)
 	local teams = {}
-	for _, team in pairs(Fray.Teammates) do
-		if table.HasValue(team, pl) then
-			table.insert(teams, team)
+	if istable(pl) then
+		for _, team in pairs(Fray.Teammates) do
+			local ex, t = teamExists(team)
+			if ex and table.HasValue(t, team[1]) and table.HasValue(t, team[2]) then
+				table.insert(teams, t)
+			end
+		end
+	else
+		for _, team in pairs(Fray.Teammates) do
+			if table.HasValue(team, pl) then
+				local _, t = teamExists(team)
+				table.insert(teams, t)
+			end
 		end
 	end
 	return teams
@@ -34,21 +52,25 @@ end
 ]]
 
 local function createTeam(pls)
-	if not teamExists(pls) and #getPlayerTeams(pl) < max then
+	if not teamExists(pls) and #getPlayerTeams(pls[1]) < max and #getPlayerTeams(pls[2]) < max then
 		table.insert(Fray.Teammates, pls)
-		net.Start("Fray Teammates Broadcast")
-			net.WriteTable(getPlayerTeams(pls[1]))
-		net.Send(pls)
 	end
+
+	PrintTable(getPlayerTeams(pls))
+
+	net.Start("Fray Teammates Broadcast")
+		net.WriteTable(getPlayerTeams(pls))
+	net.Send(pls)
 end
 
 local function removeTeam(pls)
-	if teamExists(pls) then
-		table.RemoveByValue(Fray.Teammates, pls)
-		net.Start("Fray Teammates Broadcast")
-			net.WriteTable(getPlayerTeams(pls[1]))
-		net.Send(pls)
+	local exists, team = teamExists(pls)
+	if exists then
+		table.RemoveByValue(Fray.Teammates, team)
 	end
+	net.Start("Fray Teammates Broadcast")
+		net.WriteTable(getPlayerTeams(pls))
+	net.Send(pls)
 end
 
 local function removeTeams(pl)
@@ -57,10 +79,10 @@ local function removeTeams(pl)
 	end
 end
 
-local function invitePlayer(pl, teammate)
-	teammate:SetNWEntity("LastTeammate", pl)
+local function invitePlayer(pl, mate)
+	mate:SetNWEntity("LastTeammate", pl)
 	net.Start("Fray Teammates Invitation")
-		net.WriteEntity(teammate)
+		net.WriteEntity(mate)
 	net.Send(pl)
 end
 
@@ -87,16 +109,10 @@ net.Receive("Fray Teammates Reopen", function(_, pl)
 end)
 
 net.Receive("Fray Teammates Remove", function(_, pl)
-	local teammate = net.ReadEntity()
-	local found = nil
-	for _, team in pairs(Fray.Teammates) do
-		if table.HasValue(team, pl) and table.HasValue(team, teammate) then
-			found = team
-			break
-		end
-	end
-	if found ~= nil then
-		removeTeam(found)
+	local mate = net.ReadEntity()
+	local team = {pl, mate}
+	if teamExists(team) then
+		removeTeam(team)
 	end
 end)
 
@@ -106,14 +122,7 @@ end)
 
 hook.Add("EntityTakeDamage", "Fray Teammates", function(pl, dmg)
 	local attacker = dmg:GetAttacker()
-	local found = nil
-	for _, team in pairs(Fray.Teammates) do
-		if table.HasValue(team, pl) and table.HasValue(team, attacker) then
-			found = team
-			break
-		end
-	end
-	if found ~= nil then
+	if teamExists({attacker, pl}) then
 		dmg:SetDamage(0)
 	end
 end)
