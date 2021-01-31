@@ -75,19 +75,19 @@ end
 
 place(
 	function()
-		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp))
-	end, 
-	function()
 		if math.Round(_ar) > 0 then
 			set(_draw(x, y, m_ar, ar, math.Clamp(_ar, 0, pl:GetMaxArmor()), _ar))
 		end
 	end,
 	function()
+		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th))
+	end,
+	function()
 		set(_draw(x, y, m_hg, hg, math.Clamp(_hg, 0, 100), _hg))
 	end,
 	function()
-		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th))
-	end,
+		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp))
+	end, 
 	function()
 		x, y = ScrW() - 32, ScrH() - 32
 		if babygod then
