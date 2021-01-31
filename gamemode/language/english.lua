@@ -28,8 +28,8 @@ LANG.Phrases = {
 	]]
 
 	["teams"] = "Teams",
-	["add_team"] = "Add",
-	["remove_team"] = "Remove",
+	["add_team"] = "Invite",
+	["remove_team"] = "Leave",
 	["invitation"] = " has invited you to join his team, would you like to join ?",
 
 	--[[
