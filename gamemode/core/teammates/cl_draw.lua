@@ -3,15 +3,6 @@ net.Receive("Fray Teammates Broadcast", function()
 	teams = net.ReadTable()
 end)
 
-local optf = ScreenScale(10)
-surface.CreateFont("fray_tm", {
-	font = "Roboto Condensed",
-	size = optf,
-	weight = 400,
-	extended = true,
-	antialias = true
-})
-
 local _pl
 local function getTeammates(teams)
 	local mates = {}
@@ -68,8 +59,8 @@ hook.Add("HUDPaint", "Fray Teammates", function()
 		draw.RoundedBox(6, 32, _offset, wide, tall, XPGUI.BGColor)
 
 		local name = IsValid(pl) and pl:Name() or "Unknown"
-		draw.SimpleText(name, "fray_tm", 32 + (wide / 2), _offset + 2 + 1, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
-		draw.SimpleText(name, "fray_tm", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2 + 1, ColorAlpha(color_black, 220), TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
+		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 		local hp = IsValid(pl) and pl:Health() or 100
  		_draw(_offset + b_offset, m_hp, hp)
