@@ -13,6 +13,8 @@ LANG.Zones = {
 local money_amount = Fray.Config.MoneyPerEntity
 
 LANG.Phrases = {
+	["languages"] = "Язык",
+
 	["babygod"] = "Защищён + ",
 
 	["can_respawn"] = "Кликните чтобы возродиться",

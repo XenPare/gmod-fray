@@ -31,3 +31,9 @@ function Fray.LanguagePropose(pl)
 		net.Send(pl)
 	end
 end
+
+util.AddNetworkString("Fray Language Menu")
+hook.Add("ShowHelp", "Fray Language", function(pl)
+	net.Start("Fray Language Menu")
+	net.Send(pl)
+end)
