@@ -387,7 +387,7 @@ hook.Add("Initialize", "Fray Loot", function()
 		Fray.InventoryList[class] = {
 			label = scripted_ents.Get(class).PrintName,
 			description = desc,
-			model = "models/items/boxsrounds.mdl",
+			model = "models/cw2/attachments/microt1.mdl",
 			weight = 0.5,
 			category = FRAY_CATEGORY_ATTACHMENTS,
 			onAdd = function(pl)
