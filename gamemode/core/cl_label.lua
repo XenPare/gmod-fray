@@ -18,7 +18,7 @@ local x, y = ScrW() / 2, ScrH() / 2 + 128
 hook.Add("HUDPaint", "Fray Loot Label", function()
 	pl = LocalPlayer()
 	ent = pl:GetEyeTrace().Entity
-	if not IsValid(ent) or ent:GetPos():DistToSqr(pl:GetPos()) > 300000 then
+	if not IsValid(ent) or ent:GetPos():DistToSqr(pl:GetPos()) > 22500 then
 		return
 	end
 	if Fray.InventoryList[ent:GetClass()] then
