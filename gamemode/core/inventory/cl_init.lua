@@ -114,8 +114,8 @@ net.Receive("Fray Inventory Menu", function()
 
 			if invlist[item].EquipFunc then
 				local canEquip = false
-				if invlist[item].EquipCheck then
-					canEquip = not invlist[item].EquipCheck(LocalPlayer())
+				if invlist[item].IsEquipped then
+					canEquip = not invlist[item].IsEquipped(LocalPlayer())
 				else
 					canEquip = not LocalPlayer():HasWeapon(item)
 				end

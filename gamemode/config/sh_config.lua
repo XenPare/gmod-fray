@@ -5,6 +5,9 @@ Fray.Config.JumpPower = 225
 Fray.Config.BabygodTime = 60
 Fray.Config.RespawnTime = 20
 
+Fray.Config.RadarDistance = 700
+Fray.Config.RadarCooldown = 1
+
 Fray.Config.MoneyPerEntity = 500
 Fray.Config.LootDelay = 300
 Fray.Config.CorpseCleanTime = 300
