@@ -55,9 +55,6 @@ local function createTeam(pls)
 	if not teamExists(pls) and #getPlayerTeams(pls[1]) < max and #getPlayerTeams(pls[2]) < max then
 		table.insert(Fray.Teammates, pls)
 	end
-
-	PrintTable(getPlayerTeams(pls))
-
 	net.Start("Fray Teammates Broadcast")
 		net.WriteTable(getPlayerTeams(pls))
 	net.Send(pls)

@@ -63,6 +63,7 @@ hook.Add("HUDPaint", "Fray Teammates", function()
 		draw.SimpleText(name, "fray_kf", 32 + (wide / 2), _offset + 2, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP)
 
 		local hp = IsValid(pl) and pl:Health() or 100
- 		_draw(_offset + b_offset, m_hp, hp)
+		local hp_max = IsValid(pl) and pl:GetMaxHealth() or 100
+ 		_draw(_offset + b_offset, m_hp, math.Clamp(hp, 0, hp_max))
 	end
 end)
