@@ -52,6 +52,9 @@ end
 ]]
 
 local function createTeam(pls)
+	if not IsValid(pls[1]) or not IsValid(pls[2]) then
+		return
+	end
 	if not teamExists(pls) and #getPlayerTeams(pls[1]) < max and #getPlayerTeams(pls[2]) < max then
 		table.insert(Fray.Teammates, pls)
 	end
