@@ -113,7 +113,13 @@ net.Receive("Fray Inventory Menu", function()
 			end
 
 			if invlist[item].EquipFunc then
-				if not LocalPlayer():HasWeapon(item) then
+				local canEquip = false
+				if invlist[item].EquipCheck then
+					canEquip = not invlist[item].EquipCheck(LocalPlayer())
+				else
+					canEquip = not LocalPlayer():HasWeapon(item)
+				end
+				if canEquip then
 					menu:AddOption(Fray.GetPhrase("equip"), function()
 						net.Start("Fray Inventory Equip")
 							net.WriteString(item)

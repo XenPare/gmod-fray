@@ -6,6 +6,62 @@ FRAY_CATEGORY_AMMO = 3
 FRAY_CATEGORY_CONSUMED = 4
 FRAY_CATEGORY_ATTACHMENTS = 5
 
+local radar = nil
+if SERVER then
+	local function findLeast(tbl)
+		local least = XPA.FindBiggest(tbl)
+		for i = 1, #tbl do
+			if tbl[i] < least then
+				least = tbl[i]
+			end
+		end
+		return least
+	end
+
+	local function findInSphere(pl, target)
+		local pos = pl:GetPos()
+		if not target then
+			local found = {}
+			for _, ent in pairs(ents.FindInSphere(pos, 700)) do
+				if ent:IsPlayer() and ent ~= pl then
+					if ent:HasInventoryItem("fray_muffler") then
+						return nil
+					end
+					local dist = pos:DistToSqr(ent:GetPos())
+					found[dist / dist] = ent
+				end
+			end
+			local distances = {}
+			for dist in pairs(found) do
+				table.insert(distances, dist)
+			end
+			local least = findLeast(distances)
+			return found[least]
+		else
+			for _, ent in pairs(ents.FindInSphere(pos, 700)) do
+				if ent:IsPlayer() and ent ~= pl and ent == target and not ent:HasInventoryItem("fray_muffler")then
+					return true
+				end
+			end
+			return false
+		end
+	end
+
+	radar = function(pl)
+		local found = findInSphere(pl)
+		if pl:TimerExists("Fray Radar Sound") or not IsValid(found) then
+			return
+		end
+		pl:SetTimer("Fray Radar Sound", 0.5, 0, function()
+			if not findInSphere(pl, found) or not pl:GetNWBool("Fray Radar") then
+				pl:RemoveTimer("Fray Radar Sound")
+				return
+			end
+			pl:EmitSound("ui/buttonclick.wav")
+		end)
+	end
+end
+
 Fray.InventoryList = {
 	fray_food = {
 		label = "food",
@@ -59,6 +115,56 @@ Fray.InventoryList = {
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetNWInt("Money", pl:GetNWInt("Money") + m_amount)
+			end
+		end
+	},
+
+	fray_muffler = {
+		label = "muffler",
+		description = "muffler_description",
+		model = "models/props_lab/tpplug.mdl",
+		weight = 0.1,
+		category = FRAY_CATEGORY_CONSUMED
+	},
+
+	fray_radar = {
+		label = "radar",
+		description = "radar_description",
+		model = "models/props_lab/monitor01b.mdl",
+		weight = 0.2,
+		category = FRAY_CATEGORY_CONSUMED,
+		EquipFunc = function(pl)
+			if SERVER then
+				if pl:TimerExists("Fray Radar") or pl:GetNWBool("Fray Radar") then
+					return
+				end
+				pl:ChatPrint(Fray.GetPhrase("radar_equipped", pl))
+				pl:SetNWBool("Fray Radar", true)
+				pl:SetTimer("Fray Radar", 1, 0, function()
+					radar(pl)
+				end)
+			end
+		end,
+		EquipCheck = function(pl)
+			return pl:GetNWBool("Fray Radar")
+		end,
+		UnequipFunc = function(pl)
+			if SERVER then
+				if not pl:TimerExists("Fray Radar") then
+					return
+				end
+				pl:ChatPrint(Fray.GetPhrase("radar_unequipped", pl))
+				pl:SetNWBool("Fray Radar", false)
+				pl:RemoveTimer("Fray Radar")
+			end
+		end,
+		onTake = function(pl)
+			if SERVER then
+				if not pl:TimerExists("Fray Radar") then
+					return
+				end
+				pl:SetNWBool("Fray Radar", false)
+				pl:RemoveTimer("Fray Radar")
 			end
 		end
 	},

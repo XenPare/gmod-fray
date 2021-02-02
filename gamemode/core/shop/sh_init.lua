@@ -1,4 +1,14 @@
 Fray.ShopList = {
+	fray_radar = {
+		price = 1500,
+		max = 1,
+		category = FRAY_CATEGORY_CONSUMED
+	},
+	fray_muffler = {
+		price = 1500,
+		max = 1,
+		category = FRAY_CATEGORY_CONSUMED
+	},
 	fray_ba_bicep = {
 		price = 1000,
 		max = 1,

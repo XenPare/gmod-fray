@@ -81,6 +81,13 @@ LANG.Phrases = {
 	
 	["weapon_description"] = "Использовать по назначению.",
 
+	["radar"] = "Радар",
+	["radar_description"] = "Позволяет вам засекать игроков поблизости.",
+	["radar_equipped"] = "Радар уже экипирован.",
+
+	["muffler"] = "Глушитель",
+	["muffler_description"] = "Глушит радары поблизости.",
+
 	["medicine"] = "Аптечка",
 	["medicine_description"] = "Используйте чтобы вылечиться.",
 

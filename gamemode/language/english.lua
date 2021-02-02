@@ -80,6 +80,14 @@ LANG.Phrases = {
 
 	["weapon_description"] = "Use it properly.",
 
+	["radar"] = "Radar",
+	["radar_description"] = "Let's you detect people around.",
+	["radar_equipped"] = "Equipped a radar.",
+	["radar_unequipped"] = "Enequipped a radar.",
+
+	["muffler"] = "Muffler",
+	["muffler_description"] = "Muffles radars around.",
+
 	["medicine"] = "Medicine",
 	["medicine_description"] = "Use to heal yourself.",
 
