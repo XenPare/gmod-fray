@@ -39,7 +39,7 @@ if SERVER then
 			return found[least]
 		else
 			for _, ent in pairs(ents.FindInSphere(pos, 700)) do
-				if ent:IsPlayer() and ent ~= pl and ent == target and not ent:HasInventoryItem("fray_muffler")then
+				if ent:IsPlayer() and ent ~= pl and ent == target and not ent:HasInventoryItem("fray_muffler") then
 					return true
 				end
 			end
