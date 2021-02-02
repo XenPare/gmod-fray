@@ -9,6 +9,37 @@ surface.CreateFont("fray_nick", {
 	font = "Roboto Condensed"
 })
 
+surface.CreateFont("fray_nick_small", {
+	size = 3 / scale, 
+	weight = 350, 
+	antialias = true, 
+	extended = true, 
+	font = "Roboto Condensed"
+})
+
+local function nearest(tbl, num)
+    local min, min_i
+	for i, y in ipairs(tbl) do
+		if tonumber(num) > y or tonumber(num) == y then
+			continue
+		end
+        if not min or (math.abs(num - y) < min) then
+            min = math.abs(num - y)
+            min_i = i
+        end
+    end
+    return tbl[min_i]
+end
+
+local function getNextRank(num)
+	local nums = {}
+	for rank, data in pairs(Fray.Ranks) do
+		table.insert(nums, data.kills)
+	end
+	return nearest(nums, num)
+end
+
+local m_hp = Color(153, 66, 69)
 hook.Add("PostDrawTranslucentRenderables", "Fray Nicks", function(depth, sky)
 	if depth or sky then 
 		return 
@@ -34,11 +65,18 @@ hook.Add("PostDrawTranslucentRenderables", "Fray Nicks", function(depth, sky)
 			eye = pl:GetPos()
 		end
 
-		eye.z = eye.z + 18
+		eye.z = eye.z + 22
 	
+		local name = pl:Name()
+		local kills = pl:GetNWString("Kills")
+		local rank = Fray.GetPhrase(pl:GetNWString("Rank")) .. " (" .. kills .. "/" .. getNextRank(kills) .. ")"
+		
 		cam.Start3D2D(eye, Angle(0, ang.y, 90), scale)
-			draw.SimpleText(pl:Name(), "fray_nick", -3, 3, ColorAlpha(color_black, 200), TEXT_ALIGN_CENTER)
-			draw.SimpleText(pl:Name(), "fray_nick", 0, 0, color_white, TEXT_ALIGN_CENTER)
+			draw.SimpleText(name, "fray_nick", -3, 3, ColorAlpha(color_black, 200), TEXT_ALIGN_CENTER)
+			draw.SimpleText(name, "fray_nick", 0, 0, color_white, TEXT_ALIGN_CENTER)
+
+			draw.SimpleText(rank, "fray_nick_small", -3, 103, ColorAlpha(color_black, 200), TEXT_ALIGN_CENTER)
+			draw.SimpleText(rank, "fray_nick_small", 0, 100, m_hp, TEXT_ALIGN_CENTER)
 		cam.End3D2D()
 	end
 end)
