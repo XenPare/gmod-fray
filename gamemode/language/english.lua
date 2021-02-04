@@ -26,6 +26,16 @@ LANG.Phrases = {
 	["no"] = "No",
 
 	--[[
+		Categories
+	]]
+
+	["category_1"] = "Weapons",
+	["category_2"] = "Armor",
+	["category_3"] = "Ammo",
+	["category_4"] = "Consumed",
+	["category_5"] = "Attachments",
+
+	--[[
 		Teams
 	]]
 
