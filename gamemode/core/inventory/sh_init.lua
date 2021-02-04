@@ -68,7 +68,7 @@ Fray.InventoryList = {
 		description = "muffler_description",
 		model = "models/props_lab/tpplug.mdl",
 		weight = 0.1,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_ARMOR
 	},
 
 	fray_radar = {
@@ -76,7 +76,7 @@ Fray.InventoryList = {
 		description = "radar_description",
 		model = "models/props_lab/monitor01b.mdl",
 		weight = 0.2,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_ARMOR,
 		EquipFunc = function(pl)
 			if SERVER then
 				if pl:TimerExists("Fray Radar") or pl:GetNWBool("Fray Radar") then
