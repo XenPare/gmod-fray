@@ -20,6 +20,8 @@ local function countItems(tbl, class)
 	return count
 end
 
+local enabled = {true, false, true, false, false}
+
 local color_red = Color(194, 79, 79)
 local color_green = Color(129, 235, 166)
 shopPanel = nil
@@ -55,10 +57,9 @@ net.Receive("Fray Shop Menu", function()
 
 	surface.SetFont("fray_shop")
 
-	local enabled, fillItems = {}
-	for i = 1, 5 do
-		enabled[i] = true
+	local fillItems
 
+	for i = 1, 5 do
 		local txt = Fray.GetPhrase("category_" .. i)
 		local txt_w = surface.GetTextSize(txt) + cb_w + ex_w
 
@@ -68,7 +69,7 @@ net.Receive("Fray Shop Menu", function()
 
 		local cb = vgui.Create("XPCheckBox", cat)
 		cb:Dock(LEFT)
-		cb:SetValue(enabled[i] or false)
+		cb:SetValue(enabled[i])
 		cb:SetWide(cb_w)
 
 		cb.OnChange = function()
@@ -91,8 +92,7 @@ net.Receive("Fray Shop Menu", function()
 	scroll:DockMargin(3, 3, 3, 3)
 
 	local list
-
- 	list = vgui.Create("DIconLayout", scroll)
+	list = vgui.Create("DIconLayout", scroll)
 	list:Dock(FILL)
 	list:SetSpaceY(3)
 	list:SetSpaceX(3)
@@ -156,7 +156,6 @@ net.Receive("Fray Shop Menu", function()
 				end
 	
 				menu:Open()
-	
 				XPGUI.PlaySound("xpgui/sidemenu/sidemenu_click_01.wav")
 			end
 	
