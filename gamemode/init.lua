@@ -97,5 +97,5 @@ hook.Add("PlayerSpawn", "Fray", function(pl)
 end)
 
 hook.Add("GetFallDamage", "Fray", function(_, speed)
-    return speed / 8
+	return speed / 8
 end)

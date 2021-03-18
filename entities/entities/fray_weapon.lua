@@ -11,8 +11,8 @@ ENT.Spawnable = false
 ENT.Model = "models/weapons/w_pist_fiveseven.mdl"
 
 if SERVER then
-    function ENT:Initialize()
-        self.Weapon = self.Weapon or table.Random(Fray.Config.RandomWeaponLoot)
+	function ENT:Initialize()
+		self.Weapon = self.Weapon or table.Random(Fray.Config.RandomWeaponLoot)
 		self:SetModel(weapons.GetStored(self.Weapon).WorldModel)
 		self:PhysicsInit(SOLID_VPHYSICS)
 		self:SetMoveType(MOVETYPE_VPHYSICS)
@@ -21,8 +21,8 @@ if SERVER then
 	end
 
 	function ENT:Use(pl)
-        pl:AddInventoryItem(self.Weapon)
-        self:Remove()
+		pl:AddInventoryItem(self.Weapon)
+		self:Remove()
 	end
 else
 	function ENT:Draw()
