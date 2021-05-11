@@ -1,3 +1,5 @@
+Fray.Config.BleedingChance = 35
+
 local function addChance(tbl, class, x)
 	if x > 1 then
 		for i = 1, x do

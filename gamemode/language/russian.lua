@@ -16,6 +16,7 @@ LANG.Phrases = {
 	["languages"] = "Язык",
 
 	["babygod"] = "Защищён + ",
+	["bleeding"] = "Кровотечение -",
 
 	["can_respawn"] = "Кликните чтобы возродиться",
 	["respawn"] = "Пожалуйста, подождите ",
@@ -100,6 +101,9 @@ LANG.Phrases = {
 
 	["medicine"] = "Аптечка",
 	["medicine_description"] = "Используйте чтобы вылечиться.",
+
+	["bondage"] = "Бинт",
+	["bondage_description"] = "Используйте чтобы остановить кровотечение.",
 
 	["food"] = "Еда",
 	["food_description"] = "Используйте чтобы утолить голод.",

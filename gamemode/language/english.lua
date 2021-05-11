@@ -15,6 +15,7 @@ LANG.Phrases = {
 	["languages"] = "Language",
 
 	["babygod"] = "Protected +",
+	["bleeding"] = "Bleeding -",
 
 	["can_respawn"] = "Click to respawn",
 	["respawn"] = "Please, wait ",
@@ -100,6 +101,9 @@ LANG.Phrases = {
 
 	["medicine"] = "Medicine",
 	["medicine_description"] = "Use to heal yourself.",
+
+	["bandage"] = "Bondage",
+	["bandage_description"] = "Use to stop bleeding.",
 
 	["food"] = "Food",
 	["food_description"] = "Use to satisfy your hunger.",

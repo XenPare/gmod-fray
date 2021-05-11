@@ -50,6 +50,20 @@ Fray.InventoryList = {
 		end
 	},
 
+	fray_bandage = {
+		label = "bandage",
+		description = "bandage_description",
+		model = "models/props_lab/jar01b.mdl",
+		weight = 0.1,
+		category = FRAY_CATEGORY_CONSUMED,
+		UseFunc = function(pl)
+			if SERVER then
+				pl:SetNWBool("Fray Bleeding", false)
+				pl:EmitSound("fray/player/bandage.mp3")
+			end
+		end
+	},
+
 	fray_money = {
 		label = "money",
 		description = "money_description",

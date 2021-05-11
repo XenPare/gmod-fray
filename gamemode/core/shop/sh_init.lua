@@ -50,6 +50,10 @@ Fray.ShopList = {
 		price = 500,
 		category = FRAY_CATEGORY_CONSUMED
 	},
+	fray_bandage = {
+		price = 500,
+		category = FRAY_CATEGORY_CONSUMED
+	},
 	cw_ak74 = {
 		price = 3000,
 		category = FRAY_CATEGORY_WEAPONS
