@@ -1,12 +1,9 @@
 local time = Fray.Config.BabygodTime
 hook.Add("PlayerInitialSpawn", "Fray Babygod", function(pl)
-	if pl:IsBot() then
-		return
+	pl:SetPos(Vector(9215.214844 + math.random(-256, 256), -1418.676636 + math.random(-256, 256), -3355.913574 + math.random(-256, 256)))
+	if not pl:IsBot() then
+		pl:SetNWBool("Babygod", true)
 	end
-	pl:SetNWBool("Babygod", true)
-	pl:SetSimpleTimer(time, function()
-		pl:SetNWBool("Babygod", false)
-	end)
 end)
 
 hook.Add("EntityTakeDamage", "Fray Babygod", function(ent, dmg)

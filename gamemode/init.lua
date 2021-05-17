@@ -47,7 +47,7 @@ local function hasPeopleAround(ent)
 end
 
 function GM:PlayerSelectSpawn(pl)
-	if not CFG.PlayerSpawns then
+	if not CFG.PlayerSpawns or not pl.Spawned then
 		return
 	end
 	
@@ -80,14 +80,11 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 		pl:SetTeam(TEAM_SURVIVOR)
 	end)
 
-	Fray.SetCountry(pl)
-	pl:SetSimpleTimer(30, function()
-		Fray.LanguagePropose(pl)
-	end)
-
 	pl:SetSimpleTimer(0, function()
 		hook.Call("PostPlayerSpawn", GAMEMODE, pl)
 	end)
+	
+	Fray.SetCountry(pl)
 end)
 
 hook.Add("PlayerSpawn", "Fray", function(pl)
