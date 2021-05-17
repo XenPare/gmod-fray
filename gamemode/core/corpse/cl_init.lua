@@ -9,6 +9,7 @@ local function countItems(tbl, class)
 end
 
 corpsePanel = nil
+local lng_base = Fray.Config.BaseLanguage
 net.Receive("Fray Corpse", function()
 	if IsValid(corpsePanel) then
 		return
@@ -27,8 +28,10 @@ net.Receive("Fray Corpse", function()
 	local myitems = net.ReadTable()
 	local invlist = Fray.InventoryList
 
+	local lng = LocalPlayer():GetInfo("fray_lang") or lng_base
+
 	corpsePanel = vgui.Create("XPFrame")
-	corpsePanel:SetTitle(name .. Fray.GetPhrase("corpse"))
+	corpsePanel:SetTitle(lng == "french" and (name .. Fray.GetPhrase("corpse")) or (Fray.GetPhrase("corpse") .. name))
 	corpsePanel:SetKeyboardInputEnabled(false)
 
 	local scroll = vgui.Create("XPScrollPanel", corpsePanel)

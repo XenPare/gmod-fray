@@ -33,7 +33,7 @@ LANG.Phrases = {
 	["category_1"] = "Weapons",
 	["category_2"] = "Armor",
 	["category_3"] = "Ammo",
-	["category_4"] = "Consumed",
+	["category_4"] = "Consumables",
 	["category_5"] = "Attachments",
 
 	--[[
@@ -94,7 +94,7 @@ LANG.Phrases = {
 	["radar"] = "Radar",
 	["radar_description"] = "Let's you detect people around.",
 	["radar_equipped"] = "Equipped a radar.",
-	["radar_unequipped"] = "Enequipped a radar.",
+	["radar_unequipped"] = "Unequipped a radar.",
 
 	["muffler"] = "Muffler",
 	["muffler_description"] = "Muffles radars around.",
