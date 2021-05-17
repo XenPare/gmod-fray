@@ -102,7 +102,7 @@ LANG.Phrases = {
 	["medicine"] = "Medicine",
 	["medicine_description"] = "Use to heal yourself.",
 
-	["bandage"] = "Bondage",
+	["bandage"] = "Bandage",
 	["bandage_description"] = "Use to stop bleeding.",
 
 	["food"] = "Food",
