@@ -19,7 +19,10 @@ Fray.Config.BaseLanguage = "english"
 
 Fray.Config.BaseEquipment = {
 	"cw_m1911",
-	"cw_ammo_45acp"
+	"cw_ammo_45acp",
+	"fray_bandage",
+	"fray_drink",
+	"fray_food"
 }
 
 Fray.Config.Playermodels = {
