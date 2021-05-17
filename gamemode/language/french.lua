@@ -137,7 +137,7 @@ LANG.Phrases = {
 
 	["ammo_50ae"] = "Munitions .50 AE",
 	["ammo_50ae_description"] = "Contient 7 munitions de réapprovisionnement",
-	
+
 	["ammo_44magnum"] = "Munitions .44 Magnum",
 	["ammo_44magnum_description"] = "Contient 6 munitions de réapprovisionnement",
 

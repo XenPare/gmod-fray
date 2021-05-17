@@ -5,9 +5,9 @@ LANG.Author = "crester"
 LANG.Icon = "resource/localization/ru.png"
 
 LANG.Zones = {
-    ["Russia"] = true,
-    ["Ukraine"] = true,
-    ["Belarus"] = true
+	["Russia"] = true,
+	["Ukraine"] = true,
+	["Belarus"] = true
 }
 
 local money_amount = Fray.Config.MoneyPerEntity
@@ -45,7 +45,7 @@ LANG.Phrases = {
 	["add_team"] = "Пригласить",
 	["remove_team"] = "Уйти",
 	["invitation"] = " пригласил вас в команду, желаете присоединиться ?",
-	
+
 	--[[
 		Ранги
 	]]
@@ -68,17 +68,17 @@ LANG.Phrases = {
 	["cant_deliver"] = "Не может быть доставлено сюда",
 	["cant_afford"] = "Недостаточно средств",
 
-    --[[
+	--[[
 		Инвентарь
-    ]]
-    
-    ["inventory"] = "Инвентарь",
-    ["limit"] = "Лимит достигнут",
+	]]
+
+	["inventory"] = "Инвентарь",
+	["limit"] = "Лимит достигнут",
 	["use"] = "Использовать",
 	["equip"] = "Надеть",
 	["unequip"] = "Снять",
-    ["drop"] = "Выбросить",
-	
+	["drop"] = "Выбросить",
+
 	--[[
 		Труп
 	]]
@@ -86,10 +86,10 @@ LANG.Phrases = {
 	["corpse"] = " испустил дух в этом теле",
 	["take"] = "Взять",
 
-    --[[
+	--[[
 		Вещи инвентаря
-    ]]
-	
+	]]
+
 	["weapon_description"] = "Использовать по назначению.",
 
 	["radar"] = "Радар",
@@ -137,7 +137,7 @@ LANG.Phrases = {
 
 	["ammo_50ae"] = "Патроны .50 AE",
 	["ammo_50ae_description"] = "Содержит 7 патронов",
-	
+
 	["ammo_44magnum"] = "Патроны .44 Magnum",
 	["ammo_44magnum_description"] = "Содержит 6 патронов",
 
