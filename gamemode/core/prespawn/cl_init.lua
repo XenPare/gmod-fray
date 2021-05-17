@@ -1,4 +1,4 @@
-local size = 128
+local size =128
 
 surface.CreateFont("fray_pmenu", {
 	size = 64,
@@ -49,7 +49,9 @@ do
 	spawnButton.DoClick = function()
 		net.Start("Fray Spawn")
 		net.SendToServer()
-		timer.Simple(0.5, function()
+
+		spawnButton:SetEnabled(false)
+		timer.Simple(0.7, function()
 			if IsValid(pMenu) then
 				pMenu:Remove()
 			end
