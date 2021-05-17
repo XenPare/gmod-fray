@@ -6,7 +6,7 @@ util.AddNetworkString("Body Armor RemoveCSModel")
 local pl = FindMetaTable("Player")
 function pl:SetBodyArmor(id, bool)
 	self:SetNWBool("BA #" .. id, bool)
-	timer.Simple(0.2, function()
+	timer.Simple(0.6, function()
 		if not IsValid(self) then
 			return
 		end

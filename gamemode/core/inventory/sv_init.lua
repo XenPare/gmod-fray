@@ -214,6 +214,11 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	if IsValid(phys) then
 		phys:Wake()
 	end
+
+	ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+	ent:SetSimpleTimer(0.5, function()
+		ent:SetCollisionGroup(COLLISION_GROUP_NONE)
+	end)
 end)
 
 concommand.Add("fray_inventory", function(pl)
