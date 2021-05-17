@@ -72,7 +72,7 @@ LANG.Phrases = {
 	]]
 
 	["inventory"] = "Inventaire",
-	["limit"] = "La limite est atteinte",
+	["limit"] = "Limite atteinte",
 	["use"] = "Utiliser",
 	["equip"] = "Équiper",
 	["unequip"] = "Déséquiper",
