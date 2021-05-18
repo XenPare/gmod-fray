@@ -100,8 +100,8 @@ LANG.Phrases = {
 	["medicine"] = "Аптечка",
 	["medicine_description"] = "Використовуйте щоб вилікуватися.",
 
-	["bondage"] = "Бинт",
-	["bondage_description"] = "Використовуйте щоб зупинити кровотечу.",
+	["bandage"] = "Бинт",
+	["bandage_description"] = "Використовуйте щоб зупинити кровотечу.",
 
 	["food"] = "Їжа",
 	["food_description"] = "Використовуйте щоб вгамувати голод.",
