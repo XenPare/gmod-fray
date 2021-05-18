@@ -1,5 +1,3 @@
-local heightMultiplier = 42
-local count = 70
 local distance = 3
 local threshold = 0.6
 
@@ -26,7 +24,7 @@ function PANEL:Init()
 
 	self:SetTall(tall)
 	self:DockPadding(3, 3, 3, 3)
-	self:DockMargin(0, 2, 0, tall)
+	self:DockMargin(0, 2, 0, 8)
 	self:Dock(TOP)
 end
 
