@@ -15,3 +15,9 @@ hook.Add("EntityTakeDamage", "Fray Bleeding", function(pl, inf)
 		pl:SetNWBool("Fray Bleeding", true)
 	end
 end)
+
+hook.Add("PlayerDeath", "Fray Bleeding", function(pl)
+	if pl:GetNWBool("Fray Bleeding") then
+		pl:SetNWBool("Fray Bleeding", false)
+	end
+end)
