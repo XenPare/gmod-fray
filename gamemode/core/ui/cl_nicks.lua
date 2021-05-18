@@ -51,10 +51,12 @@ hook.Add("PostDrawTranslucentRenderables", "Fray Nicks", function(depth, sky)
 
 	for pl in pairs(drawables) do
 		if not IsValid(pl) or pl == LocalPlayer() or not pl:Alive() then
-			return
+			drawables[pl] = nil
+			continue
 		end
-		if pl:GetPos():DistToSqr(LocalPlayer():GetPos()) > 40000 then
-			return
+		if pl:GetPos():DistToSqr(LocalPlayer():GetPos()) > 160000 then
+			drawables[pl] = nil
+			continue
 		end
 
 		local eye
