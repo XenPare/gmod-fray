@@ -41,7 +41,10 @@ Fray.Config.Workshop = {
 	"1998638783", -- Xanthys
 	"284860008", -- Body Armor
 	"2329408464", -- Ballistic Shield
-	"283399070" -- Masks
+	"283399070", -- Masks
+	"349050451", -- CW 2.0
+	"358608166", -- CW 2.0 Extras
+	"707343339" -- CW 2.0 Melee 
 }
 
 Fray.Config.HideHUD = {
