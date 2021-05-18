@@ -94,7 +94,8 @@ LANG.Phrases = {
 
 	["radar"] = "Радар",
 	["radar_description"] = "Позволяет вам засекать игроков поблизости.",
-	["radar_equipped"] = "Радар уже экипирован.",
+	["radar_equipped"] = "Радар включён.",
+	["radar_unequipped"] = "Радар выключен.",
 
 	["muffler"] = "Глушитель",
 	["muffler_description"] = "Глушит радары поблизости.",
