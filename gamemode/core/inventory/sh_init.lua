@@ -75,6 +75,11 @@ Fray.InventoryList = {
 			if SERVER then
 				pl:SetNWInt("Money", pl:GetNWInt("Money") + m_amount)
 			end
+		end,
+		onTake = function(pl)
+			if SERVER then
+				pl:SetNWInt("Money", pl:GetNWInt("Money") - m_amount)
+			end
 		end
 	},
 
