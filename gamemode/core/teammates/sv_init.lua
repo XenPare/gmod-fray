@@ -81,9 +81,11 @@ end
 
 local function invitePlayer(pl, mate)
 	mate:SetNWEntity("LastTeammate", pl)
-	net.Start("Fray Teammates Invitation")
-		net.WriteEntity(mate)
-	net.Send(pl)
+	timer.Simple(0, function()
+		net.Start("Fray Teammates Invitation")
+			net.WriteEntity(pl)
+		net.Send(mate)
+	end)
 end
 
 --[[
@@ -113,6 +115,8 @@ net.Receive("Fray Teammates Remove", function(_, pl)
 	local team = {pl, mate}
 	if teamExists(team) then
 		removeTeam(team)
+		team[1]:SetNWEntity("LastTeammate", nil)
+		team[2]:SetNWEntity("LastTeammate", nil)
 	end
 end)
 

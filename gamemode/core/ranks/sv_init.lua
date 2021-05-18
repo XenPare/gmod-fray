@@ -29,6 +29,14 @@ local function broadcastRank(pl, killed)
 	end)
 end
 
+timer.Create("Fray Broadcast Ranks", 15, 0, function()
+	for _, pl in pairs(player.GetAll()) do
+		net.Start("Fray Ranks Broadcast")
+			net.WriteEntity(pl)
+		net.Broadcast()
+	end
+end)
+
 hook.Add("PlayerInitialSpawn", "Fray Ranks", broadcastRank)
 hook.Add("PlayerDeath", "Fray Ranks", function(victim, _, killer)
 	if victim:IsPlayer() and killer:IsPlayer() and victim ~= killer then

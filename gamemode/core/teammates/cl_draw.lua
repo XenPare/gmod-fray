@@ -10,9 +10,13 @@ local function getTeammates(teams)
 	for _, team in pairs(teams) do
 		if table.HasValue(team, _pl) then
 			if team[1] ~= _pl then
-				table.insert(mates, team[1])
+				if team[1]:Alive() then
+					table.insert(mates, team[1])
+				end
 			elseif team[2] ~= _pl then
-				table.insert(mates, team[2])
+				if team[2]:Alive() then
+					table.insert(mates, team[2])
+				end
 			end
 		end
 	end
