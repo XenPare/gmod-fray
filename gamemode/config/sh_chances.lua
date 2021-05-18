@@ -11,8 +11,9 @@ local function addChance(tbl, class, x)
 end
 
 hook.Add("Initialize", "Fray Chances", function()
-	addChance(Fray.Config.Loot, "fray_money", 4)
+	addChance(Fray.Config.Loot, "fray_money", 5)
 	addChance(Fray.Config.Loot, "fray_food", 3)
 	addChance(Fray.Config.Loot, "fray_drink", 3)
-	addChance(Fray.Config.Loot, "fray_weapon", 2)
+	addChance(Fray.Config.Loot, "fray_weapon", 4)
+	addChance(Fray.Config.Loot, "fray_bandage", 5)
 end)

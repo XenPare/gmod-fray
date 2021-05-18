@@ -16,7 +16,8 @@ Fray.Config.Loot = {
 	"fray_drink",
 	"fray_ba_forearm",
 	"fray_ba_calf",
-	"fray_medicine"
+	"fray_medicine",
+	"fray_bandage"
 }
 
 Fray.Config.RandomWeaponLoot = {
