@@ -9,7 +9,7 @@ Fray.Config.RadarDistance = 700
 Fray.Config.RadarCooldown = 1
 
 Fray.Config.MoneyPerEntity = 500
-Fray.Config.LootDelay = 300
+Fray.Config.LootDelay = 180
 Fray.Config.CorpseCleanTime = 300
 
 Fray.Config.MaxTeams = 4
@@ -53,5 +53,6 @@ Fray.Config.HideHUD = {
 	["CHudAmmo"] = true,
 	["CHudSecondaryAmmo"] = true,
 	["CHudSuitPower"] = true,
-	["CHudWeaponSelection"] = true
+	["CHudWeaponSelection"] = true,
+	["CHudDamageIndicator"] = true
 }
