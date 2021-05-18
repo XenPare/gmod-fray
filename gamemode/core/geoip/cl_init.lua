@@ -76,6 +76,7 @@ net.Receive("Fray Language Menu", function()
 			btn:SetColor(c_sl)
 		end
 		btn:Dock(TOP)
+		btn:SetTooltip("By " .. Fray.Languages[lng].Author)
 		btn.DoClick = function()
 			if selected ~= btn then
 				selected:SetColor(color_white)
