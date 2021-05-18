@@ -80,9 +80,11 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 		pl:SetTeam(TEAM_SURVIVOR)
 	end)
 
-	pl:SetSimpleTimer(0, function()
-		hook.Call("PostPlayerSpawn", GAMEMODE, pl)
-	end)
+	if pl:IsBot() then
+		pl:SetSimpleTimer(0, function()
+			hook.Call("PostPlayerSpawn", GAMEMODE, pl)
+		end)
+	end
 	
 	Fray.SetCountry(pl)
 end)

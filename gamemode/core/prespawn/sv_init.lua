@@ -11,6 +11,8 @@ net.Receive("Fray Spawn", function(_, pl)
 	pl:Spawn()
 	pl:SetNWBool("Babygod", true)
 
+	hook.Call("PostPlayerSpawn", GAMEMODE, pl)
+
 	pl:SetSimpleTimer(time, function()
 		pl:SetNWBool("Babygod", false)
 	end)
