@@ -46,6 +46,7 @@ Fray.InventoryList = {
 				pl:SetHealth(100)
 				pl:SetPData("Health", 100)
 				pl:EmitSound("items/medshot4.wav")
+				pl:SetNWBool("Fray Bleeding", false)
 			end
 		end
 	},
