@@ -186,6 +186,10 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	end
 
 	local class = net.ReadString()
+	if not Fray.InventoryList[class] or not table.HasValue(pl.Inventory, class) then
+		return
+	end
+
 	pl:TakeInventoryItem(class)
 
 	local att_id = pl:LookupAttachment("eyes")
