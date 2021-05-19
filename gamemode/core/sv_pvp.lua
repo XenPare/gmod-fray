@@ -1,11 +1,11 @@
 local time = Fray.Config.PvPModeTime
 hook.Add("EntityTakeDamage", "Fray PvP Mode", function(victim, dmg)
-	if victim:IsBot() or not victim:IsPlayer() then
+	if not IsValid(victim) or not victim:IsPlayer() or victim:IsBot() or victim:GetNWBool("Babygod") then
 		return
 	end
 
 	local attacker = dmg:GetAttacker()
-	if not IsValid(attacker) or not attacker:IsPlayer() then
+	if not IsValid(attacker) or not attacker:IsPlayer() or attacker:GetNWBool("Babygod") then
 		return
 	end
 
