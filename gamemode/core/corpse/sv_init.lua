@@ -87,7 +87,7 @@ end
 Fray.CreateRagdoll = createRagdoll
 
 hook.Add("PlayerUse", "Fray Corpse", function(pl, ent)
-	if not ent.PlayerRag then
+	if not ent.PlayerRag or (IsValid(ent:GetNWEntity("LootingEntity")) and ent:GetNWEntity("LootingEntity") ~= pl) then
 		return
 	end
 	net.Start("Fray Corpse")
