@@ -109,6 +109,8 @@ net.Receive("Fray Inventory Menu", function()
 						net.WriteString(item)
 					net.SendToServer()
 					btn:Remove()
+					table.RemoveByValue(items, item)
+					inventoryPanel.Title:SetText(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")
 				end)
 			end
 
@@ -146,7 +148,6 @@ net.Receive("Fray Inventory Menu", function()
 			end)
 
 			menu:Open()
-
 			XPGUI.PlaySound("xpgui/sidemenu/sidemenu_click_01.wav")
 		end
 		
