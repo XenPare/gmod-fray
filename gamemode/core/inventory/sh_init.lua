@@ -61,6 +61,10 @@ Fray.InventoryList = {
 			if SERVER then
 				pl:SetNWBool("Fray Bleeding", false)
 				pl:EmitSound("fray/player/bandage.mp3")
+				
+				local hp = math.Clamp(pl:Health() + 10, 0, pl:GetMaxHealth())
+				pl:SetHealth(hp)
+				pl:SetPData("Health", hp)
 			end
 		end
 	},
