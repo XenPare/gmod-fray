@@ -17,6 +17,20 @@ function pl:SetBodyArmor(id, bool)
 	end)
 end
 
+local parts = include("parts.lua")
+timer.Create("Fray Body Armor Broadcast", 15, 0, function()
+	for _, pl in pairs(player.GetAll()) do
+		for p in pairs(parts) do
+			if pl:GetNWBool("BA #" .. p) then
+				net.Start("Body Armor AddCSModel")
+					net.WriteEntity(pl)
+					net.WriteString(p)
+				net.Broadcast()
+			end
+		end
+	end
+end)
+
 hook.Add("ScalePlayerDamage", "Fray Body Armor", function(pl, hit, dmg)
 	if hit == HITGROUP_HEAD then
 		dmg:ScaleDamage(1.3)

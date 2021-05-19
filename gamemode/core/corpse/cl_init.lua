@@ -30,9 +30,8 @@ net.Receive("Fray Corpse", function()
 	corpsePanel = vgui.Create("XPFrame")
 	corpsePanel:SetTitle(LocalPlayer():GetInfo("fray_lang") == "french" and (Fray.GetPhrase("corpse") .. name) or (name .. Fray.GetPhrase("corpse")))
 	corpsePanel:SetKeyboardInputEnabled(false)
-	corpsePanel.Name = name
 
-	corpsePanel.OnRemove = function()
+	function corpsePanel:OnClose()
 		net.Start("Fray Corpse Looting")
 			net.WriteEntity(corpse)
 		net.SendToServer()
