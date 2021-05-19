@@ -49,5 +49,6 @@ function Fray.ShopDeliver(pl, class)
 
 	ent:SetSimpleTimer(comp, function()
 		pl:AddMoney(Fray.ShopList[class].price / mpe)
+		ent:Remove()
 	end)
 end

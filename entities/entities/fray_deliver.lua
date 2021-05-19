@@ -61,8 +61,9 @@ if SERVER then
 		scrap5:SetPos(self:GetPos() + Vector(-40, 0, 6))
 		scrap5:Spawn()
 
-		if self.Deliver then
-			local deliver = ents.Create(self.Deliver)
+		local class = self.Deliver
+		if class then
+			local deliver = ents.Create(class)
 			if self.ContainedWeapon then
 				deliver.Weapon = self.ContainedWeapon
 			end
@@ -74,8 +75,10 @@ if SERVER then
 				phys:Wake()
 			end
 
+			local recip = self.Recipient
 			deliver:SetSimpleTimer(comp, function()
-				self.Recipient:AddMoney(Fray.ShopList[self.Deliver].price / mpe)
+				recip:AddMoney(Fray.ShopList[class].price / mpe)
+				deliver:Remove()
 			end)
 		end
 		self:Remove()
