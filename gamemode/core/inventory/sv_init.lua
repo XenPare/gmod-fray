@@ -68,7 +68,7 @@ function meta:AddInventoryItem(class)
 	end
 
 	local list = Fray.InventoryList
-	if not list[_class] or ((self:CalculateInventoryWeight() + list[_class].weight) >= Fray.Config.MaxInventoryWeight) or (list[_class].max and self:CalculateInventoryItemCount(_class) >= list[_class].max or false) then
+	if not list[_class] or ((self:CalculateInventoryWeight() + list[_class].weight) >= Fray.Config.MaxInventoryWeight) then
 		return
 	end
 
