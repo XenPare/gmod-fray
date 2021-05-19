@@ -104,9 +104,6 @@ function meta:ClearInventory()
 	self.Inventory = {}
 	self:SetRunSpeed(def_run)
 	self:SetJumpPower(def_jump)
-	for _, class in pairs(def_equip) do
-		self:AddInventoryItem(class)
-	end
 	file.Write("fray/inventory/" .. self:SteamID64() .. ".json", util.TableToJSON(self.Inventory, true))
 end
 
