@@ -15,6 +15,8 @@ Fray.Config.CorpseCleanTime = 300
 Fray.Config.MaxTeams = 4
 Fray.Config.MaxInventoryWeight = 100
 
+Fray.Config.PvPModeTime = 180
+
 Fray.Config.BaseLanguage = "english"
 
 Fray.Config.BaseEquipment = {

@@ -74,6 +74,8 @@ local function createRagdoll(pl)
 	return ragdoll
 end
 
+Fray.CreateRagdoll = createRagdoll
+
 hook.Add("PlayerUse", "Fray Corpse", function(pl, ent)
 	if not ent.PlayerRag then
 		return

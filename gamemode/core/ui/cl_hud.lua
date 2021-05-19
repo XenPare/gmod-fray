@@ -2,7 +2,7 @@ local pl
 local hp, ar, hg, th
 local _hp, _ar, _hg, _th
 local kills, rank, money
-local babygod, bleeding
+local babygod, bleeding, pvp
 local x, y, br, placed = 0, 0, 0
 local tall = 40
 
@@ -97,6 +97,9 @@ place(
 		if bleeding then
 			set(txt(Fray.GetPhrase("bleeding"), f_a, x, y, m_bd, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		end
+		if pvp then
+			set(txt("PvP -", f_a, x, y, m_bd, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+		end
 		set(txt(Fray.GetPhrase(rank), f_a, x, y, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(kills .. "/" .. getNextRank(kills), f_h, x, y, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(money, f_h, x, y, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
@@ -117,7 +120,7 @@ hook.Add("HUDPaint", "Fray HUD", function()
 
 	kills, rank = pl:GetNWString("Kills"), pl:GetNWString("Rank")
 	money = "$" .. string.Comma(pl:GetNWInt("Money"))
-	babygod, bleeding = pl:GetNWBool("Babygod"), pl:GetNWBool("Fray Bleeding")
+	babygod, bleeding, pvp = pl:GetNWBool("Babygod"), pl:GetNWBool("Fray Bleeding"), pl:GetNWBool("Fray PvP")
 
 	local offy, offx = ScrH() - 48, 32
 	x, y = offx, offy
