@@ -69,7 +69,7 @@ Fray.InventoryList = {
 		label = "money",
 		description = "money_description",
 		model = "models/props/cs_assault/money.mdl",
-		weight = 0.1,
+		weight = 0,
 		category = FRAY_CATEGORY_CONSUMED,
 		onAdd = function(pl)
 			if SERVER then

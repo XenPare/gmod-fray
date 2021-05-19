@@ -10,7 +10,7 @@ Fray.Config.RadarCooldown = 1
 
 Fray.Config.ShopCompensationTime = 30
 
-Fray.Config.MoneyPerEntity = 500
+Fray.Config.MoneyPerEntity = 100
 Fray.Config.LootDelay = 180
 Fray.Config.CorpseCleanTime = 300
 
