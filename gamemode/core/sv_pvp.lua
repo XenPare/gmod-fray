@@ -18,6 +18,7 @@ hook.Add("EntityTakeDamage", "Fray PvP Mode", function(victim, dmg)
 	end
 
 	victim:SetNWBool("Fray PvP", true)
+	victim:ChatPrint(Fray.GetPhrase("pvp_entered", victim))
 	victim:SetTimer("Fray PvP", time, 1, function()
 		victim:SetNWBool("Fray PvP", false)
 	end)
@@ -31,6 +32,7 @@ hook.Add("EntityTakeDamage", "Fray PvP Mode", function(victim, dmg)
 	end
 
 	attacker:SetNWBool("Fray PvP", true)
+	attacker:ChatPrint(Fray.GetPhrase("pvp_entered", attacker))
 	attacker:SetTimer("Fray PvP", time, 1, function()
 		attacker:SetNWBool("Fray PvP", false)
 	end)
