@@ -3,7 +3,7 @@ local m_amount = Fray.Config.MoneyPerEntity
 FRAY_CATEGORY_WEAPONS = 1
 FRAY_CATEGORY_ARMOR = 2
 FRAY_CATEGORY_AMMO = 3
-FRAY_CATEGORY_CONSUMED = 4
+FRAY_CATEGORY_CONSUMABLES = 4
 FRAY_CATEGORY_ATTACHMENTS = 5
 
 Fray.InventoryList = {
@@ -12,7 +12,7 @@ Fray.InventoryList = {
 		description = "food_description",
 		model = "models/props_junk/garbage_takeoutcarton001a.mdl",
 		weight = 0.2,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_CONSUMABLES,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:AddHunger(40)
@@ -26,7 +26,7 @@ Fray.InventoryList = {
 		description = "drink_description",
 		model = "models/props_junk/popcan01a.mdl",
 		weight = 0.2,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_CONSUMABLES,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:AddThirst(30)
@@ -40,7 +40,7 @@ Fray.InventoryList = {
 		description = "medicine_description",
 		model = "models/weapons/w_medkit.mdl",
 		weight = 0.4,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_CONSUMABLES,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:SetHealth(100)
@@ -56,7 +56,7 @@ Fray.InventoryList = {
 		description = "bandage_description",
 		model = "models/props_lab/jar01b.mdl",
 		weight = 0.1,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_CONSUMABLES,
 		UseFunc = function(pl)
 			if SERVER then
 				pl:SetNWBool("Fray Bleeding", false)
@@ -74,7 +74,7 @@ Fray.InventoryList = {
 		description = "money_description",
 		model = "models/props/cs_assault/money.mdl",
 		weight = 0,
-		category = FRAY_CATEGORY_CONSUMED,
+		category = FRAY_CATEGORY_CONSUMABLES,
 		onAdd = function(pl)
 			if SERVER then
 				pl:SetNWInt("Money", pl:GetNWInt("Money") + m_amount)

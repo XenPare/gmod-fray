@@ -2,12 +2,12 @@ Fray.ShopList = {
 	fray_radar = {
 		price = 300,
 		max = 1,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	fray_muffler = {
 		price = 300,
 		max = 1,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	fray_ba_bicep = {
 		price = 200,
@@ -40,19 +40,19 @@ Fray.ShopList = {
 	},
 	fray_drink = {
 		price = 100,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	fray_food = {
 		price = 100,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	fray_medicine = {
 		price = 100,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	fray_bandage = {
 		price = 100,
-		category = FRAY_CATEGORY_CONSUMED
+		category = FRAY_CATEGORY_CONSUMABLES
 	},
 	cw_ak74 = {
 		price = 400,
