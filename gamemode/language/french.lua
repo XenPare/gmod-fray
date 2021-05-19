@@ -33,7 +33,7 @@ LANG.Phrases = {
 	]]
 
 	["category_1"] = "Armes",
-	["category_2"] = "Armure",
+	["category_2"] = "Équipement",
 	["category_3"] = "Munitions",
 	["category_4"] = "Nourriture",
 	["category_5"] = "Accessoires",

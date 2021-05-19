@@ -32,7 +32,7 @@ LANG.Phrases = {
 	]]
 
 	["category_1"] = "Зброя",
-	["category_2"] = "Броня",
+	["category_2"] = "Екiпiрування",
 	["category_3"] = "Патрони",
 	["category_4"] = "Витратні матеріали",
 	["category_5"] = "Поліпшення",
