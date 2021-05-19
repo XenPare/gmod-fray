@@ -41,7 +41,7 @@ hook.Add("PlayerDeath", "Fray PvP Mode", function(pl)
 end)
 
 hook.Add("PlayerDisconnected", "Fray PvP Mode", function(pl)
-	if not pl:GetNWBool("Fray PvP") then
+	if not pl:GetNWBool("Fray PvP") or not pl:Alive() then
 		return
 	end
 	
