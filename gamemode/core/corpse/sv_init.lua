@@ -11,15 +11,25 @@ net.Receive("Fray Corpse Take", function(_, pl)
 		return
 	end
 
-	if table.HasValue(corpse.Inventory, class) then
-		local list = Fray.InventoryList
-		if not list[class] or ((pl:CalculateInventoryWeight() + list[class].weight) >= Fray.Config.MaxInventoryWeight) or (list[class].max and pl:CalculateInventoryItemCount(class) >= list[class].max or false) then
-			return
-		end
-
-		table.RemoveByValue(corpse.Inventory, class)
-		pl:AddInventoryItem(class)
+	if (IsValid(corpse:GetNWEntity("LootingEntity")) and corpse:GetNWEntity("LootingEntity") ~= pl) or not table.HasValue(corpse.Inventory, class) then
+		return
 	end
+
+	local list = Fray.InventoryList
+	if not list[class] or ((pl:CalculateInventoryWeight() + list[class].weight) >= Fray.Config.MaxInventoryWeight) or (list[class].max and pl:CalculateInventoryItemCount(class) >= list[class].max or false) then
+		return
+	end
+
+	table.RemoveByValue(corpse.Inventory, class)
+	pl:AddInventoryItem(class)
+
+	corpse:SetNWEntity("LootingEntity", pl)
+	if corpse:TimerExists("Looting") then
+		corpse:RemoveTimer("LootingEntity")
+	end
+	corpse:SetTimer("Looting", 10, 1, function()
+		corpse:SetNWEntity("LootingEntity", nil)
+	end)
 end)
 
 local function createRagdoll(pl)
