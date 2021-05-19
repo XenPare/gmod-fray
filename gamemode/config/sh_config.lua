@@ -8,6 +8,8 @@ Fray.Config.RespawnTime = 20
 Fray.Config.RadarDistance = 700
 Fray.Config.RadarCooldown = 1
 
+Fray.Config.ShopCompensationTime = 30
+
 Fray.Config.MoneyPerEntity = 500
 Fray.Config.LootDelay = 180
 Fray.Config.CorpseCleanTime = 300

@@ -14,6 +14,8 @@ function meta:CanDeliver()
 	return false
 end
 
+local mpe = Fray.Config.MoneyPerEntity
+local comp = Fray.Config.ShopCompensationTime
 function Fray.ShopDeliver(pl, class)
 	local canDeliver, hitPos = pl:CanDeliver()
 	if not canDeliver then
@@ -28,6 +30,7 @@ function Fray.ShopDeliver(pl, class)
 	local ent = ents.Create("fray_deliver")
 	ent:SetPos(hitPos)
 	ent:SetAngles(Angle(AngleRand()))
+	ent.Recipient = pl
 	if iswep then
 		ent.Deliver = "fray_weapon"
 		ent.ContainedWeapon = class
@@ -43,4 +46,8 @@ function Fray.ShopDeliver(pl, class)
 		local tr = util.QuickTrace(hitPos, pl:GetPos(), self)
 		phys:AddVelocity(tr.Normal * Vector(1, 1, -100000))
 	end
+
+	ent:SetSimpleTimer(comp, function()
+		pl:AddMoney(Fray.ShopList[class].price / mpe)
+	end)
 end

@@ -38,6 +38,8 @@ if SERVER then
 		end
 	end
 
+	local mpe = Fray.Config.MoneyPerEntity
+	local comp = Fray.Config.ShopCompensationTime
 	function ENT:Unpack()
 		local scrap1 = ents.Create("fray_scrap")
 		scrap1:SetPos(self:GetPos() + Vector(0, 40, 6))
@@ -71,6 +73,10 @@ if SERVER then
 			if IsValid(phys) then
 				phys:Wake()
 			end
+
+			deliver:SetSimpleTimer(comp, function()
+				self.Recipient:AddMoney(Fray.ShopList[self.Deliver].price / mpe)
+			end)
 		end
 		self:Remove()
 	end
