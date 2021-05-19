@@ -105,9 +105,14 @@ net.Receive("Fray Inventory Menu", function()
 
 			if invlist[item].UseFunc then
 				menu:AddOption(Fray.GetPhrase("use"), function()
+					if not IsValid(inventoryPanel) then
+						return
+					end
+
 					net.Start("Fray Inventory Use")
 						net.WriteString(item)
 					net.SendToServer()
+
 					btn:Remove()
 					table.RemoveByValue(items, item)
 					inventoryPanel.Title:SetText(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")
@@ -123,6 +128,9 @@ net.Receive("Fray Inventory Menu", function()
 				end
 				if canEquip then
 					menu:AddOption(Fray.GetPhrase("equip"), function()
+						if not IsValid(inventoryPanel) then
+							return
+						end
 						net.Start("Fray Inventory Equip")
 							net.WriteString(item)
 						net.SendToServer()
@@ -130,6 +138,9 @@ net.Receive("Fray Inventory Menu", function()
 				else
 					if invlist[item].UnequipFunc then 
 						menu:AddOption(Fray.GetPhrase("unequip"), function()
+							if not IsValid(inventoryPanel) then
+								return
+							end
 							net.Start("Fray Inventory Unequip")
 								net.WriteString(item)
 							net.SendToServer()
@@ -139,9 +150,14 @@ net.Receive("Fray Inventory Menu", function()
 			end
 
 			menu:AddOption(Fray.GetPhrase("drop"), function()
+				if not IsValid(inventoryPanel) then
+					return
+				end
+
 				net.Start("Fray Inventory Drop")
 					net.WriteString(item)
 				net.SendToServer()
+				
 				btn:Remove()
 				table.RemoveByValue(items, item)
 				inventoryPanel.Title:SetText(Fray.GetPhrase("inventory") .. " (" .. calculateWeight(items) .. "/" .. maxWeight .. " kg)")

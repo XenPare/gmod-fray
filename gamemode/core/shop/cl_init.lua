@@ -147,6 +147,9 @@ net.Receive("Fray Shop Menu", function()
 	
 				if LocalPlayer():GetNWInt("Money") >= item.price then
 					menu:AddOption(Fray.GetPhrase("buy"), function()
+						if not IsValid(shopPanel) then
+							return
+						end
 						net.Start("Fray Shop Buy")
 							net.WriteString(class)
 						net.SendToServer()
