@@ -17,7 +17,7 @@ LANG.Phrases = {
 	["babygod"] = "Protected +",
 	["bleeding"] = "Bleeding -",
 
-	["pvp_entered"] = "Vous venez d'entrer en mode PvP. Vous perdrez le contenu de votre inventaire après avoir quitté le serveur.",
+	["pvp_entered"] = "You've just entered a PvP mode. You will lose the contents of your inventory after leaving the server.",
 
 	["can_respawn"] = "Click to respawn",
 	["respawn"] = "Please, wait ",
