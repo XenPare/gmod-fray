@@ -28,8 +28,31 @@ do
 		draw.SimpleText("by xp with ♥", "xpgui_huge", ScrW() / 2, ScrH() / 2 + 64, color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 
+	local leaveButton = vgui.Create("XPButton", pMenu)
+	leaveButton:SetText("↩")
+	leaveButton:SetFont("fray_pmenu")
+	leaveButton:SetSize(size, 84)
+	leaveButton:SetPos(48, ScrH() - size)
+
+	leaveButton.Color = Color(184, 84, 84)
+	leaveButton.Paint = function(self, w, h)
+		if self:IsHovered() then
+			self.Color.a = Lerp(0.075, self.Color.a , 35)
+		else
+			self.Color.a = Lerp(0.075, self.Color.a , 0)
+		end
+		if self:IsDown() then
+			self.Color.a = Lerp(0.075, self.Color.a , 75)
+		end
+		draw.RoundedBox(6, 0, 0, w, h, self.Color)
+	end
+
+	leaveButton.DoClick = function()
+		RunConsoleCommand("disconnect")
+	end
+
 	local spawnButton = vgui.Create("XPButton", pMenu)
-	spawnButton:SetText("►")
+	spawnButton:SetText("↪")
 	spawnButton:SetFont("fray_pmenu")
 	spawnButton:SetSize(size, 84)
 	spawnButton:SetPos(ScrW() - size - 48, ScrH() - size)
