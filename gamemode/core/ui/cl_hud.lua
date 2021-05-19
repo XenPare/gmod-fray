@@ -16,7 +16,8 @@ local m_th = Color(53, 114, 143)
 local m_rnk = Color(227, 148, 141)
 local m_mn = Color(106, 171, 121)
 local m_pr = Color(194, 167, 79)
-local m_bd = Color(237, 130, 130)
+local m_bd = Color(166, 5, 5)
+local m_pvp = Color(194, 136, 0)
 
 local function txt(str, font, x, y, color, align_x, align_y)
 	draw.SimpleText(str, font, x, y + 1, ColorAlpha(color_black, 240), align_x or TEXT_ALIGN_LEFT, align_y or TEXT_ALIGN_TOP)
@@ -91,6 +92,7 @@ place(
 	end, 
 	function()
 		x, y = ScrW() - 32, ScrH() - 32
+		set(txt(Fray.GetPhrase(rank), f_a, x, y, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		if babygod then
 			set(txt(Fray.GetPhrase("babygod"), f_a, x, y, m_pr, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		end
@@ -98,9 +100,8 @@ place(
 			set(txt(Fray.GetPhrase("bleeding"), f_a, x, y, m_bd, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		end
 		if pvp then
-			set(txt("PvP -", f_a, x, y, m_bd, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
+			set(txt("PvP -", f_a, x, y, m_pvp, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		end
-		set(txt(Fray.GetPhrase(rank), f_a, x, y, color_white, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(kills .. "/" .. getNextRank(kills), f_h, x, y, m_rnk, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 		set(txt(money, f_h, x, y, m_mn, TEXT_ALIGN_RIGHT, TEXT_ALIGN_CENTER))
 	end
