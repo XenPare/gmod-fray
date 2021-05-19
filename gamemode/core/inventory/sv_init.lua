@@ -150,6 +150,10 @@ net.Receive("Fray Inventory Use", function(_, pl)
 
 	local class = net.ReadString()
 	local list = Fray.InventoryList
+	if not list[class] or not table.HasValue(pl.Inventory, class) then
+		return
+	end
+
 	if list[class].UseFunc then
 		list[class].UseFunc(pl)
 		pl:TakeInventoryItem(class)
