@@ -42,8 +42,6 @@ local b_offset = b_tall + ScreenScale(7)
 local offset = tall + 12
 
 local m_hp = Color(153, 66, 69)
-local m_hg = Color(189, 153, 111)
-local m_th = Color(53, 114, 143)
 
 local function _draw(y, color, stat)
 	draw.RoundedBox(4, 36, y, wide - 8, b_tall + 6, ColorAlpha(color_black, 180))
