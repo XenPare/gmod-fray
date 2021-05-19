@@ -4,6 +4,8 @@ AddCSLuaFile("lang.lua")
 include("shared.lua")
 include("lang.lua")
 
+resource.AddFile("sound/fray/player/bandage.mp3")
+
 CustomizableWeaponry.canDropWeapon = false
 
 local CFG = Fray.Config
