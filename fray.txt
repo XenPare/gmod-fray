@@ -1,6 +1,8 @@
 "fray"
 {
-	"base"		"base"
-	"title"		"Fray"
-	"menusystem"	"1"
+	"title" "Fray"
+	"version" "1.0.0"
+	"base" "base"
+	"category" "pve"
+	"menusystem" "1"
 }
