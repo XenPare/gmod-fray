@@ -27,9 +27,19 @@ net.Receive("Fray Corpse", function()
 	local myitems = net.ReadTable()
 	local invlist = Fray.InventoryList
 
+	if corpse:GetNWEntity("LootingEntity") == LocalPlayer() then
+		return
+	end
+
 	corpsePanel = vgui.Create("XPFrame")
 	corpsePanel:SetTitle(LocalPlayer():GetInfo("fray_lang") == "french" and (Fray.GetPhrase("corpse") .. name) or (name .. Fray.GetPhrase("corpse")))
 	corpsePanel:SetKeyboardInputEnabled(false)
+
+	corpsePanel.OnClose = function()
+		net.Start("Fray Corpse Looting")
+			net.WriteEntity(corpse)
+		net.SendToServer()
+	end
 
 	local scroll = vgui.Create("XPScrollPanel", corpsePanel)
 	scroll:Dock(FILL)

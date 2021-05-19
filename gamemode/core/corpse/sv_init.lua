@@ -1,7 +1,15 @@
 util.AddNetworkString("Fray Corpse")
 util.AddNetworkString("Fray Corpse Take")
+util.AddNetworkString("Fray Corpse Looting")
 
 local DeathRagdolls, CleanTime = {}, Fray.Config.CorpseCleanTime
+
+net.Receive("Fray Corpse Looting", function(_, pl)
+	local corpse = net.ReadEntity()
+	if corpse:GetNWEntity("LootingEntity") == pl then
+		corpse:SetNWEntity("LootingEntity", nil)
+	end
+end)
 
 net.Receive("Fray Corpse Take", function(_, pl)
 	local corpse = net.ReadEntity()
@@ -22,14 +30,6 @@ net.Receive("Fray Corpse Take", function(_, pl)
 
 	table.RemoveByValue(corpse.Inventory, class)
 	pl:AddInventoryItem(class)
-
-	corpse:SetNWEntity("LootingEntity", pl)
-	if corpse:TimerExists("Looting") then
-		corpse:RemoveTimer("LootingEntity")
-	end
-	corpse:SetTimer("Looting", 10, 1, function()
-		corpse:SetNWEntity("LootingEntity", nil)
-	end)
 end)
 
 local function createRagdoll(pl)
@@ -87,9 +87,10 @@ end
 Fray.CreateRagdoll = createRagdoll
 
 hook.Add("PlayerUse", "Fray Corpse", function(pl, ent)
-	if not ent.PlayerRag or (IsValid(ent:GetNWEntity("LootingEntity")) and ent:GetNWEntity("LootingEntity") ~= pl) then
+	if not ent.PlayerRag or IsValid(ent:GetNWEntity("LootingEntity")) then
 		return
 	end
+	ent:SetNWEntity("LootingEntity", pl)
 	net.Start("Fray Corpse")
 		net.WriteEntity(ent)
 		net.WriteString(ent.Name)
