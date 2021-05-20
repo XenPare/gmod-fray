@@ -159,7 +159,7 @@ Fray.ShopList = {
 hook.Add("Initialize", "Fray Shop", function()
 	for att in pairs(Fray.Config.Attachments) do
 		Fray.ShopList[att] = {
-			price = 500,
+			price = 100,
 			category = FRAY_CATEGORY_ATTACHMENTS
 		}
 	end
