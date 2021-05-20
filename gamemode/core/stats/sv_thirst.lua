@@ -3,9 +3,6 @@ local meta = FindMetaTable("Player")
 function meta:SetThirst(n)
 	self:SetPData("Thirst", n)
 	self:SetNWInt("Thirst", n)
-	if n > 5 and self:TimerExists("Thirst") then
-		self:RemoveTimer("Thirst")
-	end
 end
 
 function meta:GetThirst()
