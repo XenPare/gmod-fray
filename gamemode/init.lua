@@ -6,6 +6,10 @@ include("lang.lua")
 
 resource.AddFile("sound/fray/player/bandage.mp3")
 
+resource.AddFile("materials/fray/hud/health.png")
+resource.AddFile("materials/fray/hud/hunger.png")
+resource.AddFile("materials/fray/hud/thirst.png")
+
 CustomizableWeaponry.canDropWeapon = false
 
 local CFG = Fray.Config

@@ -9,8 +9,11 @@ local tall = 40
 local f_h = "xpgui_medium"
 local f_a = "xpgui_huge"
 
+local i_hp = Material("materials/fray/hud/health.png", "smooth nomips")
+local i_hg = Material("materials/fray/hud/hunger.png", "smooth nomips")
+local i_th = Material("materials/fray/hud/thirst.png", "smooth nomips")
+
 local m_hp = Color(153, 66, 69)
-local m_ar = Color(66, 82, 153)
 local m_hg = Color(189, 153, 111)
 local m_th = Color(53, 114, 143)
 local m_rnk = Color(227, 148, 141)
@@ -26,15 +29,26 @@ local function txt(str, font, x, y, color, align_x, align_y)
 end
 
 local scaled = ScreenScale(76)
-local function _draw(x, y, color, num, max, anim)
+local ic_scaled = ScreenScale(12)
+local function _draw(x, y, color, num, max, anim, ic)
 	local _x = x + (tall / 3)
+
+	surface.SetDrawColor(ColorAlpha(color_black, 180))
+	surface.SetMaterial(ic)
+	surface.DrawTexturedRect(_x + 2, y - 8 + 2, ic_scaled, ic_scaled)
+
+	surface.SetDrawColor(color_white)
+	surface.SetMaterial(ic)
+	surface.DrawTexturedRect(_x, y - 8, ic_scaled, ic_scaled)
+
+	_x = _x + ic_scaled + 24
 
 	local _txt = math.Round(Lerp(30 * FrameTime(), num, max)) .. "%"
 	surface.SetFont(f_h)
 	local w = surface.GetTextSize(_txt)
 	_x = _x + w
 
-	txt(_txt, f_h, x, y - 3, color_white)
+	txt(_txt, f_h, x + ic_scaled + 24, y - 3, color_white)
 
 	draw.RoundedBox(4, _x, y, scaled + 6, 14, ColorAlpha(color_black, 180))
 	draw.RoundedBox(3, _x + 3, y + 3, max * (scaled / 100), 8, color)
@@ -77,18 +91,13 @@ end
 
 place(
 	function()
-		if math.Round(_ar) > 0 then
-			set(_draw(x, y, m_ar, ar, math.Clamp(_ar, 0, pl:GetMaxArmor()), _ar))
-		end
+		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th, i_th))
 	end,
 	function()
-		set(_draw(x, y, m_th, th, math.Clamp(_th, 0, 100), _th))
+		set(_draw(x, y, m_hg, hg, math.Clamp(_hg, 0, 100), _hg, i_hg))
 	end,
 	function()
-		set(_draw(x, y, m_hg, hg, math.Clamp(_hg, 0, 100), _hg))
-	end,
-	function()
-		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp))
+		set(_draw(x, y, m_hp, hp, math.Clamp(_hp, 0, pl:GetMaxHealth()), _hp, i_hp))
 	end, 
 	function()
 		x, y = ScrW() - 32, ScrH() - 32
