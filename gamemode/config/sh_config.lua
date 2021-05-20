@@ -2,7 +2,7 @@ Fray.Config.WalkSpeed = 150
 Fray.Config.RunSpeed = 275
 Fray.Config.JumpPower = 225
 
-Fray.Config.BabygodTime = 60
+Fray.Config.BabygodTime = 20
 Fray.Config.RespawnTime = 20
 
 Fray.Config.RadarDistance = 700
