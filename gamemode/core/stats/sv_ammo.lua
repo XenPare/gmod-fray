@@ -23,17 +23,11 @@ hook.Add("PlayerDisconnected", "Fray Ammo Saving", function(pl)
 		local name = game.GetAmmoName(tp)
 		for class in pairs(ammolist) do
 			if getType(class) == name then
-				local bx = math.floor(cn / getAmount(class))
-				if bx > 0 then
-					if bx == 1 then
-						pl:AddInventoryItem(class)
-					else
-						for i = 1, bx do
-							pl:AddInventoryItem(class)
-						end
-					end
-				else
-					if cn > 0 then
+				local bx = math.Round(cn / getAmount(class))
+				if bx == 1 then
+					pl:AddInventoryItem(class)
+				elseif bx > 1 then
+					for i = 1, bx do
 						pl:AddInventoryItem(class)
 					end
 				end
