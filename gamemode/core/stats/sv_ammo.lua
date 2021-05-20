@@ -15,7 +15,7 @@ local function getAmount(class)
 	return scripted_ents.Get(class).ResupplyAmount
 end
 
-hook.Add("PlayerDisconnected", "Fray Ammo Saving", function(pl)
+local function checkPlayer(pl)
 	if pl:GetNWBool("Fray PvP") or not pl:Alive() then
 		return
 	end
@@ -34,5 +34,12 @@ hook.Add("PlayerDisconnected", "Fray Ammo Saving", function(pl)
 				break
 			end
 		end
+	end
+end
+
+hook.Add("PlayerDisconnected", "Fray Ammo Saving", checkPlayer)
+hook.Add("ShutDown", "Fray Ammo Saving", function()
+	for _, pl in pairs(player.GetAll()) do
+		checkPlayer(pl)
 	end
 end)
