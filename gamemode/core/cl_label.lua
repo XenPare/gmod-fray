@@ -27,7 +27,7 @@ hook.Add("HUDPaint", "Fray Loot Label", function()
 	if Fray.InventoryList[ent:GetClass()] then
 		draw.SimpleText(Fray.GetPhrase(Fray.InventoryList[ent:GetClass()].label), "xpgui_huge", x, y + 1 + (math.sin(CurTime() * 15) * 2), ColorAlpha(color_black, 240), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		draw.SimpleText(Fray.GetPhrase(Fray.InventoryList[ent:GetClass()].label), "xpgui_huge", x, y + (math.sin(CurTime() * 15) * 2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
-	elseif tobool(wep) then
+	elseif tobool(wep) and wep:find("cw") then
 		draw.SimpleText(weapons.GetStored(wep).PrintName, "xpgui_huge", x, y + 1 + (math.sin(CurTime() * 15) * 2), ColorAlpha(color_black, 240), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		draw.SimpleText(weapons.GetStored(wep).PrintName, "xpgui_huge", x, y + (math.sin(CurTime() * 15) * 2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end

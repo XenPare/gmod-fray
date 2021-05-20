@@ -70,16 +70,21 @@ if SERVER then
 			deliver:SetPos(self:GetPos() + Vector(0, 0, 6))
 			deliver:Spawn()
 
+			local recip = self.Recipient
+			deliver:SetNWEntity("Recipient", recip)
+			deliver:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+
 			local phys = deliver:GetPhysicsObject()
 			if IsValid(phys) then
 				phys:Wake()
 			end
 
-			local recip = self.Recipient
-			deliver:SetSimpleTimer(comp, function()
-				recip:AddMoney(Fray.ShopList[class].price / mpe)
-				deliver:Remove()
-			end)
+			if Fray.ShopList[class] then
+				deliver:SetSimpleTimer(comp, function()
+					recip:AddMoney(Fray.ShopList[class].price / mpe)
+					deliver:Remove()
+				end)
+			end
 		end
 		self:Remove()
 	end
