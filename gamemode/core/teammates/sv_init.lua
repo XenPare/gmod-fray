@@ -27,6 +27,8 @@ local function teamExists(pls)
 	return found ~= nil, found
 end
 
+Fray.TeamExists = teamExists
+
 local function getPlayerTeams(pl)
 	local teams = {}
 	if istable(pl) then

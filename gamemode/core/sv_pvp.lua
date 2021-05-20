@@ -9,7 +9,7 @@ hook.Add("EntityTakeDamage", "Fray PvP Mode", function(victim, dmg)
 		return
 	end
 
-	if teamExists({victim, attacker}) then
+	if Fray.TeamExists({victim, attacker}) then
 		return
 	end
 
