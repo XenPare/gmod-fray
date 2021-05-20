@@ -27,6 +27,7 @@ function meta:TakeHunger(n)
 	self:SetHunger(self:GetHunger() - n)
 end
 
+local tmr = Fray.Config.HungerDelay
 local function setHunger(pl, init)
 	if init then
 		pl:SetHunger(pl:GetHunger())
@@ -38,7 +39,7 @@ local function setHunger(pl, init)
 		pl:RemoveTimer("Hunger")
 	end
 
-	pl:SetTimer("Hunger", 85, 0, function()
+	pl:SetTimer("Hunger", tmr, 0, function()
 		if pl:GetHunger() <= 5 then
 			local dmg = DamageInfo()
 			dmg:SetDamage(8)

@@ -27,6 +27,7 @@ function meta:TakeThirst(n)
 	self:SetThirst(self:GetThirst() - n)
 end
 
+local tmr = Fray.Config.ThirstDelay
 local function setThirst(pl, init)
 	if init then
 		pl:SetThirst(pl:GetThirst())
@@ -38,7 +39,7 @@ local function setThirst(pl, init)
 		pl:RemoveTimer("Thirst")
 	end
 
-	pl:SetTimer("Thirst", 75, 0, function()
+	pl:SetTimer("Thirst", tmr, 0, function()
 		if pl:GetThirst() <= 5 then
 			local dmg = DamageInfo()
 			dmg:SetDamage(5)

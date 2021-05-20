@@ -2,6 +2,9 @@ Fray.Config.WalkSpeed = 150
 Fray.Config.RunSpeed = 275
 Fray.Config.JumpPower = 225
 
+Fray.Config.HungerDelay = 40
+Fray.Config.ThirstDelay = 50
+
 Fray.Config.BabygodTime = 20
 Fray.Config.RespawnTime = 20
 
