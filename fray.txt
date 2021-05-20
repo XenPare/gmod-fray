@@ -3,6 +3,6 @@
 	"title" "Fray"
 	"version" "1.0.0"
 	"base" "base"
-	"category" "pve"
+	"category" "pvp"
 	"menusystem" "1"
 }
