@@ -17,6 +17,7 @@ if SERVER then
 		self:SetMoveType(MOVETYPE_VPHYSICS)
 		self:SetSolid(SOLID_VPHYSICS)
 		self:SetUseType(SIMPLE_USE)
+		self:SetCollisionGroup(COLLISION_GROUP_WEAPON)
 	end
 
 	function ENT:Use(pl)
