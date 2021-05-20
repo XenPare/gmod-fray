@@ -79,6 +79,15 @@ local function createRagdoll(pl)
 		ragdoll:Remove() 
 	end)
 
+	ragdoll:SetTimer("Looting Entity Reset", 3, 0, function()
+		local ee = ragdoll:GetNWEntity("LootingEntity")
+		if IsValid(ee) then
+			if ee:GetPos():DistToSqr(ragdoll:GetPos()) > 40000 then
+				ragdoll:SetNWEntity("LootingEntity", nil)
+			end
+		end
+	end)
+
 	return ragdoll
 end
 
