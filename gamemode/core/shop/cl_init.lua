@@ -129,8 +129,8 @@ net.Receive("Fray Shop Menu", function()
 			btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description))
 	
 			if isLimited(class) then
-				model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. " (" .. Fray.GetPhrase("limit") .. ")")
-				btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. " (" .. Fray.GetPhrase("limit") .. ")")
+				model:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
+				btn:SetTooltip(Fray.GetPhrase(invlist[class].label) .. " (" .. invlist[class].weight .. " kg):\n" .. Fray.GetPhrase(invlist[class].description) .. "\n(" .. Fray.GetPhrase("limit") .. ")")
 			end
 	
 			model.OnCursorEntered = function()
