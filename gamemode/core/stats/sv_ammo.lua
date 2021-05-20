@@ -32,6 +32,10 @@ hook.Add("PlayerDisconnected", "Fray Ammo Saving", function(pl)
 							pl:AddInventoryItem(class)
 						end
 					end
+				else
+					if cn > 0 then
+						pl:AddInventoryItem(class)
+					end
 				end
 				break
 			end
