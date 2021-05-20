@@ -52,6 +52,10 @@ local function hasPeopleAround(ent)
 	return #players_nearby ~= 0
 end
 
+function GM:CanPlayerSuicide()
+	return false
+end)
+
 function GM:PlayerSelectSpawn(pl)
 	if not CFG.PlayerSpawns or not pl.Spawned then
 		return
