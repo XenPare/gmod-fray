@@ -221,9 +221,6 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	end
 
 	ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
-	ent:SetSimpleTimer(0.5, function()
-		ent:SetCollisionGroup(COLLISION_GROUP_NONE)
-	end)
 end)
 
 concommand.Add("fray_inventory", function(pl)
