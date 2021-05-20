@@ -2,7 +2,7 @@ util.AddNetworkString("Fray Corpse")
 util.AddNetworkString("Fray Corpse Take")
 util.AddNetworkString("Fray Corpse Looting")
 
-local DeathRagdolls, CleanTime = {}, Fray.Config.CorpseCleanTime
+local cleanTime = Fray.Config.CorpseCleanTime
 
 net.Receive("Fray Corpse Looting", function(_, pl)
 	local corpse = net.ReadEntity()
@@ -75,10 +75,8 @@ local function createRagdoll(pl)
 		phys:SetMaterial("gmod_silent")
 	end
 
-	timer.Simple(CleanTime, function() 
-		if IsValid(ragdoll) then 
-			ragdoll:Remove() 
-		end 
+	ragdoll:SetSimpleTimer(cleanTime, function()
+		ragdoll:Remove() 
 	end)
 
 	return ragdoll
@@ -90,7 +88,9 @@ hook.Add("PlayerUse", "Fray Corpse", function(pl, ent)
 	if not ent.PlayerRag or IsValid(ent:GetNWEntity("LootingEntity")) then
 		return
 	end
+
 	ent:SetNWEntity("LootingEntity", pl)
+
 	net.Start("Fray Corpse")
 		net.WriteEntity(ent)
 		net.WriteString(ent.Name)
@@ -99,33 +99,8 @@ hook.Add("PlayerUse", "Fray Corpse", function(pl, ent)
 	net.Send(pl)
 end)
 
-local hasntRespawned = {}
 hook.Add("PlayerDeath", "Fray Corpse", function(pl)
-	hasntRespawned[pl] = true
-
 	local ragdoll = createRagdoll(pl)
-	if not IsValid(ragdoll) then 
-		return 
-	end
-
 	ragdoll.Inventory = table.Copy(pl.Inventory)
 	pl:ClearInventory()
-
-	DeathRagdolls[pl] = DeathRagdolls[pl] or {}
-	DeathRagdolls[pl][#DeathRagdolls[pl] + 1] = ragdoll
-end)
-
-hook.Add("PlayerSpawn", "Fray Corpse", function(pl)
-	hasntRespawned[pl] = nil
-	DeathRagdolls[pl] = DeathRagdolls[pl] or {}
-end)
-
-hook.Add("PlayerDisconnected", "Fray Corpse", function(pl)
-	hasntRespawned[pl] = nil
-	for _, v in pairs(DeathRagdolls[pl] or {}) do
-		if IsValid(v) and v then 
-			v:Remove() 
-		end
-	end
-	DeathRagdolls[pl] = nil
 end)
