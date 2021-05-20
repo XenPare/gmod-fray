@@ -15,7 +15,7 @@ end)
 
 local pl, tr
 local x, y = ScrW() / 2, ScrH() / 2 + 128
-local wep
+local wep, name
 hook.Add("HUDPaint", "Fray Loot Label", function()
 	pl = LocalPlayer()
 	ent = pl:GetEyeTrace().Entity
@@ -30,5 +30,11 @@ hook.Add("HUDPaint", "Fray Loot Label", function()
 	elseif tobool(wep) and wep:find("cw") then
 		draw.SimpleText(weapons.GetStored(wep).PrintName, "xpgui_huge", x, y + 1 + (math.sin(CurTime() * 15) * 2), ColorAlpha(color_black, 240), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 		draw.SimpleText(weapons.GetStored(wep).PrintName, "xpgui_huge", x, y + (math.sin(CurTime() * 15) * 2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+	end
+
+	name = ent:GetNWString("Name")
+	if ent:GetClass() == "prop_ragdoll" and name ~= "" then
+		draw.SimpleText(name, "xpgui_huge", x, y + 1 + (math.sin(CurTime() * 15) * 2), ColorAlpha(color_black, 240), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+		draw.SimpleText(name, "xpgui_huge", x, y + (math.sin(CurTime() * 15) * 2), color_white, TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
 	end
 end)

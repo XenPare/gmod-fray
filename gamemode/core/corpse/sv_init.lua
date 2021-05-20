@@ -69,6 +69,7 @@ local function createRagdoll(pl)
 	ragdoll.PlayerRag = true
 
 	pl:SetNWEntity("Ragdoll", ragdoll)
+	ragdoll:SetNWString("Name", pl:Name())
 
 	for i = 0, ragdoll:GetPhysicsObjectCount() - 1 do
 		local phys = ragdoll:GetPhysicsObjectNum(i)
