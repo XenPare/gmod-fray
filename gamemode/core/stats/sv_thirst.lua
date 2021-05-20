@@ -56,6 +56,6 @@ end
 hook.Add("PlayerDeath", "Fray Thirst", function(pl)
 	setThirst(pl)
 end)
-hook.Add("PlayerInitialSpawn", "Fray Thirst", function(pl)
+hook.Add("PostPlayerSpawn", "Fray Thirst", function(pl)
 	setThirst(pl, true)
 end)
