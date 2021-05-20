@@ -54,7 +54,7 @@ end
 
 function GM:CanPlayerSuicide()
 	return false
-end)
+end
 
 function GM:PlayerSelectSpawn(pl)
 	if not CFG.PlayerSpawns or not pl.Spawned then
