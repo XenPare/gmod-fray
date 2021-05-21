@@ -12,6 +12,7 @@ local cfg = Fray.Config
 local def_run = cfg.RunSpeed
 local def_jump = cfg.JumpPower
 local def_equip = cfg.BaseEquipment
+local drp_cltime = cfg.DroppedCleanTime
 
 hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	local path = "fray/inventory/" .. pl:SteamID64() .. ".json"
@@ -223,6 +224,9 @@ net.Receive("Fray Inventory Drop", function(_, pl)
 	end
 
 	ent:SetCollisionGroup(COLLISION_GROUP_WEAPON)
+	ent:SetSimpleTimer(drp_cltime, function()
+		ent:Remove()
+	end)
 end)
 
 concommand.Add("fray_inventory", function(pl)

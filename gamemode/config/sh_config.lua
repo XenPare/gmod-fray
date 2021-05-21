@@ -15,6 +15,7 @@ Fray.Config.ShopCompensationTime = 30
 
 Fray.Config.MoneyPerEntity = 100
 Fray.Config.LootDelay = 240
+Fray.Config.DroppedCleanTime = 120
 Fray.Config.CorpseCleanTime = 300
 
 Fray.Config.MaxTeams = 4
