@@ -6,6 +6,9 @@ include("lang.lua")
 
 resource.AddFile("sound/fray/player/bandage.mp3")
 
+resource.AddFile("materials/fray/xp_logo.png")
+resource.AddFile("materials/fray/xp_bg.jpg")
+
 resource.AddFile("materials/fray/hud/health.png")
 resource.AddFile("materials/fray/hud/hunger.png")
 resource.AddFile("materials/fray/hud/thirst.png")
