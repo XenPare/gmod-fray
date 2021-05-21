@@ -29,26 +29,27 @@ local function txt(str, font, x, y, color, align_x, align_y)
 end
 
 local scaled = ScreenScale(76)
-local ic_scaled = ScreenScale(12)
+local ic_scale = 26
+local ic_off = 6
 local function _draw(x, y, color, num, max, anim, ic)
 	local _x = x + (tall / 3)
 
 	surface.SetDrawColor(ColorAlpha(color_black, 180))
 	surface.SetMaterial(ic)
-	surface.DrawTexturedRect(_x + 2, y - 8 + 2, ic_scaled, ic_scaled)
+	surface.DrawTexturedRect(_x + 2, y - ic_off + 2, ic_scale, ic_scale)
 
 	surface.SetDrawColor(color_white)
 	surface.SetMaterial(ic)
-	surface.DrawTexturedRect(_x, y - 8, ic_scaled, ic_scaled)
+	surface.DrawTexturedRect(_x, y - ic_off, ic_scale, ic_scale)
 
-	_x = _x + ic_scaled + 24
+	_x = _x + ic_scale + 24
 
 	local _txt = math.Round(Lerp(30 * FrameTime(), num, max)) .. "%"
 	surface.SetFont(f_h)
 	local w = surface.GetTextSize(_txt)
 	_x = _x + w
 
-	txt(_txt, f_h, x + ic_scaled + 24, y - 3, color_white)
+	txt(_txt, f_h, x + ic_scale + 24, y - 3, color_white)
 
 	draw.RoundedBox(4, _x, y, scaled + 6, 14, ColorAlpha(color_black, 180))
 	draw.RoundedBox(3, _x + 3, y + 3, max * (scaled / 100), 8, color)
