@@ -417,6 +417,7 @@ hook.Add("Initialize", "Fray Loot", function()
 			Fray.InventoryList[class].UseFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
+					pl:GiveAmmo(1, weapons.Get(class).Primary.Ammo)
 				end
 			end
 		else
@@ -498,6 +499,7 @@ hook.Add("Initialize", "Fray Loot", function()
 			Fray.InventoryList[class].UseFunc = function(pl)
 				if SERVER and not pl:HasWeapon(class) then
 					pl:Give(class)
+					pl:GiveAmmo(1, weapons.Get(class).Primary.Ammo)
 				end
 			end
 		else
