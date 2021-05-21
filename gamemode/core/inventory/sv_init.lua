@@ -57,7 +57,7 @@ end
 
 function meta:AddInventoryItem(class)
 	if not self:Alive() then
-		return
+		return false
 	end
 
 	local _class
@@ -69,13 +69,13 @@ function meta:AddInventoryItem(class)
 
 	local list = Fray.InventoryList
 	if not list[_class] or ((self:CalculateInventoryWeight() + list[_class].weight) >= Fray.Config.MaxInventoryWeight) then
-		return
+		return false
 	end
 
 	if list[_class].max then
 		if self:CalculateInventoryItemCount(_class) >= list[_class].max then
 			self:ChatPrint(Fray.GetPhrase("limit", self))
-			return
+			return false
 		end
 	end
 
@@ -92,6 +92,8 @@ function meta:AddInventoryItem(class)
 	if IsEntity(class) and IsValid(class) then
 		class:Remove()
 	end
+
+	return true
 end
 
 function meta:ClearInventory()

@@ -49,13 +49,15 @@ hook.Add("PostGamemodeLoaded", "Fray Loot", function()
 	for _, class in pairs(loot) do
 		local ENT = scripted_ents.GetStored(class).t
 		function ENT:Use(pl)
-			if table.HasValue(Fray.ActiveLoot, self) then
-				table.RemoveByValue(Fray.ActiveLoot, self)
-				BroadcastLoot()
-			end
-			pl:AddInventoryItem(self.Weapon and self.Weapon or self)
-			if self.Weapon then
-				self:Remove()
+			local taken = pl:AddInventoryItem(self.Weapon and self.Weapon or self)
+			if taken then
+				if table.HasValue(Fray.ActiveLoot, self) then
+					table.RemoveByValue(Fray.ActiveLoot, self)
+					BroadcastLoot()
+				end
+				if self.Weapon then
+					self:Remove()
+				end
 			end
 		end
 	end
