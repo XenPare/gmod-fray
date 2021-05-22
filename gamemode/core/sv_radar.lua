@@ -17,7 +17,7 @@ local function findInSphere(pl, target)
 		local found = {}
 		for _, ent in pairs(ents.FindInSphere(pos, max_dist)) do
 			if ent:IsPlayer() and ent ~= pl and ent:Alive() then
-				if ent:HasInventoryItem("fray_muffler") then
+				if ent:HasInventoryItem("fray_muffler") or Fray.TeamExists({pl, ent}) then
 					return nil
 				end
 				local dist = pos:DistToSqr(ent:GetPos())
@@ -32,7 +32,7 @@ local function findInSphere(pl, target)
 		return found[least]
 	else
 		for _, ent in pairs(ents.FindInSphere(pos, max_dist)) do
-			if ent:IsPlayer() and ent ~= pl and ent == target and not ent:HasInventoryItem("fray_muffler") and ent:Alive() then
+			if ent:IsPlayer() and ent ~= pl and ent == target and not ent:HasInventoryItem("fray_muffler") and ent:Alive() and not Fray.TeamExists({pl, ent}) then
 				return true
 			end
 		end

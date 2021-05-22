@@ -35,6 +35,14 @@ function GM:PlayerLoadout(pl)
 	pl:Give("cw_extrema_ratio_official")
 end
 
+function GM:PlayerFootstep(pl, pos, foot, sound)
+	if not pl:Alive() then
+		return true
+	end
+	pl:EmitSound(sound, 80, math.random(95, 105), 0.9, CHAN_BODY)
+	return true
+end
+
 local function hasDeathPointAround(pl, pos)
 	local death = pl.DeathPos
 	if death then
@@ -82,6 +90,12 @@ function GM:PlayerSelectSpawn(pl)
 	end
 	return spawner
 end
+
+hook.Add("PlayerCanSeePlayersChat", "Fray", function(text, team, listener, speaker)
+	if team then
+		return Fray.TeamExists({listener, speaker})
+	end
+end)
 
 hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetWalkSpeed(CFG.WalkSpeed)
