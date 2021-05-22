@@ -10,7 +10,15 @@ surface.CreateFont("fray_pmenu", {
 	font = "Roboto"
 })
 
-do
+local lerpval = -256
+local bsize = 128
+local logo = Material("fray/xp_logo.png")
+local bg, bga = Material("fray/xp_bg.jpg"), 100
+
+local pMenu
+hook.Add("InitPostEntity", "Fray PreSpawn Menu", function()
+	system.FlashWindow()
+
 	if music ~= "" then
 		sound.PlayURL(music, "", function(station)
 			if not IsValid(station) then 
@@ -23,16 +31,6 @@ do
 			soundStream = station
 		end)
 	end
-end
-
-local lerpval = -256
-local bsize = 128
-local logo = Material("fray/xp_logo.png")
-local bg, bga = Material("fray/xp_bg.jpg"), 100
-
-local pMenu
-hook.Add("InitPostEntity", "Fray PreSpawn Menu", function()
-	system.FlashWindow()
 
 	pMenu = vgui.Create("DPanel")
 	pMenu:Dock(FILL)
