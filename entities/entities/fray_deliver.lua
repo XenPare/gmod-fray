@@ -81,6 +81,9 @@ if SERVER then
 
 			if Fray.ShopList[class] then
 				deliver:SetSimpleTimer(comp, function()
+					if recip.stopCompensation then
+						return
+					end
 					recip:AddMoney(Fray.ShopList[class].price / mpe)
 					deliver:Remove()
 				end)

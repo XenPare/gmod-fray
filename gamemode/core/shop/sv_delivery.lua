@@ -47,7 +47,11 @@ function Fray.ShopDeliver(pl, class)
 		phys:AddVelocity(tr.Normal * Vector(1, 1, -100000))
 	end
 
+	pl.stopCompensation = false
 	ent:SetSimpleTimer(comp, function()
+		if pl.stopCompensation then
+			return
+		end
 		pl:AddMoney(Fray.ShopList[class].price / mpe)
 		ent:Remove()
 	end)

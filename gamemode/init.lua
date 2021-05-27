@@ -103,6 +103,8 @@ hook.Add("PlayerInitialSpawn", "Fray", function(pl)
 	pl:SetJumpPower(CFG.JumpPower)
 	pl:SetModel(table.Random(CFG.Playermodels))
 
+	pl.stopCompensation = true
+
 	pl:SetSimpleTimer(0.1, function()
 		pl:SetTeam(TEAM_SURVIVOR)
 	end)

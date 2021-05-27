@@ -50,6 +50,7 @@ end)
 
 hook.Add("PlayerDeath", "Fray PvP Mode", function(pl)
 	pl:SetNWBool("Fray PvP", false)
+	pl.stopCompensation = true
 end)
 
 hook.Add("PlayerDisconnected", "Fray PvP Mode", function(pl)
