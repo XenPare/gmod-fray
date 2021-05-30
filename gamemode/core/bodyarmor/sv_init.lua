@@ -39,7 +39,7 @@ hook.Add("ScalePlayerDamage", "Fray Body Armor", function(pl, hit, dmg)
 			dmg:ScaleDamage(1.3)
 		end
 		if (hit == HITGROUP_CHEST or hit == HITGROUP_STOMACH) then
-			dmg:ScaleDamage(pl:GetNWBool("BA #chest") and 0.6 or 1.1) 
+			dmg:ScaleDamage(pl:GetNWBool("BA #vest") and 0.6 or 1.1) 
 		end
 		if hit == HITGROUP_LEFTARM or hit == HITGROUP_RIGHTARM then
 			local res = 1
