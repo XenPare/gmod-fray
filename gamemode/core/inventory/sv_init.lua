@@ -24,6 +24,11 @@ hook.Add("PlayerInitialSpawn", "Fray Inventory", function(pl)
 	pl.Inventory = util.JSONToTable(file.Read(path))
 	pl:SetSimpleTimer(0.2, function()
 		if not exists then
+			for _, class in pairs(pl.Inventory) do
+				if not Fray.InventoryList[class] then
+					pl:TakeInventoryItem(class, true)
+				end
+			end
 			for _, class in pairs(def_equip) do
 				pl:AddInventoryItem(class)
 			end
