@@ -40,6 +40,7 @@ Fray.InventoryList = {
 		description = "medicine_description",
 		model = "models/weapons/w_medkit.mdl",
 		weight = 0.4,
+		max = 3,
 		category = FRAY_CATEGORY_CONSUMABLES,
 		UseFunc = function(pl)
 			if SERVER then
@@ -74,6 +75,7 @@ Fray.InventoryList = {
 		description = "money_description",
 		model = "models/props/cs_assault/money.mdl",
 		weight = 0,
+		max = 15,
 		category = FRAY_CATEGORY_CONSUMABLES,
 		onAdd = function(pl)
 			if SERVER then
