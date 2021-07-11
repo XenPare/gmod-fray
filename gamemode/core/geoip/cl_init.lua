@@ -26,6 +26,10 @@ net.Receive("Fray Language Propose", function()
     proposePanel:SetSize(title_w + 15, 115)
     proposePanel:Center()
 
+	proposePanel.OnClose = function()
+		proposePanel:SetMouseInputEnabled(false)
+	end
+
 	local yes = vgui.Create("XPButton", proposePanel)
 	yes:Dock(TOP)
 	yes:SetText("Yes")

@@ -47,6 +47,10 @@ net.Receive("Fray Shop Menu", function()
 	shopPanel:SetWide(ScreenScale(285), ScreenScale(135))
 	shopPanel:Center()
 
+	shopPanel.OnClose = function()
+		shopPanel:SetMouseInputEnabled(false)
+	end
+
 	local cb_w = ScreenScale(9.6)
 	local ex_w = ScreenScale(6.4)
 

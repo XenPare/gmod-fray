@@ -61,6 +61,10 @@ net.Receive("Fray Teammates Options", function()
 	teamPanel:SetSize(ScreenScale(80), (#teams > 0 and #teams < max) and 113 or 73)
 	teamPanel:Center()
 
+	teamPanel.OnClose = function()
+		teamPanel:SetMouseInputEnabled(false)
+	end
+
 	if #teams < max then
 		local add = vgui.Create("XPButton", teamPanel)
 		add:SetText(Fray.GetPhrase("add_team"))

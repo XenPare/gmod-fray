@@ -53,6 +53,10 @@ net.Receive("Fray Inventory Menu", function()
 	inventoryPanel:SetWide(ScreenScale(285), ScreenScale(135))
 	inventoryPanel:Center()
 
+	inventoryPanel.OnClose = function()
+		inventoryPanel:SetMouseInputEnabled(false)
+	end
+
 	local icon_w = inventoryPanel:GetWide() / 6 - 26
 
 	local scroll = vgui.Create("XPScrollPanel", inventoryPanel)
