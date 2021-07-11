@@ -68,6 +68,10 @@ net.Receive("Fray Language Menu", function()
 	langPanel:SetSize(ScreenScale(80), ScreenScale(80))
 	langPanel:Center()
 
+	langPanel.OnClose = function()
+		langPanel:SetMouseInputEnabled(false)
+	end
+
 	local scroll = vgui.Create("XPScrollPanel", langPanel)
 	scroll:Dock(FILL)
 
