@@ -71,7 +71,13 @@ hook.Add("PostDrawTranslucentRenderables", "Fray Nicks", function(depth, sky)
 	
 		local name = pl:Name()
 		local kills = pl:GetNWString("Kills")
-		local rank = Fray.GetPhrase(pl:GetNWString("Rank")) .. " (" .. kills .. "/" .. getNextRank(kills) .. ")"
+
+		local rank
+		if getNextRank(kills) == nil then
+			rank = Fray.GetPhrase(pl:GetNWString("Rank"))
+		else
+			rank = Fray.GetPhrase(pl:GetNWString("Rank")) .. " (" .. kills .. "/" .. getNextRank(kills) .. ")"
+		end
 		
 		cam.Start3D2D(eye, Angle(0, ang.y, 90), scale)
 			draw.SimpleText(name, "fray_nick", -3, 3, ColorAlpha(color_black, 200), TEXT_ALIGN_CENTER)
