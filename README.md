@@ -1,5 +1,6 @@
 # Fray
-Our cool survival gamemode 
+Our cool survival gamemode.<br>
+You better use a [Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=2763014257) version.
 
 # Requirements
 * [XPA](https://github.com/XenPare/XPA)
